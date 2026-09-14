@@ -23,6 +23,18 @@ export function dateRange(mode, today = berlinDay()) {
   }
   return [today, add(6)];
 }
+export function eventSearchHaystack(event) {
+  return [
+    event.title,
+    event.venue,
+    event.address,
+    event.description,
+    ...(event.topics || []),
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLocaleLowerCase("de");
+}
 export function filterEvents(events, f) {
   if (f.from && f.to && f.from > f.to) return [];
   return events
@@ -33,16 +45,7 @@ export function filterEvents(events, f) {
         Number.isFinite(endTime) && endTime > new Date(e.start).getTime()
           ? berlinDay(endTime - 1)
           : day;
-      const haystack = [
-        e.title,
-        e.venue,
-        e.address,
-        e.description,
-        ...(e.topics || []),
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLocaleLowerCase("de");
+      const haystack = eventSearchHaystack(e);
       return (
         day &&
         (!f.from || lastDay >= f.from) &&

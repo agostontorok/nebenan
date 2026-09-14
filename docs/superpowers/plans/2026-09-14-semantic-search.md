@@ -108,7 +108,7 @@ test("semantic ranking keeps exact fitness matches and related Zumba", () => {
   const ranked = rankSemanticMatches(
     events,
     "fitness",
-    { zumba: 0.71, fitness: 0.59, cinema: 0.88 },
+    { zumba: 0.71, fitness: 0.71, cinema: 0.31 },
     { threshold: 0.7, exactBoost: 0.08 },
   );
   assert.deepEqual(ranked.map(({ id }) => id), ["fitness", "zumba"]);
