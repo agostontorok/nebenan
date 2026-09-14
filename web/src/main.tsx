@@ -10,6 +10,10 @@ import { filterAdminEvents } from "./admin-filter.mjs";
 import { eventToIcs, parseAttendees } from "./calendar-invite.mjs";
 import { safeImageUrl } from "./image-url.mjs";
 import {
+  createSemanticSearchClient,
+  rankSemanticMatches,
+} from "./semantic-search.mjs";
+import {
   languageFromStorage,
   scaleLabels as scaleLabelsByLanguage,
   topicLabels as topicLabelsByLanguage,
@@ -643,6 +647,11 @@ function App() {
     [inviteFor, setInviteFor] = useState<EventItem | null>(null),
     [contribute, setContribute] = useState(false),
     [suggest, setSuggest] = useState(false);
+  const semanticClientRef = useRef<ReturnType<typeof createSemanticSearchClient> | null>(null);
+  const [semanticScores, setSemanticScores] = useState<Record<string, number> | null>(null);
+  const [semanticStatus, setSemanticStatus] = useState<
+    "idle" | "loading" | "ready" | "fallback"
+  >("idle");
   const tr = (key: string) => t(language, key);
   const topicLabels: Record<string, string> = topicLabelsByLanguage[language];
   const scales: Record<string, string> = scaleLabelsByLanguage[language];
@@ -683,7 +692,19 @@ function App() {
     const timer = setInterval(refresh, 10000);
     return () => clearInterval(timer);
   }, []);
-  const filtered = useMemo(
+  const baseFiltered = useMemo(
+    () =>
+      filterEvents(events, {
+        from,
+        to,
+        query: "",
+        topic,
+        scale,
+        free,
+      }) as EventItem[],
+    [events, from, to, topic, scale, free],
+  );
+  const lexicalFiltered = useMemo(
     () =>
       filterEvents(events, {
         from,
@@ -695,6 +716,39 @@ function App() {
       }) as EventItem[],
     [events, from, to, query, topic, scale, free],
   );
+  const filtered = useMemo(() => {
+    if (!query.trim() || !semanticScores) return lexicalFiltered;
+    return rankSemanticMatches(baseFiltered, query, semanticScores) as EventItem[];
+  }, [baseFiltered, lexicalFiltered, query, semanticScores]);
+  useEffect(() => {
+    if (!query.trim()) {
+      setSemanticScores(null);
+      setSemanticStatus("idle");
+      return;
+    }
+    let cancelled = false;
+    setSemanticScores(null);
+    setSemanticStatus("loading");
+    semanticClientRef.current ||= createSemanticSearchClient();
+    semanticClientRef.current
+      .search(events, query, baseFiltered.map((event) => String(event.id)), {
+        onProgress: () => {
+          if (!cancelled) setSemanticStatus("loading");
+        },
+      })
+      .then((scores: Record<string, number>) => {
+        if (cancelled) return;
+        setSemanticScores(scores);
+        setSemanticStatus("ready");
+      })
+      .catch(() => {
+        if (!cancelled) setSemanticStatus("fallback");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [events, query, baseFiltered]);
+  useEffect(() => () => semanticClientRef.current?.dispose(), []);
   const topics = useMemo(
     () => [...new Set(events.flatMap((e) => e.topics || []))].sort(),
     [events],
@@ -844,6 +898,19 @@ function App() {
                     </button>
                   )}
                 </label>
+                {query.trim() && (
+                  <span
+                    className={`semantic-status semantic-${semanticStatus}`}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    {semanticStatus === "loading"
+                      ? tr("filters.semanticLoading")
+                      : semanticStatus === "ready"
+                        ? tr("filters.semanticReady")
+                        : tr("filters.semanticFallback")}
+                  </span>
+                )}
                 <div className="date-tabs" role="group" aria-label={tr("filters.date")}>
                   {[
                     ["today", tr("filters.today")],

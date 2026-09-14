@@ -441,6 +441,18 @@ main {
   padding: 0;
   font-size: 22px;
 }
+.semantic-status {
+  align-self: center;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.semantic-ready {
+  color: #54765d;
+}
+.semantic-fallback {
+  color: #a3452e;
+}
 .date-tabs {
   display: flex;
   background: #eaece2;
@@ -1340,6 +1352,10 @@ dialog::backdrop {
   .filter-bar {
     flex-direction: column;
     gap: 11px;
+  }
+  .semantic-status {
+    align-self: flex-start;
+    white-space: normal;
   }
   .search input {
     font-size: 12px;

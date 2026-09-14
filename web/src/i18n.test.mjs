@@ -11,7 +11,7 @@ test("language preference accepts only supported languages", () => {
 
 test("English and German have complete navigation and filter copy", () => {
   for (const lang of ["en", "de"]) {
-    for (const key of ["nav.discover", "nav.sources", "nav.review", "filters.allTopics", "filters.allScales", "filters.freeOnly", "map.unknownLocation"]) {
+    for (const key of ["nav.discover", "nav.sources", "nav.review", "filters.allTopics", "filters.allScales", "filters.freeOnly", "filters.semanticLoading", "filters.semanticReady", "filters.semanticFallback", "map.unknownLocation"]) {
       assert.ok(copy[lang][key], `${lang}.${key} is translated`);
     }
     assert.notEqual(topicLabels["en"].music, topicLabels["de"].music);
