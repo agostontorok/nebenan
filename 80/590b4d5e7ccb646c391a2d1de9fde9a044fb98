@@ -1,0 +1,26 @@
+web/src/semantic-search.test.mjs
+  s_f31cd23d008cbd::t_32a2bd33e1c68b 9,76-117
+  s_f31cd23d008cbd::t_935ee543198bfc 118
+web/src/semantic-search.worker.mjs
+  s_f31cd23d008cbd::t_d38f5a3a02201f 1-131
+web/package-lock.json
+  s_f31cd23d008cbd::t_3e01a593b10e88 11,25-34,477-969,987-1043,1418-1426,1447-1462,1470-1542,1585-1596,1615-1620,1636-1704,1711-1728,1748-1799,1820-1825,1871-1893,1915-1931,1984-2060,2071-2076,2094-2112,2127-2132
+web/package.json
+  s_f31cd23d008cbd::t_2e6ff01aa1cb84 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "80590b4d5e7ccb646c391a2d1de9fde9a044fb98",
+  "prompts": {},
+  "sessions": {
+    "s_f31cd23d008cbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09eb0-ad09-7711-9984-a76bbbfbd0b7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    }
+  }
+}
