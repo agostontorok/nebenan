@@ -1,0 +1,23 @@
+web/src/semantic-search.test.mjs
+  s_f31cd23d008cbd::t_c6b14d3fb84ca8 77-81
+web/src/semantic-search.mjs
+  s_f31cd23d008cbd::t_3fecafebe85446 4
+docs/superpowers/specs/2026-09-14-semantic-search-design.md
+  s_f31cd23d008cbd::t_35592708647f24 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6814661066d5f02b6fa9e3c801cb3f9499b4b985",
+  "prompts": {},
+  "sessions": {
+    "s_f31cd23d008cbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09eb0-ad09-7711-9984-a76bbbfbd0b7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    }
+  }
+}
