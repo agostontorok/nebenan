@@ -1,0 +1,36 @@
+web/src/i18n.mjs
+  s_f31cd23d008cbd::t_5d33203c8ca8ed 75-77,242-244
+web/src/style.css
+  s_f31cd23d008cbd::t_19e617ddec51a9 444-455,1356-1358
+  s_78620ec1c97742::t_4a69ab69eebdd0 1359
+web/src/i18n.test.mjs
+  s_f31cd23d008cbd::t_d921ac7e1fea11 14
+web/src/main.tsx
+  s_f31cd23d008cbd::t_f315329c65e883 13-15,650-654,695-707,719-751
+  s_f31cd23d008cbd::t_3f60bf186f30d6 901-913
+  s_f31cd23d008cbd::t_995e634d14a60a 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8a15a37cee8ad409cd6f69db08dbaf121de8023d",
+  "prompts": {},
+  "sessions": {
+    "s_78620ec1c97742": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09048-19d4-7da3-92b3-21486464b27d",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    },
+    "s_f31cd23d008cbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09eb0-ad09-7711-9984-a76bbbfbd0b7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    }
+  }
+}
