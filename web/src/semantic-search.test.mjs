@@ -6,6 +6,7 @@ import {
   textFingerprint,
   cosineSimilarity,
   rankSemanticMatches,
+  createSemanticSearchClient,
 } from "./semantic-search.mjs";
 
 const event = (id, title, start, extra = {}) => ({
@@ -71,4 +72,47 @@ test("ranking is stable for equal scores", () => {
     ),
     ["earlier", "later"],
   );
+});
+
+test("worker client resolves the newest result and forwards progress", async () => {
+  const messages = [];
+  const worker = {
+    onmessage: null,
+    onerror: null,
+    postMessage(message) {
+      messages.push(message);
+      queueMicrotask(() =>
+        worker.onmessage({
+          data: {
+            type: "progress",
+            requestId: message.requestId,
+            phase: "loading",
+            value: 0.5,
+          },
+        }),
+      );
+      queueMicrotask(() =>
+        worker.onmessage({
+          data: {
+            type: "result",
+            requestId: message.requestId,
+            scores: { zumba: 0.81 },
+          },
+        }),
+      );
+    },
+    terminate() {},
+  };
+  const progress = [];
+  const client = createSemanticSearchClient({ workerFactory: () => worker });
+  const scores = await client.search(
+    [{ id: "zumba", title: "Zumba", start: "2026-09-15T18:00:00+02:00" }],
+    "fitness",
+    ["zumba"],
+    { onProgress: (update) => progress.push(update) },
+  );
+  assert.deepEqual(scores, { zumba: 0.81 });
+  assert.equal(progress[0].phase, "loading");
+  assert.equal(messages[0].type, "search");
+  client.dispose();
 });

@@ -9,6 +9,7 @@
     "test": "node --test src/*.test.mjs"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
     "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
