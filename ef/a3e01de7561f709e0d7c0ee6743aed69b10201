@@ -1,0 +1,20 @@
+README.md
+  s_f31cd23d008cbd::t_3d61b0f5495241 23,35
+  s_f31cd23d008cbd::t_39b9705f2c3192 36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "efa3e01de7561f709e0d7c0ee6743aed69b10201",
+  "prompts": {},
+  "sessions": {
+    "s_f31cd23d008cbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09eb0-ad09-7711-9984-a76bbbfbd0b7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    }
+  }
+}
