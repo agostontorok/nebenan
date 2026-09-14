@@ -74,6 +74,11 @@ test("ranking is stable for equal scores", () => {
   );
 });
 
+test("default threshold includes the calibrated fitness to Zumba score", () => {
+  const zumba = event("zumba", "Zumba im Bürgerpark", "2026-09-15T18:00:00+02:00");
+  assert.deepEqual(rankSemanticMatches([zumba], "fitness", { zumba: 0.416 }), [zumba]);
+});
+
 test("worker client resolves the newest result and forwards progress", async () => {
   const messages = [];
   const worker = {

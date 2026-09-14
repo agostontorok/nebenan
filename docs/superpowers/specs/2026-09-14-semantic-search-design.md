@@ -42,7 +42,7 @@ The existing `filterEvents` behavior remains the lexical and filter baseline. Se
 ## Relevance policy
 
 - Exact title, topic, venue, address, and description matches are always retained.
-- Semantic matches are retained only above a threshold selected from positive and negative fixtures. Initial fixtures include `fitness → Zumba` and an unrelated event that must not match.
+- Semantic matches are retained only above a threshold selected from positive and negative fixtures. The initial threshold is `0.36`, which admits measured `fitness → Zumba` and `fitness → Seniorengymnastik` similarities while excluding unrelated examples.
 - Exact matches receive a modest boost, not an unconditional top position, so a strongly related result can still rank well.
 - Events with missing text are excluded from embedding but remain available to lexical search.
 - Ranking ties resolve by event start time, then event ID, to keep the UI stable.

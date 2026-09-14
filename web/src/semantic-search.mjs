@@ -1,7 +1,7 @@
 import { eventSearchHaystack } from "./filters.mjs";
 
 export const SEMANTIC_MODEL_ID = "Xenova/paraphrase-multilingual-MiniLM-L12-v2";
-export const DEFAULT_SEMANTIC_THRESHOLD = 0.42;
+export const DEFAULT_SEMANTIC_THRESHOLD = 0.36;
 export const DEFAULT_EXACT_BOOST = 0.08;
 
 export function normalizeSearchText(value) {
