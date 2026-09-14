@@ -1,0 +1,26 @@
+web/src/semantic-search.test.mjs
+  s_f31cd23d008cbd::t_4662a70e438bd5 1-74
+web/src/semantic-search.mjs
+  s_f31cd23d008cbd::t_11a6577405048a 29-30,38-39,55-56,83-84,126
+  s_f31cd23d008cbd::t_0babd85ab33ed0 1-28,31-37,40-54,57-82,85-125
+web/src/filters.mjs
+  s_f31cd23d008cbd::t_0babd85ab33ed0 26-37,48
+docs/superpowers/plans/2026-09-14-semantic-search.md
+  s_f31cd23d008cbd::t_cb1586380406c9 111
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c1c284f7f752c12db8447bf25ffd96c74b3d366e",
+  "prompts": {},
+  "sessions": {
+    "s_f31cd23d008cbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09eb0-ad09-7711-9984-a76bbbfbd0b7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    }
+  }
+}
