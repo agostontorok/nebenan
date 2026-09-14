@@ -1,0 +1,85 @@
+.gitignore
+  s_f31cd23d008cbd::t_d763f43883d00a 1-8
+README.md
+  s_f31cd23d008cbd::t_cd0ee2b3eb583a 1-51
+app/collect.py
+  s_f31cd23d008cbd::t_9a9ceac35c8e2a 1-592
+app/main.py
+  s_f31cd23d008cbd::t_dc28d8a60ef99d 1-250
+app/network.py
+  s_f31cd23d008cbd::t_1d804407dc2dde 1-75
+app/sources.py
+  s_f31cd23d008cbd::t_c941c8f5f69268 1-109
+docs/research/2026-09-14-expansion-sources.md
+  s_f31cd23d008cbd::t_3ad4bb92fd68e8 1-26
+docs/research/2026-09-14-implementation-verification.json
+  s_f31cd23d008cbd::t_ac61449a679bc9 1-94
+docs/research/2026-09-14-implementation-verification.md
+  s_f31cd23d008cbd::t_9eadf47505eaf0 1-41
+docs/research/darmstadt-sources.json
+  s_f31cd23d008cbd::t_3c7038d159cb53 1-2266
+docs/superpowers/plans/2026-09-14-event-image-extraction.md
+  s_f31cd23d008cbd::t_9f7e3de3f20b87 1-62
+docs/superpowers/plans/2026-09-14-first-local-implementation.md
+  s_f31cd23d008cbd::t_515c721b3c3cab 1-48
+docs/superpowers/specs/2026-09-14-darmstadt-local-design.md
+  s_f31cd23d008cbd::t_1b6824411d4d10 1-84
+requirements.lock.txt
+  s_f31cd23d008cbd::t_30646e012548a6 1-27
+run.sh
+  s_f31cd23d008cbd::t_0ee1044c715803 1-16
+tests/test_api.py
+  s_f31cd23d008cbd::t_35f18ff7830fc7 1-32
+tests/test_collection.py
+  s_f31cd23d008cbd::t_c9f50d93877fb1 1-237
+tests/test_db_updates.py
+  s_f31cd23d008cbd::t_c57482ecd23bad 1-240
+tests/test_network.py
+  s_f31cd23d008cbd::t_5c1c8d26599e68 1-69
+web/package-lock.json
+  s_f31cd23d008cbd::t_278b110dadd1e1 1-1239
+web/package.json
+  s_f31cd23d008cbd::t_d7ed76a882b883 1-24
+web/src/calendar-invite.mjs
+  s_f31cd23d008cbd::t_e254962dfd0e27 1-78
+web/src/calendar-invite.test.mjs
+  s_f31cd23d008cbd::t_135160fd999755 1-33
+web/src/event-patch.mjs
+  s_f31cd23d008cbd::t_a1808c90c6b4dd 1-46
+web/src/event-patch.test.mjs
+  s_f31cd23d008cbd::t_2800168c29283c 1-74
+web/src/filters.mjs
+  s_f31cd23d008cbd::t_ea11fdca13d0ec 1-57
+web/src/filters.test.mjs
+  s_f31cd23d008cbd::t_e28e00146950ac 1-92
+web/src/i18n.mjs
+  s_f31cd23d008cbd::t_7cceb31321d631 1-380
+web/src/image-url.mjs
+  s_f31cd23d008cbd::t_3ce0957a344ef5 1-50
+web/src/image-url.test.mjs
+  s_f31cd23d008cbd::t_9345ec4de7f675 1-29
+web/src/main.tsx
+  s_f31cd23d008cbd::t_47780937417592 1-1585
+web/src/style.css
+  s_f31cd23d008cbd::t_8b404906b99531 1-1597
+web/tsconfig.json
+  s_f31cd23d008cbd::t_00240a7d11d3fa 1-16
+web/vite.config.ts
+  s_f31cd23d008cbd::t_f3c225d51f0870 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5e362c7f1c87fb37f8da68a691d514815fdd3059",
+  "prompts": {},
+  "sessions": {
+    "s_f31cd23d008cbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09eb0-ad09-7711-9984-a76bbbfbd0b7",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Agoston Torok <agoston.torok@straumann.com>"
+    }
+  }
+}
