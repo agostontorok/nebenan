@@ -1,0 +1,570 @@
+[
+  {
+    "requested_url": "https://cafe-bellevue.com/",
+    "checked_at": "2026-09-14T09:16:34.696618+00:00",
+    "status": 200,
+    "final_url": "https://cafe-bellevue.com/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Café Bellevue Darmstadt",
+    "bytes": 64072,
+    "social_links": [
+      "https://www.facebook.com/profile.php?id=100047761793325",
+      "https://www.instagram.com/cafebellevuedarmstadt/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://cafe-bellevue.com/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://cafe-bellevue.com/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://cafe-bellevue.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcafe-bellevue.com%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://cafe-bellevue.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcafe-bellevue.com%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://cafe-bellevue.com/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://cafe-bellevue.com/wp-json/wp/v2/pages/73",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format",
+    "checked_at": "2026-09-14T09:16:34.696862+00:00",
+    "status": 200,
+    "final_url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Export im iCal-Format",
+    "bytes": 21563,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=263&modid=0",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=atom&Itemid=263&modid=0",
+        "type": "application/atom+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/icals.ical/-?year=2026&month=08&day=14",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/icals.ical/-?year=2026&month=09&day=13",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/eventsnachjahr/2026/-",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/monatskalender/2026/9/-",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/eventsnachwoche/2026/9/14/-",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/eventsnachtag/2026/9/14/-",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/search_form/-",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/icals.ical/-?year=2026&month=09&day=15",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/icals.ical/-?year=2026&month=10&day=14",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.repaircafes-darmstadt.de/components/com_jevents/assets/css/eventsadmin.css?v=3.6.102",
+      "https://www.repaircafes-darmstadt.de/components/com_jevents/views/geraint/assets/css/events_css.css?v=3.6.102",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender",
+      "https://www.repaircafes-darmstadt.de/images/pdf/Termine.pdf",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/icals.ical/-?year=2026&month=08&day=14",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/icals.ical/-?year=2026&month=09&day=13",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/eventsnachjahr/2026/-",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/monatskalender/2026/9/-",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/eventsnachwoche/2026/9/14/-",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/eventsnachtag/2026/9/14/-",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format/search_form/-"
+    ]
+  },
+  {
+    "requested_url": "https://www.eberstaedter-buergerverein.de/veranstaltung/backtag-september-3/",
+    "checked_at": "2026-09-14T09:16:34.696911+00:00",
+    "status": 200,
+    "final_url": "https://www.eberstaedter-buergerverein.de/veranstaltung/backtag-september-3/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Backtag September – Eberstädter Bürgerverein von 1980 e.V.",
+    "bytes": 101852,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      },
+      {
+        "url": "webcal://www.eberstaedter-buergerverein.de/veranstaltung/backtag-september-3/?ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fveranstaltung%2Fbacktag-september-3%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fveranstaltung%2Fbacktag-september-3%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/wp-json/tribe/events/v1/events/936",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Event",
+      "Place",
+      "PostalAddress"
+    ],
+    "event_schema_count": 1,
+    "event_links_sample": [
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/?ical=1",
+      "https://www.eberstaedter-buergerverein.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fveranstaltung%2Fbacktag-september-3%2F",
+      "https://www.eberstaedter-buergerverein.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fveranstaltung%2Fbacktag-september-3%2F&format=xml",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/backtag-september-3/",
+      "https://www.eberstaedter-buergerverein.de/wp-json/tribe/events/v1/events/936",
+      "https://eberstaedter-buergerverein.de/veranstaltungen",
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/weinuebergabe/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/konzert-mit-der-band-bnr/",
+      "https://www.google.com/calendar/event?action=TEMPLATE&dates=20260926T100000/20260926T150000&text=Backtag%20September&details=%3Cimg+class%3D%22alignnone++wp-image-573%22+src%3D%22https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fwp-content%2Fuploads%2F2024%2F09%2FIMG-20230617-WA0010-300x225.jpg%22+alt%3D%22%22+width%3D%22332%22+height%3D%22249%22+%2F%3EIn+Eberstadt+finden+einmal+im+Monat+Backtage+f%C3%BCr+Gro%C3%9F+und+Klein+statt.+Alle+Besucher%2FInnen+k%C3%B6nnen+ihren+Teig+f%C3%BCr+Brot%2C+Br%C3%B6tchen%2C+Pizza%2C+Kuchen+und+andere+Leckereien+mitbringen+und+im+holzbefeuerten+Lehmofen+backen.+Der+Backtag+startet+um+10+Uhr+mit+dem+Anfeuern+des+Ofens+und+den+Vorbereitungen.+Gegen+12+Uhr+wird+die+Glut+zur+Seite+geschoben+und+im+Ofen+kann+Pizza+und+Flammkuchen+gebacken+werden.+Um+13+Uhr+hat+der+Ofen+die+entsprechende+Temperatur+erreicht%2C+Glut+und+Asche+werden+entfernt+und+die+Brote+k%C3%B6nnen+eingeschoben+werden.+Nach+ca.+einer+Stunde+ist+das+Brot+fertig+und+der+Kuchen+ist+an+der+Reihe.+Um+ca.+15+Uhr+endet+der+Backtag.Die+Leckereien+k%C3%B6nnen+direkt+vor+Ort+im+gem%C3%BCtlichen+Garten+oder+in+der+%C3%BCberdachten+Scheune+verzehrt+werden.+Getr%C3%A4nke+werden+gegen+Bezahlung+angeboten.+Die+vers+%28Zeige+vollst%C3%A4ndige+Veranstaltung-Beschreibung+hier+an%3A+https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fveranstaltung%2Fbacktag-september-3%2F%29&location=Geibelsche%20Schmiede,%20Oberstraße%2020,%20Darmstadt,%2064297,%20Germany&trp=false&ctz=Europe/Berlin&sprop=website:https://www.eberstaedter-buergerverein.de",
+      "webcal://www.eberstaedter-buergerverein.de/veranstaltung/backtag-september-3/?ical=1",
+      "https://outlook.office.com/owa/?path=/calendar/action/compose&rrv=addevent&startdt=2026-09-26T10%3A00%3A00%2B02%3A00&enddt=2026-09-26T15%3A00%3A00%2B02%3A00&location=Geibelsche%20Schmiede,%20Oberstraße%2020,%20Darmstadt,%2064297,%20Germany&subject=Backtag%20September&body=In%20Eberstadt%20finden%20einmal%20im%20Monat%20Backtage%20f%C3%BCr%20Gro%C3%9F%20und%20Klein%20statt.%20Alle%20Besucher%2FInnen%20k%C3%B6nnen%20ihren%20Teig%20f%C3%BCr%20Brot%2C%20Br%C3%B6tchen%2C%20Pizza%2C%20Kuchen%20und%20andere%20Leckereien%20mitbringen%20und%20im%20holzbefeuerten%20Lehmofen%20backen.%20Der%20Backtag%20startet%20um%2010%20Uhr%20mit%20dem%20Anfeuern%20des%20Ofens%20und%20den%20Vorbereitungen.%20Gegen%2012%20Uhr%20wird%20die%20Glut%20zur%20Seite%20geschoben%20und%20im%20Ofen%20kann%20Pizza%20und%20Flammkuchen%20gebacken%20werden.%20Um%2013%20Uhr%20hat%20der%20Ofen%20die%20entsprechende%20Temperatur%20erreicht%2C%20Glut%20und%20Asche%20werden%20entfernt%20und%20die%20Brote%20k%C3%B6nnen%20eingeschoben%20werden.%20Nach%20ca.%20einer%20Stunde%20ist%20das%20Brot%20fertig%20und%20der%20Kuchen%20ist%20an%20der%20Reihe.%20Um%20ca.%2015%20Uhr%20endet%20der%20Backtag.Die%20Leckereien%20k%C3%B6nnen%20direkt%20vor%20Ort%20im%20gem%C3%BCtlichen%20Garten%20oder%20in%20der%20%C3%BCberdachten%20Scheune%20verzehrt%20werden.%20Getr%C3%A4nke%20werden%20gegen%20Bezahlung%20angeboten.%20Die%20verschiedenen%20Teige%20und%20Belage%20sind%20von%20den%20Besucher%2FInnen%20mitzubringen.%20Die%20Backes-Gr%20%28Zeige%20vollst%C3%A4ndige%20Veranstaltung-Beschreibung%20hier%20an%3A%20https%3A%2F%2Fwww.eberstaedter-buergerverein.de%2Fveranstaltung%2Fbacktag-september-3%2F%29"
+    ]
+  },
+  {
+    "requested_url": "https://www.goldene-krone.de/veranstaltung/kronedyp/2026-09-17/",
+    "checked_at": "2026-09-14T09:16:34.699538+00:00",
+    "status": 200,
+    "final_url": "https://www.goldene-krone.de/veranstaltung/kronedyp/2026-09-17/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Krone-DYP - Goldene Krone Darmstadt",
+    "bytes": 130085,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.goldene-krone.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.goldene-krone.de/wp-json/wp/v2/tribe_events/10005520",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.goldene-krone.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.goldene-krone.de%2Fveranstaltung%2Fkronedyp%2F2026-09-17%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.goldene-krone.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.goldene-krone.de%2Fveranstaltung%2Fkronedyp%2F2026-09-17%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.goldene-krone.de/wp-json/tribe/events/v1/events/10005520",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "EntryPoint",
+      "Event",
+      "ImageObject",
+      "ListItem",
+      "Organization",
+      "Place",
+      "PostalAddress",
+      "PropertyValueSpecification",
+      "ReadAction",
+      "SearchAction",
+      "WebPage",
+      "WebSite"
+    ],
+    "event_schema_count": 1,
+    "event_links_sample": [
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/events-virtual-skeleton.min.css?ver=1.15.8",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/events-virtual-single-skeleton.min.css?ver=1.15.8",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/events-single.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/tribe-events-pro-full.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/tribe-events-pro-mini-calendar-block.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/events-virtual-single-v2-skeleton.min.css?ver=1.15.8",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/events-virtual-single-block.min.css?ver=1.15.8",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/custom-tables-v1/single.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-content/plugins/the-events-calendar/src/resources/css/app/event-venue/frontend.min.css?ver=6.10.2",
+      "https://www.goldene-krone.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.goldene-krone.de%2Fveranstaltung%2Fkronedyp%2F2026-09-17%2F",
+      "https://www.goldene-krone.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.goldene-krone.de%2Fveranstaltung%2Fkronedyp%2F2026-09-17%2F&format=xml",
+      "https://www.goldene-krone.de/wp-json/tribe/events/v1/events/10005520"
+    ]
+  },
+  {
+    "requested_url": "https://www.lincoln-darmstadt.de/events/",
+    "checked_at": "2026-09-14T09:16:34.993833+00:00",
+    "status": 200,
+    "final_url": "https://www.lincoln-darmstadt.de/events/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen von 15. September – 26. September – Lincoln-Siedlung",
+    "bytes": 233827,
+    "social_links": [
+      "https://www.instagram.com/jugendklub_lincoln_siedlung/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.lincoln-darmstadt.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/events/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/events/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.google.com/calendar/render?cid=webcal%3A%2F%2Fwww.lincoln-darmstadt.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "webcal://www.lincoln-darmstadt.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=webcal%3A%2F%2Fwww.lincoln-darmstadt.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist&name=Lincoln-Siedlung+Veranstaltungen+–+Lincoln-Siedlung",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://outlook.live.com/owa?path=/calendar/action/compose&rru=addsubscription&url=webcal%3A%2F%2Fwww.lincoln-darmstadt.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist&name=Lincoln-Siedlung+Veranstaltungen+–+Lincoln-Siedlung",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/events/liste/?ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/events/liste/?outlook-ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=at.bitfire.icsdroid&hl=de",
+        "type": null,
+        "rel": "noopener"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Event",
+      "Person",
+      "Place",
+      "PostalAddress"
+    ],
+    "event_schema_count": 12,
+    "event_links_sample": [
+      "https://www.lincoln-darmstadt.de/events/?ical=1",
+      "https://www.lincoln-darmstadt.de/events/feed/",
+      "https://www.lincoln-darmstadt.de/wp-json/tribe/events/v1/",
+      "https://www.lincoln-darmstadt.de/events/#content",
+      "https://www.lincoln-darmstadt.de/events/",
+      "https://cafelincoln.baff-darmstadt.de/events-und-news/",
+      "https://heinersyndikat.de/termine/",
+      "https://www.lincoln-darmstadt.de/events/liste/",
+      "https://www.lincoln-darmstadt.de/events/monat/",
+      "https://www.lincoln-darmstadt.de/events/heute/",
+      "https://www.lincoln-darmstadt.de/events/liste/?eventDisplay=past",
+      "https://www.lincoln-darmstadt.de/events/liste/seite/2/"
+    ]
+  },
+  {
+    "requested_url": "https://www.postsiedlung.de/events/",
+    "checked_at": "2026-09-14T09:16:35.112216+00:00",
+    "status": 200,
+    "final_url": "https://www.postsiedlung.de/events/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen der Woche vom 14. September 2026 – Zusammen in der Postsiedlung e.V.",
+    "bytes": 264830,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.postsiedlung.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.postsiedlung.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.postsiedlung.de/events/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.postsiedlung.de/events/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.google.com/calendar/render?cid=webcal%3A%2F%2Fwww.postsiedlung.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "webcal://www.postsiedlung.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=webcal%3A%2F%2Fwww.postsiedlung.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist&name=Zusammen+in+der+Postsiedlung+e.V.+Veranstaltungen+–+Zusammen+in+der+Postsiedlung+e.V.",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://outlook.live.com/owa?path=/calendar/action/compose&rru=addsubscription&url=webcal%3A%2F%2Fwww.postsiedlung.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist&name=Zusammen+in+der+Postsiedlung+e.V.+Veranstaltungen+–+Zusammen+in+der+Postsiedlung+e.V.",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.postsiedlung.de/events/woche/?ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.postsiedlung.de/events/woche/?outlook-ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.postsiedlung.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.postsiedlung.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Event",
+      "Place",
+      "PostalAddress"
+    ],
+    "event_schema_count": 15,
+    "event_links_sample": [
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/views-print.css?ver=7.8.0",
+      "https://www.postsiedlung.de/events/?ical=1",
+      "https://www.postsiedlung.de/events/feed/",
+      "https://www.postsiedlung.de/wp-content/plugins/the-events-calendar/build/event-datetime/frontend.css?ver=6.17.4.1",
+      "https://www.postsiedlung.de/wp-content/plugins/the-events-calendar/build/event-organizer/frontend.css?ver=6.17.4.1",
+      "https://www.postsiedlung.de/wp-content/plugins/the-events-calendar/build/event-links/frontend.css?ver=6.17.4.1",
+      "https://www.postsiedlung.de/wp-content/plugins/the-events-calendar/build/event-price/frontend.css?ver=6.17.4.1",
+      "https://www.postsiedlung.de/wp-content/plugins/the-events-calendar/build/event-website/frontend.css?ver=6.17.4.1",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/events-virtual-skeleton.css?ver=7.8.0",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/events-virtual-full.css?ver=7.8.0",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/events-single.css?ver=7.8.0",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/tribe-events-pro-mini-calendar-block.css?ver=7.8.0"
+    ]
+  },
+  {
+    "requested_url": "https://www.centralstation-darmstadt.de/",
+    "checked_at": "2026-09-14T09:16:35.345709+00:00",
+    "status": 200,
+    "final_url": "https://www.centralstation-darmstadt.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Centralstation Darmstadt • Konzerte, Lesungen, Partys und Kinderprogramm",
+    "bytes": 76745,
+    "social_links": [
+      "https://www.facebook.com/centralstationdarmstadt/",
+      "https://www.instagram.com/centralstationdarmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/wp/v2/pages/11494",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.centralstation-darmstadt.de%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.centralstation-darmstadt.de%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.centralstation-darmstadt.de/programm/",
+      "https://www.centralstation-darmstadt.de/programm/specials/",
+      "https://www.centralstation-darmstadt.de/programm/zeitung/",
+      "https://www.centralstation-darmstadt.de/programm/archiv/",
+      "https://www.centralstation-darmstadt.de/event/31906/lambert-i-am-not-lambert-live-2026/",
+      "https://www.ztix.de/centralstation/events/lambert-i-am-not-lambert-live-2026-DZYWLg",
+      "https://www.centralstation-darmstadt.de/event/26272/medlz-die-90er-a-capella/",
+      "https://ztix.de/hp/events/26272/info",
+      "https://www.centralstation-darmstadt.de/event/30296/meike-winnemuth-eine-seite-noch/",
+      "https://www.ztix.de/centralstation/events/meike-winnemuth-eine-seite-noch-cbser0",
+      "https://www.centralstation-darmstadt.de/event/27693/simon-jan-neues-programm/",
+      "https://ztix.de/hp/events/27693/info"
+    ]
+  },
+  {
+    "requested_url": "https://oetingervilla.de/info",
+    "checked_at": "2026-09-14T09:16:35.364138+00:00",
+    "status": 404,
+    "final_url": "https://oetingervilla.de/info",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "404 Not Found",
+    "bytes": 808,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  }
+]

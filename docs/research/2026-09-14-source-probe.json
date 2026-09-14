@@ -1,0 +1,2603 @@
+[
+  {
+    "requested_url": "https://www.events-in-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:45.259141+00:00",
+    "status": 200,
+    "final_url": "https://www.events-in-darmstadt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Partyamt Darmstadt",
+    "bytes": 1104355,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.events-in-darmstadt.de/event/pop-art-meets-digital-art-01072026/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/open-jam-19012026/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/pub-quiz-mit-quizmaster-moritz-16022026/2026-09-14",
+      "https://www.centralstation-darmstadt.de/programm/?cal=0",
+      "https://www.events-in-darmstadt.de/event/farbenfrohe-mittagspause-digitale-kunst-in-mensa-152026/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/weiter-immer-weiter-ausstellung-der-kuenstlergruppe-impuls-art/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/trotz-reichtum-arm-interaktive-ausstellung/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/werkzeuge-des-anstiftens-ausstellung/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/entspanne-mit-lamayoga-in-der-natur-yoga-und-aromatherapie-fuer-alle-n/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/blue-monday/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/vintage-mit-dj-gun/2026-09-14",
+      "https://www.events-in-darmstadt.de/event/wanderkino-laster-der-nacht-10/2026-09-14"
+    ]
+  },
+  {
+    "requested_url": "https://www.partyamt.de/",
+    "checked_at": "2026-09-14T09:13:45.260536+00:00",
+    "status": 200,
+    "final_url": "https://www.partyamt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Partyamt Darmstadt",
+    "bytes": 1104398,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.partyamt.de/event/pop-art-meets-digital-art-01072026/2026-09-14",
+      "https://www.partyamt.de/event/open-jam-19012026/2026-09-14",
+      "https://www.partyamt.de/event/pub-quiz-mit-quizmaster-moritz-16022026/2026-09-14",
+      "https://www.centralstation-darmstadt.de/programm/?cal=0",
+      "https://www.partyamt.de/event/farbenfrohe-mittagspause-digitale-kunst-in-mensa-152026/2026-09-14",
+      "https://www.partyamt.de/event/weiter-immer-weiter-ausstellung-der-kuenstlergruppe-impuls-art/2026-09-14",
+      "https://www.partyamt.de/event/trotz-reichtum-arm-interaktive-ausstellung/2026-09-14",
+      "https://www.partyamt.de/event/werkzeuge-des-anstiftens-ausstellung/2026-09-14",
+      "https://www.partyamt.de/event/entspanne-mit-lamayoga-in-der-natur-yoga-und-aromatherapie-fuer-alle-n/2026-09-14",
+      "https://www.partyamt.de/event/blue-monday/2026-09-14",
+      "https://www.partyamt.de/event/vintage-mit-dj-gun/2026-09-14",
+      "https://www.partyamt.de/event/wanderkino-laster-der-nacht-10/2026-09-14"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadt.de/veranstaltungskalender",
+    "checked_at": "2026-09-14T09:13:45.260726+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadt.de/veranstaltungskalender",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungskalender | Wissenschaftsstadt Darmstadt",
+    "bytes": 200625,
+    "social_links": [
+      "https://www.facebook.com/wissenschaftsstadtdarmstadt",
+      "https://www.instagram.com/wissenschaftsstadt_darmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadt.de/veranstaltungskalender",
+      "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-veranstaltungen/aktive-ferien",
+      "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+      "https://www.darmstadt.de/leben/umwelt/foerderprogramme",
+      "https://www.darmstadt.de/kultur/stadtgeschichte/stadtarchiv/stadtgeschichte-entdecken/regelmaessige-veranstaltungen",
+      "https://www.darmstadt.de/standort/stadtplanung/foerdergebiete/waldkolonie-akazienweg/folgeveranstaltung-zum-isek",
+      "https://digitales-rathaus.darmstadt.de/kategorien/dienstleistungen/veranstaltungskalender",
+      "https://www.ztix.de/5181/events/-0lzZTg",
+      "https://www.darmstadt.de/veranstaltungskalender/14-09-2026/seite-1/barrierefreiheit-0/kategorien-2",
+      "https://www.darmstadt.de/veranstaltungskalender/14-09-2026/seite-1/barrierefreiheit-0/kategorien-17",
+      "https://www.darmstadt.de/veranstaltungskalender/14-09-2026/seite-1/barrierefreiheit-0/kategorien-28",
+      "https://www.ztix.de/5181/events/-QQ09D8"
+    ]
+  },
+  {
+    "requested_url": "https://www.p-stadtkultur.de/",
+    "checked_at": "2026-09-14T09:13:45.261832+00:00",
+    "status": 200,
+    "final_url": "https://www.p-stadtkultur.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "P Stadtkulturmagazin: Kultur. Feiern. Darmstadt entdecken.",
+    "bytes": 109975,
+    "social_links": [
+      "https://www.facebook.com/pmagazin",
+      "https://www.instagram.com/pmagazin_da/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.p-stadtkultur.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      }
+    ],
+    "jsonld_types": [
+      "CollectionPage",
+      "ImageObject",
+      "NewsMediaOrganization",
+      "Place",
+      "PostalAddress",
+      "SearchAction",
+      "WebSite"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/",
+    "checked_at": "2026-09-14T09:13:45.643496+00:00",
+    "status": 200,
+    "final_url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen in Darmstadt, Rhein-Main und Südhessen - FRIZZ - Das Stadt- und Kulturmagazin & Online-Portal für Darmstadt, Südhessen und Rhein-Main - FRIZZmag.de",
+    "bytes": 93176,
+    "social_links": [
+      "http://www.facebook.com/FRIZZmag",
+      "http://www.instagram.com/FRIZZmag"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.frizzmag.de/api/rss/content.rss",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/index.rss",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/calendar.ics",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ListItem",
+      "WebPage",
+      "https://schema.org/Event",
+      "https://schema.org/GeoCoordinates",
+      "https://schema.org/Place"
+    ],
+    "event_schema_count": 30,
+    "event_links_sample": [
+      "https://www.frizzmag.de/search/event/veranstaltungs-kalender/",
+      "https://www.frizzmag.de/search/event/veranstaltungs-kalender/?page=2",
+      "https://www.frizzmag.de/search/event/veranstaltungs-kalender/#maincontent",
+      "https://www.frizzmag.de/search/event/veranstaltungs-kalender/index.html",
+      "http://www.frizzmag.de/events/submit.html",
+      "https://www.frizzmag.de/search/event/veranstaltungs-kalender/map_search.html",
+      "https://www.frizzmag.de/events/das-gr%C3%BCne-sofa/?occ_dtstart=2026-09-14T00:00",
+      "https://www.frizzmag.de/events/bewegte-sternstunden-jennifer-marie/?occ_dtstart=2026-09-14T15:30",
+      "https://www.frizzmag.de/events/Nachtleben-Frankfurt-09-26_6/?occ_dtstart=2026-09-14T19:00",
+      "https://www.frizzmag.de/events/Batschkapp%20Frankfurt-09-26_20/?occ_dtstart=2026-09-14T19:00",
+      "https://www.frizzmag.de/events/museumsabend-haie-elegante-anmutige-rauber-meere/?occ_dtstart=2026-09-14T19:30",
+      "https://www.frizzmag.de/events/Alte-Oper-Frankfurt-09-26/?occ_dtstart=2026-09-14T20:00"
+    ]
+  },
+  {
+    "requested_url": "https://www.centralstation-darmstadt.de/programm/",
+    "checked_at": "2026-09-14T09:13:46.924104+00:00",
+    "status": 200,
+    "final_url": "https://www.centralstation-darmstadt.de/programm/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Programm • Centralstation Darmstadt • Konzerte, Lesungen, Partys und Kinderprogramm",
+    "bytes": 112612,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/wp/v2/pages/32",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.centralstation-darmstadt.de%2Fprogramm%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.centralstation-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.centralstation-darmstadt.de%2Fprogramm%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.centralstation-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.centralstation-darmstadt.de%2Fprogramm%2F",
+      "https://www.centralstation-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.centralstation-darmstadt.de%2Fprogramm%2F&format=xml",
+      "https://www.centralstation-darmstadt.de/programm/",
+      "https://www.centralstation-darmstadt.de/programm/specials/",
+      "https://www.centralstation-darmstadt.de/programm/zeitung/",
+      "https://www.centralstation-darmstadt.de/programm/archiv/",
+      "https://www.centralstation-darmstadt.de/event/32715/wanderkino-laster-der-nacht/",
+      "https://www.centralstation-darmstadt.de/event/32716/wanderkino-laster-der-nacht/",
+      "https://www.centralstation-darmstadt.de/event/32717/wanderkino-laster-der-nacht/",
+      "https://www.centralstation-darmstadt.de/event/30466/tony-bauer-fallschirmspringer/",
+      "https://www.centralstation-darmstadt.de/event/33811/wdc-pavillon-one-last-dance-pavillon-closing-party/",
+      "https://www.centralstation-darmstadt.de/event/32965/polly-rakete/"
+    ]
+  },
+  {
+    "requested_url": "https://www.knabenschule.de/",
+    "checked_at": "2026-09-14T09:13:47.170270+00:00",
+    "status": 200,
+    "final_url": "https://www.knabenschule.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Kulturzentrum Bessunger Knabenschule in Darmstadt / Veranstaltungen",
+    "bytes": 91114,
+    "social_links": [
+      "http://www.instagram.com/kulturzentrum_knabenschule",
+      "https://www.facebook.com/Bessunger-Knabenschule-124571307596175/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=135198&type=160",
+      "https://www.ztix.de/knabenschule/events/tango-transit-in-concert-iPsn2t/tickets",
+      "https://www.knabenschule.de/kalender.php?page=1703",
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=135315&type=160",
+      "https://www.ztix.de/jazz-darmstadt/events/darmstaedter-jazzherbst-glodramondkugel-potsa-lots-s2Pe1J/tickets",
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=135316&type=160",
+      "https://www.ztix.de/jazz-darmstadt/events/darmstaedter-jazzherbst-mueller-mahall-moden-fulso-uLtnO7/tickets",
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=135826&type=160",
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=135707&type=160",
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=135332&type=160",
+      "https://www.hessen-szene.de/veranstaltungen?tx_laks_calendar[action]=formCenter&tx_laks_calendar[controller]=Reservation&tx_laks_calendar[eventDate]=134978&type=160",
+      "https://www.ztix.de/knabenschule/events/americana-robert-oberbeck-Q0RSkn/tickets"
+    ]
+  },
+  {
+    "requested_url": "https://www.goldene-krone.de/",
+    "checked_at": "2026-09-14T09:13:47.233673+00:00",
+    "status": 200,
+    "final_url": "https://www.goldene-krone.de/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Goldene Krone Darmstadt - Konzerte Theater Disco",
+    "bytes": 366060,
+    "social_links": [
+      "https://www.facebook.com/goldenekrone/",
+      "https://www.instagram.com/goldenekronedarmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.goldene-krone.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.goldene-krone.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "EntryPoint",
+      "Event",
+      "ImageObject",
+      "ListItem",
+      "Offer",
+      "Organization",
+      "Place",
+      "PostalAddress",
+      "PropertyValueSpecification",
+      "SearchAction",
+      "WebSite"
+    ],
+    "event_schema_count": 100,
+    "event_links_sample": [
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/tribe-events-pro-mini-calendar-block.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-json/tribe/events/v1/",
+      "https://www.goldene-krone.de/#Programm",
+      "https://www.goldene-krone.de/veranstaltung/impressum-und-datenschutz/",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/views-skeleton.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/views-full.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/wp-content/plugins/events-calendar-pro/src/resources/css/views-print.min.css?ver=7.4.2",
+      "https://www.goldene-krone.de/programm/liste/?shortcode=24f53d40",
+      "https://www.goldene-krone.de/programm/heute/?shortcode=24f53d40",
+      "https://www.goldene-krone.de/programm/liste/?shortcode=24f53d40&eventDisplay=past",
+      "https://www.goldene-krone.de/programm/liste/seite/2/?shortcode=24f53d40",
+      "https://www.goldene-krone.de/veranstaltung/blue-monday-2/"
+    ]
+  },
+  {
+    "requested_url": "https://www.schlosskeller-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:47.494760+00:00",
+    "status": 200,
+    "final_url": "https://www.schlosskeller-darmstadt.de/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Schlosskeller Darmstadt",
+    "bytes": 56101,
+    "social_links": [
+      "https://instagram.com/schlosskellerdarmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://oetingervilla.de/",
+    "checked_at": "2026-09-14T09:13:47.931175+00:00",
+    "status": 200,
+    "final_url": "https://oetingervilla.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "OETINGER VILLA",
+    "bytes": 44701,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://oetingervilla.de/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Foetingervilla.de%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://oetingervilla.de/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Foetingervilla.de%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://oetingervilla.de/index.php/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://oetingervilla.de/index.php/wp-json/wp/v2/pages/407",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://806qm.de/programm/",
+    "checked_at": "2026-09-14T09:13:47.950708+00:00",
+    "status": 200,
+    "final_url": "https://806qm.de/programm/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "806qm",
+    "bytes": 29883,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://806qm.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://806qm.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://806qm.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://806qm.de/wp-json/tribe/events/v1/"
+    ]
+  },
+  {
+    "requested_url": "https://www.krzwl.de/",
+    "checked_at": "2026-09-14T09:13:48.234255+00:00",
+    "status": 200,
+    "final_url": "https://www.krzwl.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "KRZWL",
+    "bytes": 87757,
+    "social_links": [
+      "https://www.facebook.com/GalerieKurzweil/",
+      "https://www.instagram.com/galeriekurzweil/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.krzwl.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.krzwl.de/#ProgrammContainer",
+      "https://xceed.me/en/darmstadt/event/hood-comedy-aftershow-x-good-times/243688/channel/galerie-kurzweil-2",
+      "https://xceed.me/en/darmstadt/event/restless-invites-kaiser-1/243561/channel/resit?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAUKEIZwZG9mAmV4dG4DYWVtAjExAHNydGMGYXBwX2lkDzU2NzA2NzM0MzM1MjQyNwABpzThQbObvFWpDfCTSPdatgoRgDv_LPbUoBc0OgrdXPM6N0pjJ7DNSLyLqx5P_aem_J1xAdsYvLZwFUGxkQNS3AQ&utm_id=97760_v0_s00_e0_tv3",
+      "https://xceed.me/en/darmstadt/event/gerd-janson-x-thomas-hammann/242106/channel/galerie-kurzweil-2"
+    ]
+  },
+  {
+    "requested_url": "https://www.hoffart-theater.de/veranstaltungen/",
+    "checked_at": "2026-09-14T09:13:48.571974+00:00",
+    "status": 200,
+    "final_url": "https://www.hoffart-theater.de/veranstaltungen/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen | HoffART Darmstadt",
+    "bytes": 570110,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.hoffart-theater.de/veranstaltungen/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.hoffart-theater.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.hoffart-theater.de/veranstaltungen/feed/",
+      "https://www.hoffart-theater.de/veranstaltungen/",
+      "https://www.hoffart-theater.de/veranstaltungen/nathalie-schaefer-le-trois-amis/",
+      "https://www.hoffart-theater.de/veranstaltungen/dubtales/",
+      "https://www.hoffart-theater.de/veranstaltungen/pons/",
+      "https://www.hoffart-theater.de/veranstaltungen/die-besondere-platte-81/",
+      "https://www.hoffart-theater.de/veranstaltungen/lesung-trio-infernale-livemusik-mit-denise-frey/",
+      "https://www.hoffart-theater.de/veranstaltungen/gute-stube-praesentiert-son-of-the-velvet-rat/",
+      "https://www.hoffart-theater.de/veranstaltungen/improtheater-show-mit-alles-auf-anfang/",
+      "https://www.hoffart-theater.de/veranstaltungen/dancing-for-goldies-oktober-tanzt-line/",
+      "https://www.hoffart-theater.de/veranstaltungen/gute-stube-praesentiert-kelly-mcmichael-art-poprock-aus-kanada/",
+      "https://www.hoffart-theater.de/veranstaltungen/nur-nicht-dass-sie-nach-amerika-gehen-buechnerbande-praesentiert-neue-revue/"
+    ]
+  },
+  {
+    "requested_url": "https://www.keller-klub.de/",
+    "checked_at": "2026-09-14T09:13:49.698030+00:00",
+    "status": 200,
+    "final_url": "https://www.keller-klub.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Keller-Klub Darmstadt e.V.",
+    "bytes": 57533,
+    "social_links": [
+      "https://www.facebook.com/kuenstlerkeller/",
+      "https://www.instagram.com/kuenstlerkeller/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.keller-klub.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.keller-klub.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.keller-klub.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.keller-klub.de/wp-json/wp/v2/pages/11",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.keller-klub.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.keller-klub.de%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.keller-klub.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.keller-klub.de%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "EntryPoint",
+      "ListItem",
+      "PropertyValueSpecification",
+      "ReadAction",
+      "SearchAction",
+      "WebPage",
+      "WebSite"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.keller-klub.de/programm/"
+    ]
+  },
+  {
+    "requested_url": "https://bruchbudedarmstadt.de/events/",
+    "checked_at": "2026-09-14T09:13:50.631925+00:00",
+    "status": 200,
+    "final_url": "https://bruchbudedarmstadt.de/events/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Events – Bruchbude Darmstadt",
+    "bytes": 59278,
+    "social_links": [
+      "https://www.facebook.com/profile.php?id=61550213564667",
+      "https://www.instagram.com/bruchbude_darmstadt/",
+      "https://www.instagram.com/bruchbude_darmstadt?igsh=MThmZXR4dmV3Zmp0eg=="
+    ],
+    "feed_links": [
+      {
+        "url": "https://bruchbudedarmstadt.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://bruchbudedarmstadt.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://bruchbudedarmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://bruchbudedarmstadt.de/wp-json/wp/v2/pages/60",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://bruchbudedarmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbruchbudedarmstadt.de%2Fevents%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://bruchbudedarmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbruchbudedarmstadt.de%2Fevents%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://bruchbudedarmstadt.de/events/",
+      "https://bruchbudedarmstadt.de/events/#main"
+    ]
+  },
+  {
+    "requested_url": "https://www.ansibin.de/",
+    "checked_at": "2026-09-14T09:13:50.883817+00:00",
+    "status": 200,
+    "final_url": "https://www.ansibin.de/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "An Sibin Irish Pub Darmstadt",
+    "bytes": 21596,
+    "social_links": [
+      "https://www.facebook.com/pg/ansibindarmstadt",
+      "https://www.instagram.com/ansibindarmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.ansibin.de/events.html"
+    ]
+  },
+  {
+    "requested_url": "https://www.gastspielhaus-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:50.890454+00:00",
+    "status": 200,
+    "final_url": "https://www.gastspielhaus-darmstadt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Gastspielhaus Darmstadt - Home",
+    "bytes": 23336,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.gastspielhaus-darmstadt.de/Veranstaltungen/"
+    ]
+  },
+  {
+    "requested_url": "https://nbh-darmstadt.de/veranstaltungen-aktuell/",
+    "checked_at": "2026-09-14T09:13:51.185953+00:00",
+    "status": 200,
+    "final_url": "https://nbh-darmstadt.de/veranstaltungen-aktuell/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Nachbarschaftsheim Darmstadt e.V. | Veranstaltungen",
+    "bytes": 128614,
+    "social_links": [
+      "https://instagram.com/nachbarschaftsheim_darmstadt",
+      "https://www.facebook.com/nbh.darmstadt/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://nbh-darmstadt.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://nbh-darmstadt.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://nbh-darmstadt.de/veranstaltungen/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://nbh-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnbh-darmstadt.de%2Fveranstaltungen-aktuell%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://nbh-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnbh-darmstadt.de%2Fveranstaltungen-aktuell%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://nbh-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://nbh-darmstadt.de/wp-json/wp/v2/pages/3274",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://nbh-darmstadt.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Event",
+      "Offer",
+      "Place",
+      "PostalAddress"
+    ],
+    "event_schema_count": 9,
+    "event_links_sample": [
+      "https://nbh-darmstadt.de/veranstaltungen/?ical=1",
+      "https://nbh-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnbh-darmstadt.de%2Fveranstaltungen-aktuell%2F",
+      "https://nbh-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnbh-darmstadt.de%2Fveranstaltungen-aktuell%2F&format=xml",
+      "https://nbh-darmstadt.de/wp-content/plugins/events-calendar-pro/build/css/tribe-events-pro-mini-calendar-block.css?ver=7.8.0",
+      "https://nbh-darmstadt.de/veranstaltungen-aktuell/",
+      "https://nbh-darmstadt.de/wp-json/tribe/events/v1/",
+      "https://nbh-darmstadt.de/veranstaltungen/",
+      "https://nbh-darmstadt.de/veranstaltungen",
+      "https://nbh-darmstadt.de/veranstaltung/fit-for-kids-ein-sportangebot-fuer-kinder-aus-dem-stadtteil/2026-09-14/",
+      "https://nbh-darmstadt.de/veranstaltungsort/turnhalle-herderschule/",
+      "https://nbh-darmstadt.de/veranstaltung/mobiler-treff-mein-bessungen/2026-09-14/",
+      "https://nbh-darmstadt.de/veranstaltung/medienteens/2026-09-14/"
+    ]
+  },
+  {
+    "requested_url": "https://www.vielbunt.org/kalender/",
+    "checked_at": "2026-09-14T09:13:51.937852+00:00",
+    "status": 200,
+    "final_url": "https://www.vielbunt.org/kalender/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Termine – vielbunt e.V.",
+    "bytes": 117521,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.vielbunt.org/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [
+      "https://calendar.google.com/calendar/embed?src=vielbunt.org_9dumkl9hgmdsf22bvi3vb7du78%40group.calendar.google.com&ctz=Europe%2FBerlin&mode=AGENDA"
+    ],
+    "api_links": [
+      {
+        "url": "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Fkalender%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Fkalender%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/wp/v2/pages/680",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Fkalender%2F",
+      "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Fkalender%2F&format=xml",
+      "https://www.vielbunt.org/kalender/",
+      "https://www.vielbunt.org/kalender/#wp--skip-link--target"
+    ]
+  },
+  {
+    "requested_url": "https://www.vielbunt.org/treffbunt/",
+    "checked_at": "2026-09-14T09:13:52.471799+00:00",
+    "status": 200,
+    "final_url": "https://www.vielbunt.org/treffbunt/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Treffbunt – vielbunt e.V.",
+    "bytes": 123228,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.vielbunt.org/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Ftreffbunt%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Ftreffbunt%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/wp/v2/pages/28",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/index_1.de.jsp",
+    "checked_at": "2026-09-14T09:13:52.982106+00:00",
+    "status": 200,
+    "final_url": "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/index_1.de.jsp",
+    "content_type": "text/html;charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungskalender - öffentliche Veranstaltungen – TU Darmstadt",
+    "bytes": 76933,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltungen_rss.de.jsp",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltungen_rss.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_214465.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_214464.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_206103.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_211352.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_210501.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_215936.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_213697.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_215232.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_214150.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_206938.de.jsp",
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltung_204876.de.jsp"
+    ]
+  },
+  {
+    "requested_url": "https://www.webteam.tu-darmstadt.de/hilfe/details_513.de.jsp",
+    "checked_at": "2026-09-14T09:13:53.375826+00:00",
+    "status": 200,
+    "final_url": "https://www.webteam.tu-darmstadt.de/hilfe/details_513.de.jsp",
+    "content_type": "text/html;charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungskalender der TU Darmstadt – Webteam – TU Darmstadt",
+    "bytes": 55252,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6",
+      "https://www.intern.tu-darmstadt.de/informationsportal/veranstaltungskalender",
+      "https://www.webteam.tu-darmstadt.de/media/wissenssammlung/artikel/sonstiges/veranstaltungen/veranstaltungskalender_tu.png"
+    ]
+  },
+  {
+    "requested_url": "https://www.schader-stiftung.de/veranstaltungen/aktuell",
+    "checked_at": "2026-09-14T09:13:53.719169+00:00",
+    "status": 200,
+    "final_url": "https://www.schader-stiftung.de/veranstaltungen/aktuell",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Aktuelle Veranstaltungen",
+    "bytes": 121918,
+    "social_links": [
+      "https://www.instagram.com/schaderstiftung/?hl=de"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/film-im-forum-der-lange-februar/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-aesthetik-nachhaltiger-baukultur/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-zukunftslabor-juridicum/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-differenziert-wahrnehmen-und-transformationspotenziale-entdecken/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-ki-und-architektur-wer-bewertet-was-gebaut-ist/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-smart-gebaut-green-gedacht-handwerk-azubis-bauen-die-smart-green-box/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-neubaugebiete-des-20-jahrhunderts-in-laendlichen-regionen-wie-wollen-und-koennen-wir-kuenfitg-wohnen/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-zukunft-ortsraender-visionen-fuer-die-laendlichen-raeume/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/vom-viertel-zur-mitwelt/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-mitarbeitendenwohnen/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-wie-wohnen-wir-morgen/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-tag-der-baukultur-weiter-bauen-fuer-das-gemeinwohl/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-kirchenimmobilien-als-dritte-orte-herausforderungen-und-chancen-fuer-kirche-kommune-und-zivilgesellschaft/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-neue-traegerschaften-fuer-kirchliche-immobilien-transformation-gemeinwohlorientiert-gestalten/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-mutige-orte/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/wie-demokratien-bauen/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/strassenraeume-raeumen-perspektiven-fuer-eine-sozial-oekologische-transformation-des-ruhenden-verkehrs/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-demokratische-baukultur-als-kollektive-praxis/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt-26-engagierte-bau-und-wohnkultur/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-freiraeume-mit-und-fuer-kinder-und-jugendliche-gestalten/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/spiele-und-weltpolitik-workshop-und-verleihung-des-lehrpreises-2026/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/metamorphosen-der-faecher/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/grenzenlose-sicherheit-die-verschraenkung-von-see-und-all/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/neue-strukturen-fuer-die-dasl/ical",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/denkwerkstatt-vielfalt-in-demokratien-leben/ical",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell",
+      "https://www.schader-stiftung.de/veranstaltungen/archiv",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/film-im-forum-dokufilmabende-rhein-main-x-letsdok",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/film-im-forum-der-lange-februar",
+      "https://www.schader-stiftung.de/veranstaltungen/teilnehmen/3057",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/film-im-forum-der-lange-februar/ical",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/darmstaedter-tage-der-transformation-2026-dtdt26",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-aesthetik-nachhaltiger-baukultur",
+      "https://www.schader-stiftung.de/veranstaltungen/teilnehmen/3141",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-aesthetik-nachhaltiger-baukultur/ical",
+      "https://www.schader-stiftung.de/veranstaltungen/aktuell/artikel/dtdt26-zukunftslabor-juridicum",
+      "https://www.schader-stiftung.de/veranstaltungen/teilnehmen/3143"
+    ]
+  },
+  {
+    "requested_url": "https://www.adfc-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:54.519281+00:00",
+    "status": 200,
+    "final_url": "https://www.adfc-darmstadt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Startseite",
+    "bytes": 27834,
+    "social_links": [
+      "https://www.facebook.com/adfcdarmstadtdieburg",
+      "https://www.facebook.com/adfcdarmstadtdieburg/",
+      "https://www.instagram.com/adfcdarmstadtdieburg/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://darmstadt.bund.net/nc/termine/",
+    "checked_at": "2026-09-14T09:13:54.878030+00:00",
+    "error": "RuntimeError: curl: (60) SSL: no alternative certificate subject name matches target host name 'darmstadt.bund.net'\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, please visit the web page mentioned above.",
+    "feed_links": [],
+    "social_links": []
+  },
+  {
+    "requested_url": "https://www.bund-hessen.de/stadtnaturzentrum/",
+    "checked_at": "2026-09-14T09:13:55.078147+00:00",
+    "status": 200,
+    "final_url": "https://www.bund-hessen.de/stadtnaturzentrum/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Zentrum für Stadtnatur in Darmstadt – BUND Hessen",
+    "bytes": 122191,
+    "social_links": [
+      "https://www.facebook.com/BUND.Hessen",
+      "https://www.instagram.com/bund_hessen/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.bund-hessen.de/termine/",
+      "https://www.bund-hessen.de/termine/terminsuche/detail/event/vortrag-mit-steckermodulen-selbst-sonnenstrom-vom-balkon-produzieren/",
+      "https://www.bund-hessen.de/termine/terminsuche/detail/event/exkursion-climate-cycling-tour-zur-woche-der-klimaanpassung/",
+      "https://www.bund-hessen.de/termine/terminsuche/detail/event/online-stammtisch-stadtnaturschutz-flaechenschutz-und-flaechenrueckgewinnung-in-siedlungsraeumen/",
+      "https://www.bund-hessen.de/termine/terminsuche/detail/event/oline-vortrag-wie-helfen-wir-dem-igel-lebensweise-gefahren-tipps-1/",
+      "https://www.bund-hessen.de/termine/terminsuche/detail/event/inseln-der-artenvielfalt-schaffen-und-pflegen/",
+      "https://www.bund-hessen.de/fileadmin/hessen/Themen/Naturschutz-und-Landnutzung/Naturschutz/Stadtnaturzentrum/2024-2-Begleitprogramm-POI.pdf"
+    ]
+  },
+  {
+    "requested_url": "https://www.repaircafes-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:55.314426+00:00",
+    "status": 200,
+    "final_url": "https://www.repaircafes-darmstadt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Start",
+    "bytes": 13367,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php?format=feed&type=rss",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php?format=feed&type=atom",
+        "type": "application/atom+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.repaircafes-darmstadt.de/index.php/kalender",
+      "https://www.repaircafes-darmstadt.de/images/pdf/Termine.pdf",
+      "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format"
+    ]
+  },
+  {
+    "requested_url": "https://makerspace-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:56.119348+00:00",
+    "status": 200,
+    "final_url": "https://makerspace-darmstadt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Makerspace Darmstadt e.V.",
+    "bytes": 63010,
+    "social_links": [
+      "https://de-de.facebook.com/makerspacedarmstadt",
+      "https://instagram.com/makerspacedarmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://chaos-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:56.119605+00:00",
+    "status": 200,
+    "final_url": "https://chaos-darmstadt.de/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "CCC Darmstadt e.V.",
+    "bytes": 16489,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://chaos-darmstadt.de/feed.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://chaos-darmstadt.de/feed.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://chaos-darmstadt.de/feed.xml",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://chaos-darmstadt.de/termine/"
+    ]
+  },
+  {
+    "requested_url": "https://transition-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:56.327605+00:00",
+    "status": 200,
+    "final_url": "https://transition-darmstadt.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Transition Town Darmstadt",
+    "bytes": 136773,
+    "social_links": [
+      "https://www.facebook.com/transitiondarmstadt",
+      "https://www.instagram.com/transition_town_darmstadt/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://transition-darmstadt.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "webcal://transition-darmstadt.de/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true&ai1ec_cat_ids=18,28",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "webcal://transition-darmstadt.de/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true&ai1ec_cat_ids=18,28",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "webcal://transition-darmstadt.de/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true&ai1ec_cat_ids=53,52,19,13,23,73,22,17,57,20,15,16,14,25",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "webcal://transition-darmstadt.de/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true&ai1ec_cat_ids=53,52,19,13,23,73,22,17,57,20,15,16,14,25",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://transition-darmstadt.de/feed/",
+        "type": null,
+        "rel": null
+      },
+      {
+        "url": "https://transition-darmstadt.de/comments/feed/",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://transition-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftransition-darmstadt.de%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://transition-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftransition-darmstadt.de%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://transition-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://transition-darmstadt.de/wp-json/wp/v2/pages/32",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://transition-darmstadt.de/Veranstaltung/juergen-resch-kommt-nach-darmstadt-fuer-umwelt-und-klimaschutz-in-schwierigen-zeiten/?instance_id=6866",
+      "https://transition-darmstadt.de/Veranstaltung/transition-mitmach-konferenz-in-frankfurt/?instance_id=6780",
+      "https://transition-darmstadt.de/Veranstaltung/the-week-eine-gruppenerfahrung-mit-herz-und-verstand-zu-klimawandel-und-handlungsmoeglichkeiten-3/?instance_id=6830",
+      "https://transition-darmstadt.de/Veranstaltung/the-week-eine-gruppenerfahrung-mit-herz-und-verstand-zu-klimawandel-und-handlungsmoeglichkeiten-3/?instance_id=6831",
+      "https://transition-darmstadt.de/Veranstaltung/online-vortrag-mit-steckermodulen-selbst-sonnenstrom-vom-balkon-produzieren-was-ist-mit-den-kleinspeichern/?instance_id=6933",
+      "https://transition-darmstadt.de/Veranstaltung/faire-mode-rundgang/?instance_id=6925",
+      "https://transition-darmstadt.de/Veranstaltung/climate-cycling-tour-eberstadt/?instance_id=6763",
+      "https://transition-darmstadt.de/Veranstaltung/climate-cycling-tour-eberstadt-fahrradtour-zur-woche-der-klimaanpassung/?instance_id=6934",
+      "https://transition-darmstadt.de/Veranstaltung/offener-treff-eberleih-6-2/?instance_id=6865",
+      "https://transition-darmstadt.de/Veranstaltung/vortrag-nachhaltig-und-fair-wirtschaften-aber-wie-wege-zu-einer-wirtschaft-die-nicht-zerstoert/?instance_id=6882",
+      "https://transition-darmstadt.de/Veranstaltung/karolinenplatz-flohmarkt/?instance_id=6928",
+      "https://transition-darmstadt.de/Veranstaltung/umwelt-und-familientag-des-ead/?instance_id=6875"
+    ]
+  },
+  {
+    "requested_url": "https://www.kranichsteinkalender.de/",
+    "checked_at": "2026-09-14T09:13:56.417186+00:00",
+    "status": 200,
+    "final_url": "https://www.kranichsteinkalender.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "In Kranichstein Aktiv",
+    "bytes": 158857,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [
+      "https://www.google.com/calendar/embed?color=%2342d692&color=%234986e7&color=%2392e1c0&color=%239a9cff&color=%239fc6e7&color=%23c2c2c2&color=%23f691b2&color=%23fa573c&color=%23ff7537&color=%23ffad46&embed_style=WyJhdDplbWI6c3QiLCIjZTBlMGUwIiwiI2VkZWRlZCIsIiM0MTg0ZjMiLCJyb2JvdG8iLCIjNjM2MzYzIiw1MDAsIiNmZmYiXQo&eopt=2&mode=agenda&showCalendars=1&showPrint=0&showTitle=0&showTz=1&src=2ifk0f42n6v3tu03l62uo2qn7c@group.calendar.google.com&src=322alpneq15p8ue53d9co1hgjg@group.calendar.google.com&src=7f605jq902g41iemfp9ggboqtk@group.calendar.google.com&src=83fk44613t3s3pbjt4ohnbg7g4@group.calendar.google.com&src=8da3o3mp7kim1uhfb0v7fpu7fs@group.calendar.google.com&src=bj7r87ashrn1d3vtu1t1cr0ivc@group.calendar.google.com&src=de.christian%23holiday@group.v.calendar.google.com&src=de.german%23holiday@group.v.calendar.google.com&src=de.islamic%23holiday@group.v.calendar.google.com&src=de.judaism%23holiday@group.v.calendar.google.com&src=de.orthodox_christianity%23holiday@group.v.calendar.google.com&src=e_2_de%23weeknum@group.v.calendar.google.com&src=elejl5pkhes5d64j7vsptrv5v4@group.calendar.google.com&src=familienbildung.kranichstein@gmail.com&src=hiergeblieben.kranichstein@gmail.com&src=inka.kranichstein@gmail.com&src=ppehd1f39qctle59erfleu1a88@group.calendar.google.com&src=tkib9g4o51jf6h86svaga0qubk@group.calendar.google.com"
+    ],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.kranichsteinkalender.de/startseite",
+      "https://www.kranichsteinkalender.de/über-den-kalender",
+      "https://www.kranichsteinkalender.de/kranichstein-inklusiv",
+      "https://www.kranichsteinkalender.de/datenschutzerklärung",
+      "https://www.kranichsteinkalender.de/impressum",
+      "https://www.kranichsteinkalender.de/ChillauiKalender"
+    ]
+  },
+  {
+    "requested_url": "https://wixhausen.org/",
+    "checked_at": "2026-09-14T09:13:56.520433+00:00",
+    "status": 200,
+    "final_url": "https://wixhausen.org/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Startseite",
+    "bytes": 132904,
+    "social_links": [
+      "https://www.facebook.com/VereinTfuerWixhausen/",
+      "https://www.instagram.com/vereintfuerwixhausen/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://vereint.wixhausen.org/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://vereint.wixhausen.org/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://vereint.wixhausen.org/veranstaltungen/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://vereint.wixhausen.org/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://vereint.wixhausen.org/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Organization",
+      "SearchAction",
+      "WebPage",
+      "WebSite"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://vereint.wixhausen.org/veranstaltungen/?ical=1",
+      "https://vereint.wixhausen.org/wp-json/tribe/events/v1/",
+      "https://vereint.wixhausen.org/kalender/"
+    ]
+  },
+  {
+    "requested_url": "https://www.arheilger-stadtteilverein.de/",
+    "checked_at": "2026-09-14T09:13:57.300799+00:00",
+    "status": 200,
+    "final_url": "https://www.arheilger-stadtteilverein.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Start - Arheilger Stadtteilverein",
+    "bytes": 24133,
+    "social_links": [
+      "https://www.instagram.com/arheilgerstadtteilverein/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://listi.jpberlin.de/mailman/listinfo/astv-veranstaltungen"
+    ]
+  },
+  {
+    "requested_url": "https://www.martinsviertel-darmstadt.de/",
+    "checked_at": "2026-09-14T09:13:57.448598+00:00",
+    "error": "RuntimeError: curl: (60) SSL certificate problem: self signed certificate\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, please visit the web page mentioned above.",
+    "feed_links": [],
+    "social_links": []
+  },
+  {
+    "requested_url": "https://www.staatstheater-darmstadt.de/spielplan/",
+    "checked_at": "2026-09-14T09:13:57.636959+00:00",
+    "status": 200,
+    "final_url": "https://www.staatstheater-darmstadt.de/spielplan/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Spielplan\n | Staatstheater Darmstadt",
+    "bytes": 2095689,
+    "social_links": [
+      "https://www.facebook.com/staatstheaterdarmstadt/",
+      "https://www.instagram.com/staatstheaterdarmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.staatstheater-darmstadt.de/spielplan/",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/blick-hinter-die-kulissen.1766/#event-14326",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/theaterfuehrung-fuer-familien.1775/#event-13394",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/1-kammerkonzert.2229/#event-13398",
+      "https://webshop.staatstheater-darmstadt.de/de/veranstaltung/21bd4f39-454c-4772-9662-f80d209d4273/10797",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/laed-naid-music.2350/#event-13400",
+      "https://webshop.staatstheater-darmstadt.de/de/veranstaltung/21bd4f39-454c-4772-9662-f80d209d4273/10910",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/antanzen.2387/#event-13535",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/die-zauberfloete.2202/#event-13403",
+      "https://webshop.staatstheater-darmstadt.de/de/veranstaltung/21bd4f39-454c-4772-9662-f80d209d4273/10833",
+      "https://www.staatstheater-darmstadt.de/veranstaltungen/beute.2274/#event-13404",
+      "https://webshop.staatstheater-darmstadt.de/de/veranstaltung/21bd4f39-454c-4772-9662-f80d209d4273/10972"
+    ]
+  },
+  {
+    "requested_url": "https://theatermollerhaus.de/",
+    "checked_at": "2026-09-14T09:13:57.827719+00:00",
+    "status": 200,
+    "final_url": "https://theatermollerhaus.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Startseite | Theater Moller HausTheater Moller Haus – Das Theater Moller Haus ist die Spielstätte der Freien Szene Darmstadt",
+    "bytes": 70096,
+    "social_links": [
+      "https://www.facebook.com/theatermollerhaus",
+      "https://www.instagram.com/theatermollerhaus/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://theatermollerhaus.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://theatermollerhaus.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://theatermollerhaus.de/production/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://theatermollerhaus.de/upcoming_productions",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://theatermollerhaus.de/upcoming_events",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://theatermollerhaus.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://theatermollerhaus.de/wp-json/wp/v2/pages/110",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://theatermollerhaus.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftheatermollerhaus.de%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://theatermollerhaus.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftheatermollerhaus.de%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://theatermollerhaus.de/spielplan-tickets/spielplan/",
+      "https://theatermollerhaus.de/spielplan-tickets/stuecke/",
+      "https://theatermollerhaus.de/spielplan-tickets/preise/",
+      "https://theatermollerhaus.de/spielplan-tickets/preise#gutscheine",
+      "https://www.ztix.de/freie-szene-da/events/ida-und-der-fliegende-wal-FWHXBQ",
+      "https://www.ztix.de/freie-szene-da/events/-iCvg1S",
+      "https://www.ztix.de/freie-szene-da/events/-dLwrKZ",
+      "https://www.ztix.de/freie-szene-da/events/alt-weiber-sommer-g5p958",
+      "https://theatermollerhaus.de/spielplan",
+      "https://theatermollerhaus.de/wp-content/uploads/2026/07/TMH_Programm_2026-08-09_Mail.pdf",
+      "https://theatermollerhaus.de/unsere-programme-zum-download/"
+    ]
+  },
+  {
+    "requested_url": "https://www.hlmd.de/de/besuchen/kalender/",
+    "checked_at": "2026-09-14T09:13:57.837146+00:00",
+    "status": 200,
+    "final_url": "https://www.hlmd.de/de/besuchen/kalender/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Kalender – Hessisches Landesmuseum Darmstadt",
+    "bytes": 1283022,
+    "social_links": [
+      "https://de-de.facebook.com/HessischesLandesmuseumDarmstadt",
+      "https://www.instagram.com/landesmuseumdarmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.hlmd.de/de/besuchen/kalender/#main",
+      "https://www.hlmd.de/de/besuchen/kalender"
+    ]
+  },
+  {
+    "requested_url": "https://www.mathildenhoehe.de/besuch/termine",
+    "checked_at": "2026-09-14T09:13:58.465804+00:00",
+    "status": 200,
+    "final_url": "https://www.mathildenhoehe.de/besuch/termine",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Termine – Besuch – UNESCO Welterbe Mathildenhöhe Darmstadt",
+    "bytes": 55884,
+    "social_links": [
+      "https://www.instagram.com/mathildenhoehe/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.mathildenhoehe.debesuch/termine",
+      "https://www.mathildenhoehe.de/besuch/termine#header-nav",
+      "https://www.mathildenhoehe.de/besuch/termine#search",
+      "https://www.mathildenhoehe.de/besuch/termine#main",
+      "https://www.mathildenhoehe.de/besuch/termine#footer",
+      "https://www.mathildenhoehe.de/besuch/termine",
+      "https://www.mathildenhoehe.de/vermittlung/veranstaltungen",
+      "https://www.mathildenhoehe.de/besuch/termine?filter=25",
+      "https://www.mathildenhoehe.de/besuch/termine?filter=22",
+      "https://www.mathildenhoehe.de/besuch/termine?filter=1",
+      "https://www.mathildenhoehe.de/besuch/termine?filter=5",
+      "https://www.mathildenhoehe.de/besuch/termine?filter=20"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadtium.de/besuchen/veranstaltungskalender",
+    "checked_at": "2026-09-14T09:13:59.177033+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadtium.de/besuchen/veranstaltungskalender",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungskalender | darmstadtium - Wissenschafts- und Kongresszentrum",
+    "bytes": 119314,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadtium.de/besuchen/veranstaltungskalender",
+      "https://www.darmstadtium.de/en/visitors/event-calendar",
+      "https://www.darmstadtium.de/veranstalten",
+      "https://www.darmstadtium.de/veranstalten/argumente-fuer-ihre-buchung",
+      "https://www.darmstadtium.de/veranstalten/raeume-entdecken",
+      "https://www.darmstadtium.de/veranstalten/raumplaner",
+      "https://www.darmstadtium.de/veranstalten/referenzen",
+      "https://www.darmstadtium.de/veranstalten/it-hotspot-fuer-ihren-kongress",
+      "https://www.darmstadtium.de/veranstalten/digitale-hybride-veranstaltungen",
+      "https://www.darmstadtium.de/veranstalten/klimafreundlich-tagen",
+      "https://www.darmstadtium.de/veranstalten/unser-service-fuer-sie",
+      "https://www.darmstadtium.de/besuchen/veranstaltungskalender#klaro"
+    ]
+  },
+  {
+    "requested_url": "https://www.familien-willkommen.de/Termine",
+    "checked_at": "2026-09-14T09:13:59.214019+00:00",
+    "status": 200,
+    "final_url": "https://www.familien-willkommen.de/Termine",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "familien-willkommen.de |Veranstaltungen und Flohmärkte für Kinder, Eltern und Familien in Darmstadt",
+    "bytes": 10023,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.familien-willkommen.de/Termine#sa",
+      "https://www.familien-willkommen.de/Termine#top",
+      "https://www.familien-willkommen.de/Termine",
+      "https://www.darmstadt.de/veranstaltungskalender/?no_cache=1",
+      "https://www.darmstadt.de/veranstaltungskalender/"
+    ]
+  },
+  {
+    "requested_url": "https://www.kinder-jugend-freizeiten.de/",
+    "checked_at": "2026-09-14T09:13:59.308339+00:00",
+    "status": 200,
+    "final_url": "https://www.kinder-jugend-freizeiten.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "kinder-jugend-freizeiten.de: kinder-jugend-freizeiten.de",
+    "bytes": 43241,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.kinder-jugend-freizeiten.de/veranstalter/"
+    ]
+  },
+  {
+    "requested_url": "https://www.heinerfest.de/",
+    "checked_at": "2026-09-14T09:13:59.703214+00:00",
+    "status": 200,
+    "final_url": "https://www.heinerfest.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Darmstädter Heinerfest – Das vielfältigste Innenstadtfest Deutschlands",
+    "bytes": 39307,
+    "social_links": [
+      "https://www.facebook.com/Heinerfest",
+      "https://www.instagram.com/heinerfest/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.heinerfest.de/programm/",
+      "https://www.heinerfest.de/infos/programmheft/",
+      "https://www.heinerfest.de/programm"
+    ]
+  },
+  {
+    "requested_url": "https://goldenleavesfestival.de/",
+    "checked_at": "2026-09-14T09:14:00.005896+00:00",
+    "status": 200,
+    "final_url": "https://goldenleavesfestival.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Golden Leaves Festival 2027",
+    "bytes": 320551,
+    "social_links": [
+      "http://www.facebook.com/goldenleavesfestival",
+      "http://www.instagram.com/goldenleavesfestival",
+      "https://www.facebook.com/GoldenLeavesFestival",
+      "https://www.instagram.com/goldenleavesfestival"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://goldenleavesfestival.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://www.csd-darmstadt.de/",
+    "checked_at": "2026-09-14T09:14:00.266762+00:00",
+    "status": 200,
+    "final_url": "https://www.csd-darmstadt.de/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "CSD Darmstadt – 21.08.2027 – Christopher Street Day Darmstadt",
+    "bytes": 178787,
+    "social_links": [
+      "http://www.facebook.com/csd-darmstadt",
+      "https://instagram.com/vielbunt"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.csd-darmstadt.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.csd-darmstadt.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.csd-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.csd-darmstadt.de/buehnenprogramm-2/",
+      "https://www.csd-darmstadt.de/veranstalter/"
+    ]
+  },
+  {
+    "requested_url": "https://darmstadtforfuture.de/",
+    "checked_at": "2026-09-14T09:14:00.315665+00:00",
+    "status": 200,
+    "final_url": "https://darmstadtforfuture.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Fridays For Future Darmstadt – Wir sind Teil der globalen Fridays For Future Bewegung.",
+    "bytes": 84218,
+    "social_links": [
+      "https://instagram.com/fridaysforfuture.da"
+    ],
+    "feed_links": [
+      {
+        "url": "https://darmstadtforfuture.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://darmstadtforfuture.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://darmstadtforfuture.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+    "checked_at": "2026-09-14T09:14:00.448273+00:00",
+    "status": 200,
+    "final_url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Bad Habits Run Club\rAmerican ExpressApple PayBancontactEPSGoogle PayMaestroMastercardMobilePayPayPalShop PayUnion PayVisa",
+    "bytes": 538686,
+    "social_links": [
+      "https://www.facebook.com/asphaltgold/",
+      "https://www.instagram.com/asphaltgold/",
+      "https://www.instagram.com/badhabitsrunclub/",
+      "https://www.strava.com/clubs/badhabits?share_sig=542FDF171732790270&_branch_match_id=1397137248457732000&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXLy4pSixL1EssKNDLyczL1g90L86rzMpPD%2FFPsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAMSALmU9AAAA"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "ImageObject",
+      "Organization"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.asphaltgold.com/pages/events"
+    ]
+  },
+  {
+    "requested_url": "https://www.osthang.de/",
+    "checked_at": "2026-09-14T09:14:00.839525+00:00",
+    "status": 200,
+    "final_url": "https://www.osthang.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Osthang | Festivalzentrum | Darmstadt",
+    "bytes": 1267906,
+    "social_links": [
+      "http://www.facebook.com/oha.osthang",
+      "https://www.facebook.com/OHAOsthang",
+      "https://www.facebook.com/OHAOsthang/",
+      "https://www.instagram.com/oha.osthang/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.osthang.de/blog-feed.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "WebSite"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://www.weststadtcafe.de/",
+    "checked_at": "2026-09-14T09:14:01.063532+00:00",
+    "status": 200,
+    "final_url": "https://www.weststadtcafe.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Weststadtcafé | Biergarten Darmstadt | Mainzer Strasse 106, Darmstadt-Nord, Germany",
+    "bytes": 792225,
+    "social_links": [
+      "https://www.instagram.com/weststadtcafe/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "WebSite"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.weststadtcafe.de/kalender"
+    ]
+  },
+  {
+    "requested_url": "https://www.ponyhof-darmstadt.de/",
+    "checked_at": "2026-09-14T09:14:01.190015+00:00",
+    "status": 200,
+    "final_url": "https://www.ponyhof-darmstadt.de/",
+    "content_type": "text/html;charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Ponyhof Darmstadt",
+    "bytes": 12868,
+    "social_links": [
+      "https://www.facebook.com/DerPonyhofDarmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.ponyhof-darmstadt.de/events",
+      "https://www.ponyhof-darmstadt.de/kalender"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstaedter-lauftreff.de/wann-wo-wie/",
+    "checked_at": "2026-09-14T09:14:01.489108+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstaedter-lauftreff.de/wann-wo-wie/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Wann-Wo-Wie - Darmstädter Lauf-Treff",
+    "bytes": 41298,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstaedter-lauftreff.de/events/"
+    ]
+  },
+  {
+    "requested_url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/",
+    "checked_at": "2026-09-14T09:14:01.789795+00:00",
+    "status": 200,
+    "final_url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen von 20. September – 19. Dezember – Eberstädter Bürgerverein von 1980 e.V.",
+    "bytes": 148858,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "webcal://www.eberstaedter-buergerverein.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/?ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/?outlook-ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.eberstaedter-buergerverein.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Event",
+      "Place",
+      "PostalAddress"
+    ],
+    "event_schema_count": 11,
+    "event_links_sample": [
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/?ical=1",
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/feed/",
+      "https://www.eberstaedter-buergerverein.de/wp-json/tribe/events/v1/",
+      "https://eberstaedter-buergerverein.de/veranstaltungen",
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/monat/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/?eventDisplay=past",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/weinuebergabe/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/backtag-september-3/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/konzert-mit-der-band-bnr/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/eberstaedter-grenzgang-wanderung-durch-die-gemarkung-2/",
+      "https://www.eberstaedter-buergerverein.de/veranstaltung/backtag-oktober-3/"
+    ]
+  },
+  {
+    "requested_url": "https://www.muckerhaus.de/",
+    "checked_at": "2026-09-14T09:14:01.802504+00:00",
+    "status": 200,
+    "final_url": "https://www.muckerhaus.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "muckerhaus.de - Startseite",
+    "bytes": 37195,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.muckerhaus.de/seite/390186/ziele-und-programm.html",
+      "https://www.muckerhaus.de/veranstaltungen/index.php",
+      "https://www.muckerhaus.de/veranstaltungen/1620658/2026/09/14/hausaufgabenhilfe.html",
+      "https://www.muckerhaus.de/veranstaltungen/2581605/2026/09/14/rechtliche-erstberatung.html",
+      "https://www.muckerhaus.de/veranstaltungen/1984576/2026/09/15/drop-inklusive-eltern-kind-treff-0-3-jahre.html",
+      "https://www.muckerhaus.de/veranstaltungen/1620655/2026/09/15/offener-frühstückstreff.html",
+      "https://www.muckerhaus.de/veranstaltungen/2408487/2026/09/15/wohlfühlmalen.html",
+      "https://www.muckerhaus.de/veranstaltungen/1620657/2026/09/15/intergenerativer-mittagstisch.html"
+    ]
+  },
+  {
+    "requested_url": "https://www.lincoln-darmstadt.de/",
+    "checked_at": "2026-09-14T09:14:01.895998+00:00",
+    "status": 200,
+    "final_url": "https://www.lincoln-darmstadt.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Lincoln-Siedlung – Informationen, Veranstaltungen und vieles mehr in der Siedlung",
+    "bytes": 161940,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.lincoln-darmstadt.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/events/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/beispiel-seite/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.lincoln-darmstadt.de%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.lincoln-darmstadt.de%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/wp/v2/pages/2",
+        "type": "application/json",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.lincoln-darmstadt.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.lincoln-darmstadt.de/events/?ical=1",
+      "https://www.lincoln-darmstadt.de/wp-json/tribe/events/v1/",
+      "https://www.lincoln-darmstadt.de/events/"
+    ]
+  },
+  {
+    "requested_url": "https://postsiedlung.de/",
+    "checked_at": "2026-09-14T09:14:02.343009+00:00",
+    "status": 200,
+    "final_url": "https://www.postsiedlung.de/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Zusammen in der Postsiedlung e.V. – Gemeinsam für mehr Miteinander",
+    "bytes": 122642,
+    "social_links": [],
+    "feed_links": [
+      {
+        "url": "https://www.postsiedlung.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.postsiedlung.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.postsiedlung.de/events/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.postsiedlung.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.postsiedlung.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.postsiedlung.de/events/?ical=1",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/tribe-events-pro-mini-calendar-block.css?ver=7.8.0",
+      "https://www.postsiedlung.de/wp-json/tribe/events/v1/",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/custom-tables-v1/archives.css?ver=7.8.0",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/widget-events-list-skeleton.css?ver=7.8.0",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/widget-events-list-full.css?ver=7.8.0",
+      "https://www.postsiedlung.de/events",
+      "https://www.postsiedlung.de/event/unser-kiosk-1975-hat-geoeffnet-2/2026-09-14/",
+      "https://www.postsiedlung.de/event/unser-umsonstladen-bessunger-str-132-ist-geoeffnet-nachbarschaft-leben-rohstoffe-sparen-solidaritaet-stiften-5/2026-09-14/",
+      "https://www.postsiedlung.de/event/offene-sprechstunde-quartierarbeit-5/2026-09-14/",
+      "https://www.postsiedlung.de/events/",
+      "https://www.postsiedlung.de/wp-content/plugins/events-calendar-pro/build/css/widgets-events-common-skeleton.css?ver=7.8.0"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadt-vhs.de/programm",
+    "checked_at": "2026-09-14T09:14:02.621076+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadt-vhs.de/programm",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "vhs Darmstadt: Programm",
+    "bytes": 125592,
+    "social_links": [
+      "https://www.facebook.com/wissenschaftsstadtdarmstadt/",
+      "https://www.instagram.com/wissenschaftsstadt_darmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadt-vhs.de/programm",
+      "https://www.darmstadt-vhs.de/programm#content",
+      "https://www.darmstadt-vhs.de/programm/kategorie/0",
+      "https://www.darmstadt-vhs.de/programm/politik-gesellschaft",
+      "https://www.darmstadt-vhs.de/programm/kunst-kultur",
+      "https://www.darmstadt-vhs.de/programm/sprachen",
+      "https://www.darmstadt-vhs.de/programm/deutsch-als-zweitsprache",
+      "https://www.darmstadt-vhs.de/programm/gesundheit-persoenlichkeit",
+      "https://www.darmstadt-vhs.de/programm/grundbildung-schulabschluss",
+      "https://www.darmstadt-vhs.de/programm/beruf-computer-digitales",
+      "https://www.darmstadt-vhs.de/programm/wochenendkurse",
+      "https://www.darmstadt-vhs.de/programm/online-kurse"
+    ]
+  },
+  {
+    "requested_url": "https://www.literaturhaus-darmstadt.de/programm/filter?action_filter=Suchen",
+    "checked_at": "2026-09-14T09:14:02.982604+00:00",
+    "status": 200,
+    "final_url": "https://www.literaturhaus-darmstadt.de/programm/filter?action_filter=Suchen",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Programm – Literaturhaus Darmstadt",
+    "bytes": 117552,
+    "social_links": [
+      "https://www.facebook.com/literaturhausdarmstadt/",
+      "https://www.instagram.com/literaturhausdarmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.literaturhaus-darmstadt.de/programm/css/reset.css",
+      "https://www.literaturhaus-darmstadt.de/programm/css/normalize.css",
+      "https://www.literaturhaus-darmstadt.de/programm/css/style.css?v=7",
+      "https://www.literaturhaus-darmstadt.de/programm/css/flexslider.css",
+      "https://www.literaturhaus-darmstadt.de/programm/images/favicon.ico",
+      "https://www.literaturhaus-darmstadt.de/programm/",
+      "https://www.literaturhaus-darmstadt.de/assets/hauptprogramm/LH_Herbst_2026_web.pdf",
+      "https://www.literaturhaus-darmstadt.de/programm/lesung-mit-agnieszka-lessmann/",
+      "https://www.literaturhaus-darmstadt.de/programm/simon-gilmer-lager-zwei/",
+      "https://www.literaturhaus-darmstadt.de/programm/lesung-mit-katerina-poladjan-goldstrand/",
+      "https://www.literaturhaus-darmstadt.de/programm/der-flug-des-garuda-aus-den-23-liedern-des-shabkar/",
+      "https://www.literaturhaus-darmstadt.de/programm/visioni-sarde-proiezione-di-cortometraggi-made-in-sardegna-2/"
+    ]
+  },
+  {
+    "requested_url": "https://www.stiftung-oberfeld.de/aktuelles-termine.html",
+    "checked_at": "2026-09-14T09:14:03.782344+00:00",
+    "status": 200,
+    "final_url": "https://www.stiftung-oberfeld.de/aktuelles-termine.html",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Aktuelles & Termine - Stiftung Hofgut Oberfeld Darmstadt",
+    "bytes": 10924,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "ImageObject",
+      "Page",
+      "WebPage"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.stiftung-oberfeld.de/aktuelles-termine.html#skipNavigation20",
+      "https://www.stiftung-oberfeld.de/aktuelles/aktuell/veranstaltungskalender-2026.html",
+      "https://www.stiftung-oberfeld.de/termine/termin/jubilaeumsprogramm-vernissage-fotoausstellung.html"
+    ]
+  },
+  {
+    "requested_url": "https://www.initiative-oberfeld.de/veranstaltungen.html",
+    "checked_at": "2026-09-14T09:14:04.263679+00:00",
+    "status": 200,
+    "final_url": "https://www.initiative-oberfeld.de/veranstaltungen.html",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen - Initiative Domäne Oberfeld e. V.",
+    "bytes": 12886,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.initiative-oberfeld.de/veranstaltungen.html#skipNavigation2",
+      "https://www.initiative-oberfeld.de/tl_files/ini/Downloads/Hofgut_Kalender_2026.pdf",
+      "https://www.initiative-oberfeld.de/veranstaltungen.html#top"
+    ]
+  },
+  {
+    "requested_url": "https://cafe-bellevue.com/",
+    "checked_at": "2026-09-14T09:16:34.696618+00:00",
+    "status": 200,
+    "final_url": "https://cafe-bellevue.com/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Café Bellevue Darmstadt",
+    "bytes": 64072,
+    "social_links": [
+      "https://www.facebook.com/profile.php?id=100047761793325",
+      "https://www.instagram.com/cafebellevuedarmstadt/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://cafe-bellevue.com/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://cafe-bellevue.com/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://cafe-bellevue.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcafe-bellevue.com%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://cafe-bellevue.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcafe-bellevue.com%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://cafe-bellevue.com/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://cafe-bellevue.com/wp-json/wp/v2/pages/73",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  },
+  {
+    "requested_url": "https://international.h-da.de/internationalisation/sprachcafe",
+    "checked_at": "2026-09-14T09:14:04.410834+00:00",
+    "status": 200,
+    "final_url": "https://international.h-da.de/internationalisation/sprachcafe",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Sprachcafé",
+    "bytes": 79299,
+    "social_links": [
+      "https://www.facebook.com/internationalofficehda/",
+      "https://www.instagram.com/h_da.international_office/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "ListItem"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://international.h-da.de/wege-an-die-h-da/studierende/erasmus-blended-intensive-programme-bip-at-h-da",
+      "https://international.h-da.de/wege-an-die-h-da/studierende/erasmus-blended-intensive-programme-bip-at-h-da/announcement-upcoming-erasmus-blended-intensive-programmes",
+      "https://international.h-da.de/wege-ins-ausland/fuer-unsere-studierenden/kurzaufenthalte/erasmus-blended-intensive-programmes",
+      "https://international.h-da.de/internationalesh-da/erasmus-programm",
+      "https://international.h-da.de/erasmus-programm/erasmus-blended-intensive-programmes-bip",
+      "https://international.h-da.de/erasmus-programm/erasmus-blended-intensive-programmes-bip/teilnahme-an-einem-erasmus-bip-im-ausland",
+      "https://international.h-da.de/erasmus-programm/erasmus-blended-intensive-programmes-bip/ein-erasmus-bip-ausrichten-an-der-h-da"
+    ]
+  },
+  {
+    "requested_url": "https://studierendenwerkdarmstadt.de/interkulturelles/events/",
+    "checked_at": "2026-09-14T09:14:04.457653+00:00",
+    "status": 200,
+    "final_url": "https://studierendenwerkdarmstadt.de/interkulturelles/events/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen - studierendenwerk darmstadt",
+    "bytes": 111890,
+    "social_links": [
+      "https://www.instagram.com/studierendenwerkdarmstadt/?hl=de"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://studierendenwerkdarmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fstudierendenwerkdarmstadt.de%2Finterkulturelles%2Fevents%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://studierendenwerkdarmstadt.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fstudierendenwerkdarmstadt.de%2Finterkulturelles%2Fevents%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://studierendenwerkdarmstadt.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://studierendenwerkdarmstadt.de/wp-json/wp/v2/pages/4932",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "BreadcrumbList",
+      "EntryPoint",
+      "ListItem",
+      "PropertyValueSpecification",
+      "ReadAction",
+      "SearchAction",
+      "WebPage",
+      "WebSite"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://studierendenwerkdarmstadt.de/interkulturelles/events/",
+      "https://studierendenwerkdarmstadt.de/en/interkulturelles/events/",
+      "https://studierendenwerkdarmstadt.de/interkulturelles/events/nutz-dein-semesterticket-geh-kostenlos-ins-theater-oder-mach-mit/",
+      "https://studierendenwerkdarmstadt.de/interkulturelles/events/kegeln/",
+      "https://studierendenwerkdarmstadt.de/interkulturelles/kontakte-knuepfen/itt/vergangene-veranstaltungen/",
+      "https://studierendenwerkdarmstadt.de/nachhaltigkeit/veranstaltungen/"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+    "checked_at": "2026-09-14T09:14:04.640250+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen in der Stadtbibliothek | Wissenschaftsstadt Darmstadt",
+    "bytes": 207449,
+    "social_links": [
+      "https://www.facebook.com/wissenschaftsstadtdarmstadt",
+      "https://www.instagram.com/wissenschaftsstadt_darmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+      "https://www.darmstadt.de/veranstaltungskalender",
+      "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-veranstaltungen/aktive-ferien",
+      "https://www.darmstadt.de/leben/umwelt/foerderprogramme",
+      "https://www.darmstadt.de/kultur/stadtgeschichte/stadtarchiv/stadtgeschichte-entdecken/regelmaessige-veranstaltungen",
+      "https://www.darmstadt.de/standort/stadtplanung/foerdergebiete/waldkolonie-akazienweg/folgeveranstaltung-zum-isek"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadt-citymarketing.de/aktuelles.html",
+    "checked_at": "2026-09-14T09:14:04.796193+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadt-citymarketing.de/aktuelles.html",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Aktuelles",
+    "bytes": 58226,
+    "social_links": [
+      "http://www.facebook.com/darmstadtcitymarketing"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadt-citymarketing.de/veranstaltungen/darmstadt-mobil.html",
+      "https://www.darmstadt-citymarketing.de/veranstaltungen/darmstaedter-weinfest.html",
+      "https://www.darmstadt-citymarketing.de/veranstaltungen/feuer-eis.html",
+      "https://www.darmstadt-citymarketing.de/veranstaltungen/darmstaedter-wochenmarkt.html"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+    "checked_at": "2026-09-14T09:14:05.053811+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Kirchweih Veranstaltungen: Darmstadt Tourismus",
+    "bytes": 82880,
+    "social_links": [
+      "https://www.facebook.com/kerbmannschaft",
+      "https://www.facebook.com/visit.darmstadt",
+      "https://www.instagram.com/oarhelljer_kerbmannschaft/",
+      "https://www.instagram.com/visit.darmstadt/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadt-tourismus.de/events-und-maerkte/world-design-capital-2026.html",
+      "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+      "https://www.darmstadt-tourismus.de/events-und-maerkte.html",
+      "https://www.darmstadt-tourismus.de/events-und-maerkte/kunsthandwerkermarkt.html",
+      "https://www.darmstadt-tourismus.de/events-und-maerkte/darmstaedter-weinfest.html",
+      "https://www.darmstadt-tourismus.de/events-und-maerkte/darmstaedter-weihnachtsmarkt.html",
+      "https://www.darmstadt-tourismus.de/events-und-maerkte/welterbefest-mathildenhoehe-darmstadt.html",
+      "https://www.darmstadt-tourismus.de/messen-und-maerkte/standplatzbewerbungen-veranstaltungen.html",
+      "https://www.darmstadt-tourismus.de/fileadmin/Bilder/Veranstaltungen/Kirchweihen/martinskerb_programm_2026.pdf",
+      "https://bvm-da.de/veranstaltungen/martinskerb/"
+    ]
+  },
+  {
+    "requested_url": "https://www.vielbunt.org/queer-szeneguide-darmstadt/",
+    "checked_at": "2026-09-14T09:14:05.453588+00:00",
+    "status": 200,
+    "final_url": "https://www.vielbunt.org/queer-szeneguide-darmstadt/",
+    "content_type": "text/html",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Szeneguide – vielbunt e.V.",
+    "bytes": 122577,
+    "social_links": [
+      "http://www.facebook.com/SeitransDu?"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.vielbunt.org/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/queer-szeneguide-darmstadt/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Fqueer-szeneguide-darmstadt%2F",
+        "type": "application/json+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vielbunt.org%2Fqueer-szeneguide-darmstadt%2F&format=xml",
+        "type": "text/xml+oembed",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.vielbunt.org/wp-json/wp/v2/pages/197",
+        "type": "application/json",
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "http://www.weiterstadt.de/koki/Kinoprogramm/Startseite.html"
+    ]
+  },
+  {
+    "requested_url": "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-ferien",
+    "checked_at": "2026-09-14T09:14:05.861909+00:00",
+    "status": 200,
+    "final_url": "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-ferien",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Freizeit und Ferien für Kinder und Jugendliche Darmstadt | Wissenschaftsstadt Darmstadt",
+    "bytes": 217106,
+    "social_links": [
+      "https://www.facebook.com/wissenschaftsstadtdarmstadt",
+      "https://www.instagram.com/wissenschaftsstadt_darmstadt"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.darmstadt.de/veranstaltungskalender",
+      "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-veranstaltungen/aktive-ferien",
+      "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+      "https://www.darmstadt.de/leben/umwelt/foerderprogramme",
+      "https://www.darmstadt.de/kultur/stadtgeschichte/stadtarchiv/stadtgeschichte-entdecken/regelmaessige-veranstaltungen",
+      "https://www.darmstadt.de/standort/stadtplanung/foerdergebiete/waldkolonie-akazienweg/folgeveranstaltung-zum-isek",
+      "https://www.ztix.de/5181/events/-2k11X0",
+      "https://www.ztix.de/5181/events/-TJdg3C",
+      "https://www.ztix.de/ev-stadtkg-darmstadt/events/-R8tKKQ"
+    ]
+  }
+]

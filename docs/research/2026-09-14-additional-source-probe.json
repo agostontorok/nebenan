@@ -1,0 +1,277 @@
+[
+  {
+    "requested_url": "https://www.jazzinstitut.de/jazzkalender/",
+    "checked_at": "2026-09-14T09:18:16.176238+00:00",
+    "status": 200,
+    "final_url": "https://www.jazzinstitut.de/jazzkalender/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Veranstaltungen von 17. September - 28. NovemberJazzinstitut Darmstadt",
+    "bytes": 352983,
+    "social_links": [
+      "https://www.facebook.com/jazzinstitut.darmstadt/",
+      "https://www.instagram.com/jazzinstitut/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://www.jazzinstitut.de/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.jazzinstitut.de/comments/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.jazzinstitut.de/jazzkalender/?ical=1",
+        "type": "text/calendar",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.jazzinstitut.de/jazzkalender/feed/",
+        "type": "application/rss+xml",
+        "rel": "alternate"
+      },
+      {
+        "url": "https://www.google.com/calendar/render?cid=webcal%3A%2F%2Fwww.jazzinstitut.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "webcal://www.jazzinstitut.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=webcal%3A%2F%2Fwww.jazzinstitut.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist&name=Jazzinstitut+Darmstadt+Veranstaltungen+–+Jazzinstitut+Darmstadt",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://outlook.live.com/owa?path=/calendar/action/compose&rru=addsubscription&url=webcal%3A%2F%2Fwww.jazzinstitut.de%2F%3Fpost_type%3Dtribe_events%26ical%3D1%26eventDisplay%3Dlist&name=Jazzinstitut+Darmstadt+Veranstaltungen+–+Jazzinstitut+Darmstadt",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.jazzinstitut.de/jazzkalender/liste/?ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      },
+      {
+        "url": "https://www.jazzinstitut.de/jazzkalender/liste/?outlook-ical=1",
+        "type": null,
+        "rel": "noopener noreferrer nofollow noindex"
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [
+      {
+        "url": "https://www.jazzinstitut.de/wp-json/",
+        "type": null,
+        "rel": "https://api.w.org/"
+      },
+      {
+        "url": "https://www.jazzinstitut.de/wp-json/tribe/events/v1/",
+        "type": null,
+        "rel": "alternate"
+      }
+    ],
+    "jsonld_types": [
+      "Event",
+      "Offer",
+      "Person",
+      "Place",
+      "PostalAddress"
+    ],
+    "event_schema_count": 36,
+    "event_links_sample": [
+      "https://www.jazzinstitut.de/jazzkalender/?ical=1",
+      "https://www.jazzinstitut.de/jazzkalender/feed/",
+      "https://www.jazzinstitut.de/wp-json/tribe/events/v1/",
+      "https://www.jazzinstitut.de/jazzkalender/",
+      "https://www.jazzinstitut.de/en/jazzkalender/",
+      "https://www.jazzinstitut.de/jazzkalender/#content",
+      "https://www.jazzinstitut.de/termine-dates/",
+      "https://www.jazzinstitut.de/darmstaedter-jazzkalender/",
+      "https://www.jazzinstitut.de/jazzkalender/liste/",
+      "https://www.jazzinstitut.de/jazzkalender/monat/",
+      "https://www.jazzinstitut.de/jazzkalender/liste/?eventDisplay=past",
+      "https://www.jazzinstitut.de/jazzkalender/liste/seite/2/"
+    ]
+  },
+  {
+    "requested_url": "https://www.vinocentral.de/termine/",
+    "checked_at": "2026-09-14T09:18:16.185551+00:00",
+    "status": 200,
+    "final_url": "https://www.vinocentral.de/termine/",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Termine I Vinocentral",
+    "bytes": 178022,
+    "social_links": [
+      "https://www.facebook.com/vinocentral",
+      "https://www.instagram.com/vinocentral_/"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.vinocentral.de/termine/",
+      "https://www.vinocentral.de/termine/#show-hide--search",
+      "https://www.vinocentral.de/termine/#close-account-menu",
+      "https://www.vinocentral.de/termine/#offcanvas--left",
+      "https://www.vinocentral.de/termine/#close-categories-menu"
+    ]
+  },
+  {
+    "requested_url": "https://filmkreis.de/programm/aktuell",
+    "checked_at": "2026-09-14T09:18:16.186009+00:00",
+    "status": 200,
+    "final_url": "https://filmkreis.de/programm/aktuell",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Aktuelles Programm » Studentischer Filmkreis an der TU Darmstadt e.V.",
+    "bytes": 12750,
+    "social_links": [
+      "https://www.facebook.com/Filmkreis",
+      "https://www.instagram.com/filmkreis/"
+    ],
+    "feed_links": [
+      {
+        "url": "https://filmkreis.de/home/rss",
+        "type": null,
+        "rel": null
+      }
+    ],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://filmkreis.de/programm/aktuell",
+      "https://filmkreis.de/programm/",
+      "https://filmkreis.de/programm/aktuell/",
+      "https://filmkreis.de/programm/224/Sommersemester+2026",
+      "https://filmkreis.de/programm/reihenarchiv/",
+      "https://filmkreis.de/programm/archiv/programme/",
+      "https://filmkreis.de/programm/archiv/filme/",
+      "https://filmkreis.de/programm/reihenarchiv/177/Multi-Feature",
+      "https://filmkreis.de/programm/reihenarchiv/117/Filmkreis+Shorts",
+      "https://filmkreis.de/kontakt/kalender/",
+      "https://filmkreis.de/programm/programm/vorstellung/4580/Blinddate",
+      "https://filmkreis.de/Security/login?BackURL=/programm/aktuell/"
+    ]
+  },
+  {
+    "requested_url": "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20",
+    "checked_at": "2026-09-14T09:18:16.188076+00:00",
+    "status": 200,
+    "final_url": "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20",
+    "content_type": "text/html; charset=UTF-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Programmübersicht rex – programmkino rex",
+    "bytes": 31828,
+    "social_links": [
+      "https://www.facebook.com/ProgrammkinoRex",
+      "https://www.instagram.com/kinopolis_de"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [
+      "MovieTheater"
+    ],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20",
+      "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20#cinemas",
+      "https://www.facebook.com/ProgrammkinoRex",
+      "https://www.kinopolis.de/rx/programm",
+      "https://www.kinopolis.de/rx/events",
+      "http://trailer.kinopolis.de/media/pdf/Programm/rex-programm-September.pdf",
+      "http://trailer.kinopolis.de/media/pdf/Programm/rex-programm-August.pdf",
+      "https://www.kinopolis.de/rx/events/detail/best-of-cinema-meisterwerke-zurueck-im-kino/3420",
+      "https://www.kinopolis.de/rx/firmenkunden/ihre-veranstaltung",
+      "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20?cmpscreen"
+    ]
+  },
+  {
+    "requested_url": "https://dekanat-darmstadt.de/arbeitsbereiche/bildung-und-gesellschaft/alleweltkino",
+    "checked_at": "2026-09-14T09:18:16.647613+00:00",
+    "status": 200,
+    "final_url": "https://dekanat-darmstadt.de/arbeitsbereiche/bildung-und-gesellschaft/alleweltkino",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "AlleWeltKino: Dekanat Darmstadt",
+    "bytes": 110934,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://dekanat-darmstadt.de/veranstaltungen"
+    ]
+  },
+  {
+    "requested_url": "https://www.bdkj-darmstadt.de/termine",
+    "checked_at": "2026-09-14T09:18:16.905483+00:00",
+    "status": 200,
+    "final_url": "https://www.bdkj-darmstadt.de/termine",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "Termine - BDKJ Darmstadt",
+    "bytes": 55690,
+    "social_links": [
+      "https://www.facebook.com/BdkjDarmstadt/",
+      "https://www.instagram.com/bdkj_darmstadt/?hl=de"
+    ],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": [
+      "https://www.bdkj-darmstadt.de/termine",
+      "https://www.bdkj-darmstadt.de/termine/category-0?cHash=a77b1ff875b2fabea51cb1772840e152",
+      "https://www.bdkj-darmstadt.de/termine/category-1?cHash=e030308d90f654daaca17e588b8e2e1e",
+      "https://www.bdkj-darmstadt.de/termine/category-11?cHash=40ee5df801935516df1493b3b36e03cb",
+      "https://www.bdkj-darmstadt.de/termine/category-14?cHash=87f0edbda168ff1cb329f733fe949f4d",
+      "https://www.bdkj-darmstadt.de/termine/category-9?cHash=4c692ac67e3a14e14a871e2b13fbe43e",
+      "https://www.bdkj-darmstadt.de/termine/category-19?cHash=39e1b91c511637140de10dd3f24f7bed",
+      "https://www.bdkj-darmstadt.de/termine/category-2?cHash=f8a3edd6db77836c8aef30f2ebefdec3",
+      "https://www.bdkj-darmstadt.de/termine/details/event-dpsg-open-air-kino-4498#event-participation-4498",
+      "https://www.bdkj-darmstadt.de/termine/details/event-dpsg-open-air-kino-4498",
+      "https://www.bdkj-darmstadt.de/termine/details/event-weltkindertag-2026-4473#event-participation-4473",
+      "https://www.bdkj-darmstadt.de/termine/details/event-weltkindertag-2026-4473"
+    ]
+  },
+  {
+    "requested_url": "https://www.kikuta-darmstadt.de/",
+    "checked_at": "2026-09-14T09:18:17.057391+00:00",
+    "status": 200,
+    "final_url": "https://www.kikuta-darmstadt.de/",
+    "content_type": "text/html; charset=utf-8",
+    "transport": "system curl with TLS verification",
+    "truncated": false,
+    "title": "KinderKulturTage Darmstadt - Startseite",
+    "bytes": 86537,
+    "social_links": [],
+    "feed_links": [],
+    "calendar_embeds": [],
+    "api_links": [],
+    "jsonld_types": [],
+    "event_schema_count": 0,
+    "event_links_sample": []
+  }
+]

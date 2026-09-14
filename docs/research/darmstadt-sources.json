@@ -1,0 +1,2266 @@
+{
+  "checked_on": "2026-09-14",
+  "scope": "Darmstadt public event portal, local first batch",
+  "counting_note": "Entries include organisers, directories and aggregators, not independent feeds or measured unique-event coverage. Three verified local additions cover Griesheim, Weiterstadt and the Spielmobil manual route.",
+  "source_count": 72,
+  "sources": [
+    {
+      "id": "partyamt",
+      "name": "Partyamt",
+      "url": "https://www.events-in-darmstadt.de/",
+      "additional_pages": [
+        "https://www.partyamt.de/"
+      ],
+      "category": "City calendars and discovery",
+      "role": "aggregator",
+      "integration_priority": 1,
+      "coverage": "City and surrounding area; small social events through concerts",
+      "recommended_collection": "HTML occurrence pages",
+      "limitations": "Treat partyamt.de as an alias, not another independent source. Filter out surrounding towns.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Partyamt Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "city",
+      "name": "Wissenschaftsstadt Darmstadt calendar",
+      "url": "https://www.darmstadt.de/veranstaltungskalender",
+      "additional_pages": [],
+      "category": "City calendars and discovery",
+      "role": "aggregator",
+      "integration_priority": 1,
+      "coverage": "Culture, civic, family and accessible events across the city",
+      "recommended_collection": "HTML listings and linked ztix details",
+      "limitations": "City submission asks for 14 days lead time; insufficient alone for spontaneous events.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungskalender | Wissenschaftsstadt Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/wissenschaftsstadtdarmstadt/",
+          "evidence_url": "https://www.darmstadt.de/veranstaltungskalender",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/wissenschaftsstadt_darmstadt/",
+          "evidence_url": "https://www.darmstadt.de/veranstaltungskalender",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "p-magazin",
+      "name": "P Stadtkulturmagazin",
+      "url": "https://www.p-stadtkultur.de/",
+      "additional_pages": [],
+      "category": "City calendars and discovery",
+      "role": "editorial_directory",
+      "integration_priority": 3,
+      "coverage": "Small venues, collectives, new places and cultural recommendations",
+      "recommended_collection": "Editorial articles and outbound source links",
+      "limitations": "Its calendar links to Partyamt. Articles add discovery value; calendar overlap is not independent corroboration.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "P Stadtkulturmagazin: Kultur. Feiern. Darmstadt entdecken.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/pmagazin/",
+          "evidence_url": "https://www.p-stadtkultur.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/pmagazin_da/",
+          "evidence_url": "https://www.p-stadtkultur.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "frizz",
+      "name": "FRIZZ regional calendar",
+      "url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/",
+      "additional_pages": [],
+      "category": "City calendars and discovery",
+      "role": "aggregator",
+      "integration_priority": 1,
+      "coverage": "Arts, family, nightlife, workshops across the region",
+      "recommended_collection": "Verified iCal/RSS and Event JSON-LD",
+      "limitations": "Regional and online records require filtering; calendar includes recurring masters from earlier years.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen in Darmstadt, Rhein-Main und Südhessen - FRIZZ - Das Stadt- und Kulturmagazin & Online-Portal für Darmstadt, Südhessen und Rhein-Main - FRIZZmag.de",
+      "observed_event_jsonld_count": 30,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/FRIZZmag/",
+          "evidence_url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/FRIZZmag/",
+          "evidence_url": "https://www.frizzmag.de/search/event/veranstaltungs-kalender/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.frizzmag.de/api/rss/content.rss",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "family-portal",
+      "name": "Familien willkommen",
+      "url": "https://www.familien-willkommen.de/Termine",
+      "additional_pages": [],
+      "category": "City calendars and discovery",
+      "role": "mirror",
+      "integration_priority": 3,
+      "coverage": "Family selection of city-calendar events",
+      "recommended_collection": "Use for category cross-checks",
+      "limitations": "Explicitly reuses the city calendar with ztix; do not count as an independent feed.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "familien-willkommen.de |Veranstaltungen und Flohmärkte für Kinder, Eltern und Familien in Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "city-youth",
+      "name": "City leisure and holiday directory",
+      "url": "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-ferien",
+      "additional_pages": [],
+      "category": "City calendars and discovery",
+      "role": "directory",
+      "integration_priority": 3,
+      "coverage": "Youth providers and holiday programmes",
+      "recommended_collection": "Follow official provider links",
+      "limitations": "Separates local activities from trips elsewhere; directory is not itself a complete dated programme.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Freizeit und Ferien für Kinder und Jugendliche Darmstadt | Wissenschaftsstadt Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/wissenschaftsstadtdarmstadt/",
+          "evidence_url": "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-ferien",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/wissenschaftsstadt_darmstadt/",
+          "evidence_url": "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/freizeit-und-ferien",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "centralstation",
+      "name": "Centralstation",
+      "url": "https://www.centralstation-darmstadt.de/programm/",
+      "additional_pages": [
+        "https://www.centralstation-darmstadt.de/"
+      ],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Concerts, comedy, children and events at partner venues",
+      "recommended_collection": "HTML programme and event details",
+      "limitations": "Organiser is not always the event venue; Wanderkino uses multiple locations.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Programm • Centralstation Darmstadt • Konzerte, Lesungen, Partys und Kinderprogramm",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/centralstationdarmstadt/",
+          "evidence_url": "https://www.centralstation-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/centralstationdarmstadt/",
+          "evidence_url": "https://www.centralstation-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "knabenschule",
+      "name": "Bessunger Knabenschule",
+      "url": "https://www.knabenschule.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Concerts, flea markets, film, theatre and regular groups",
+      "recommended_collection": "HTML programme plus groups pages",
+      "limitations": "List repeats summaries in detail sections; preserve door time, start time and rain-location notes separately.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Kulturzentrum Bessunger Knabenschule in Darmstadt / Veranstaltungen",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/Bessunger-Knabenschule-124571307596175/",
+          "evidence_url": "https://www.knabenschule.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/kulturzentrum_knabenschule/",
+          "evidence_url": "https://www.knabenschule.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "goldene-krone",
+      "name": "Goldene Krone",
+      "url": "https://www.goldene-krone.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Pub music, table-football tournaments, parties and concerts",
+      "recommended_collection": "Event JSON-LD plus details",
+      "limitations": "100 Event objects observed on the landing page; room labels can lack a street address. No attendance inference.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Goldene Krone Darmstadt - Konzerte Theater Disco",
+      "observed_event_jsonld_count": 100,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/goldenekrone/",
+          "evidence_url": "https://www.goldene-krone.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/goldenekronedarmstadt/",
+          "evidence_url": "https://www.goldene-krone.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "schlosskeller",
+      "name": "Schlosskeller",
+      "url": "https://www.schlosskeller-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Student culture, jazz, karaoke, queer parties and film",
+      "recommended_collection": "HTML programme and details",
+      "limitations": "Overview sometimes omits year or start time; enrich each event before publication.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Schlosskeller Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://instagram.com/schlosskellerdarmstadt/",
+          "evidence_url": "https://www.schlosskeller-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "oetinger-villa",
+      "name": "Oetinger Villa",
+      "url": "https://oetingervilla.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Independent concerts, community meals and open meetings",
+      "recommended_collection": "HTML dated programme plus explicit recurrence rules",
+      "limitations": "Some meetings alternate online and in-person; one fixed venue cannot be assumed for all occurrences.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "OETINGER VILLA",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "806qm",
+      "name": "806qm",
+      "url": "https://806qm.de/programm/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Student culture, music and small creative gatherings",
+      "recommended_collection": "Current HTML programme; news RSS as discovery",
+      "limitations": "Live HTML had upcoming October/December 2026 events while the search reader showed an old empty page.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "806qm",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://806qm.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "kurzweil",
+      "name": "Galerie Kurzweil / KRZWL",
+      "url": "https://www.krzwl.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Club nights and comedy",
+      "recommended_collection": "HTML programme and organiser-linked ticket pages",
+      "limitations": "galeriekurzweil.de without a hyphen is an unrelated gallery in Alfeld. Use verified KRZWL identity.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "KRZWL",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/GalerieKurzweil/",
+          "evidence_url": "https://www.krzwl.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/galeriekurzweil/",
+          "evidence_url": "https://www.krzwl.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "hoffart",
+      "name": "HoffART",
+      "url": "https://www.hoffart-theater.de/veranstaltungen/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Small concerts, readings, dance and theatre",
+      "recommended_collection": "HTML event dates; RSS for discovery",
+      "limitations": "RSS sample contained publication time and empty event descriptions; pubDate is not event start time.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen | HoffART Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://www.hoffart-theater.de/veranstaltungen/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "keller-klub",
+      "name": "Keller-Klub / Künstlerkeller",
+      "url": "https://www.keller-klub.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Readings, music and cultural evenings",
+      "recommended_collection": "Follow programme from homepage",
+      "limitations": "Distinct from Schlosskeller despite sharing the castle setting; homepage RSS is not a proven event feed.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Keller-Klub Darmstadt e.V.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/kuenstlerkeller/",
+          "evidence_url": "https://www.keller-klub.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/kuenstlerkeller/",
+          "evidence_url": "https://www.keller-klub.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.keller-klub.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.keller-klub.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "staatstheater",
+      "name": "Staatstheater Darmstadt",
+      "url": "https://www.staatstheater-darmstadt.de/spielplan/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Theatre, opera, dance, concerts and family tours",
+      "recommended_collection": "HTML schedule with individual performances",
+      "limitations": "Preserve sold-out state, age recommendations, price ranges and separate performance dates.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Spielplan\n | Staatstheater Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/staatstheaterdarmstadt/",
+          "evidence_url": "https://www.staatstheater-darmstadt.de/spielplan/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/staatstheaterdarmstadt/",
+          "evidence_url": "https://www.staatstheater-darmstadt.de/spielplan/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "moller-haus",
+      "name": "Theater Moller Haus",
+      "url": "https://theatermollerhaus.de/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Independent theatre and children's performances",
+      "recommended_collection": "Production RSS for discovery, then performance details",
+      "limitations": "The upcoming_events RSS returned production records; a run's date range is not a continuous event.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Startseite | Theater Moller HausTheater Moller Haus – Das Theater Moller Haus ist die Spielstätte der Freien Szene Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/theatermollerhaus/",
+          "evidence_url": "https://theatermollerhaus.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/theatermollerhaus/",
+          "evidence_url": "https://theatermollerhaus.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://theatermollerhaus.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://theatermollerhaus.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://theatermollerhaus.de/production/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://theatermollerhaus.de/upcoming_productions",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://theatermollerhaus.de/upcoming_events",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "jazzinstitut",
+      "name": "Jazzinstitut Darmstadt Jazzkalender",
+      "url": "https://www.jazzinstitut.de/jazzkalender/",
+      "additional_pages": [],
+      "category": "Music, nightlife and performance",
+      "role": "specialist_aggregator",
+      "integration_priority": 1,
+      "coverage": "Jazz across multiple local venues, jams and workshops",
+      "recommended_collection": "Event JSON-LD and iCal",
+      "limitations": "Includes partner venues such as vinocentral; use actual performance venue and deduplicate.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen von 17. September - 28. NovemberJazzinstitut Darmstadt",
+      "observed_event_jsonld_count": 36,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/jazzinstitut.darmstadt/",
+          "evidence_url": "https://www.jazzinstitut.de/jazzkalender/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/jazzinstitut/",
+          "evidence_url": "https://www.jazzinstitut.de/jazzkalender/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.jazzinstitut.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.jazzinstitut.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.jazzinstitut.de/jazzkalender/?ical=1",
+          "type": "text/calendar",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.jazzinstitut.de/jazzkalender/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "webcal://www.jazzinstitut.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "type": null,
+          "rel": "noopener noreferrer nofollow noindex"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "bruchbude",
+      "name": "Bruchbude",
+      "url": "https://bruchbudedarmstadt.de/events/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Quiz, bingo and social evenings",
+      "recommended_collection": "Explicit website recurrence; social confirmation for ambiguous series",
+      "limitations": "Monday quiz 19:00 and Tuesday bingo 20:30 are stated; fortnightly Single Night dates are directed to Instagram.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Events – Bruchbude Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/profile.php?id=61550213564667",
+          "evidence_url": "https://bruchbudedarmstadt.de/events/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/bruchbude_darmstadt/",
+          "evidence_url": "https://bruchbudedarmstadt.de/events/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://bruchbudedarmstadt.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://bruchbudedarmstadt.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "ansibin",
+      "name": "An Sibin",
+      "url": "https://www.ansibin.de/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Pub quiz, karaoke and live music",
+      "recommended_collection": "Website posters plus linked Instagram/Facebook",
+      "limitations": "Text extraction alone misses poster content. Conflicting quiz weekdays exist in secondary listings; verify occurrence.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "An Sibin Irish Pub Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/pg/ansibindarmstadt/",
+          "evidence_url": "https://www.ansibin.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/ansibindarmstadt/",
+          "evidence_url": "https://www.ansibin.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "gastspielhaus",
+      "name": "GastSpielhaus",
+      "url": "https://www.gastspielhaus-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "venue_directory",
+      "integration_priority": 3,
+      "coverage": "Board-game venue at Riegerplatz",
+      "recommended_collection": "Track announcements; add venue to discovery directory",
+      "limitations": "A permanent game collection and opening hours are not dated organised events.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Gastspielhaus Darmstadt - Home",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "weststadtcafe",
+      "name": "Weststadtcafé",
+      "url": "https://www.weststadtcafe.de/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Seasonal outdoor gatherings and dance",
+      "recommended_collection": "Website programme and linked Instagram",
+      "limitations": "Seasonal venue. Do not confuse with the separate Weststadt Bar domain.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Weststadtcafé | Biergarten Darmstadt | Mainzer Strasse 106, Darmstadt-Nord, Germany",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.instagram.com/weststadtcafe/",
+          "evidence_url": "https://www.weststadtcafe.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "ponyhof",
+      "name": "Ponyhof Darmstadt",
+      "url": "https://www.ponyhof-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "organiser",
+      "integration_priority": 3,
+      "coverage": "Occasional public gatherings and food events",
+      "recommended_collection": "Public announcements and linked Facebook",
+      "limitations": "Website heavily promotes private-event hire; exclude private bookings and generic venue offers.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Ponyhof Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/DerPonyhofDarmstadt/",
+          "evidence_url": "https://www.ponyhof-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "bellevue",
+      "name": "Café Bellevue",
+      "url": "https://cafe-bellevue.com/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Collective café, cultural events and informal gatherings",
+      "recommended_collection": "Website announcements and linked Instagram/Facebook",
+      "limitations": "Do not treat permanent exhibitions or an invitation to propose events as dated appointments.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Café Bellevue Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/profile.php?id=100047761793325",
+          "evidence_url": "https://cafe-bellevue.com/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/cafebellevuedarmstadt/",
+          "evidence_url": "https://cafe-bellevue.com/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://cafe-bellevue.com/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://cafe-bellevue.com/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "vinocentral",
+      "name": "vinocentral",
+      "url": "https://www.vinocentral.de/termine/",
+      "additional_pages": [],
+      "category": "Pubs, food and informal gatherings",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Wine tastings, music and food events",
+      "recommended_collection": "HTML dates, linked details and social announcements",
+      "limitations": "Some events take place elsewhere; cross-check jazz overlap and preserve booking requirements.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Termine I Vinocentral",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/vinocentral/",
+          "evidence_url": "https://www.vinocentral.de/termine/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/vinocentral_/",
+          "evidence_url": "https://www.vinocentral.de/termine/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "nbh",
+      "name": "Nachbarschaftsheim Darmstadt",
+      "url": "https://nbh-darmstadt.de/veranstaltungen-aktuell/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Bessungen; crafts, movement, family and intergenerational activities",
+      "recommended_collection": "Verified iCal and Event JSON-LD",
+      "limitations": "Several locations. Export sample ends that Friday; inspect horizon. A zero-price metadata sample used USD.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Nachbarschaftsheim Darmstadt e.V. | Veranstaltungen",
+      "observed_event_jsonld_count": 9,
+      "linked_social_profiles": [
+        {
+          "url": "https://instagram.com/nachbarschaftsheim_darmstadt/",
+          "evidence_url": "https://nbh-darmstadt.de/veranstaltungen-aktuell/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.facebook.com/nbh.darmstadt/",
+          "evidence_url": "https://nbh-darmstadt.de/veranstaltungen-aktuell/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://nbh-darmstadt.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://nbh-darmstadt.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://nbh-darmstadt.de/veranstaltungen/?ical=1",
+          "type": "text/calendar",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "kranichstein",
+      "name": "In Kranichstein Aktiv",
+      "url": "https://www.kranichsteinkalender.de/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "federated_calendar",
+      "integration_priority": 1,
+      "coverage": "Kranichstein providers, clubs, family and community activities",
+      "recommended_collection": "Public Google calendar feeds per contributing calendar",
+      "limitations": "18 embedded calendar IDs include 6 holidays/week-number calendars. Two event calendars tested; remaining contributors untested. Site warns of displayed-time issues.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "In Kranichstein Aktiv",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "wixhausen",
+      "name": "VereinT für Wixhausen",
+      "url": "https://wixhausen.org/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "federated_calendar",
+      "integration_priority": 2,
+      "coverage": "Wixhausen clubs, Kerb, concerts and neighbourhood gatherings",
+      "recommended_collection": "HTML calendar; advertised iCal needs investigation",
+      "limitations": "Advertised iCal returned HTTP 200 with zero bytes. Visible listings include cancellations and events in Griesheim.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Startseite",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/VereinTfuerWixhausen/",
+          "evidence_url": "https://wixhausen.org/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/vereintfuerwixhausen/",
+          "evidence_url": "https://wixhausen.org/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://vereint.wixhausen.org/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://vereint.wixhausen.org/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://vereint.wixhausen.org/veranstaltungen/?ical=1",
+          "type": "text/calendar",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "arheilgen",
+      "name": "Arheilger Stadtteilverein",
+      "url": "https://www.arheilger-stadtteilverein.de/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Arheilgen neighbourhood activities",
+      "recommended_collection": "Website announcements and linked Instagram",
+      "limitations": "Inspect dated posts and posters; no structured event feed identified on the sampled homepage.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Start - Arheilger Stadtteilverein",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.instagram.com/arheilgerstadtteilverein/",
+          "evidence_url": "https://www.arheilger-stadtteilverein.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "martinsviertel",
+      "name": "Bezirksverein Martinsviertel",
+      "url": "https://www.martinsviertel-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "organiser",
+      "integration_priority": 3,
+      "coverage": "Neighbourhood fairs, markets, music and open-air cinema",
+      "recommended_collection": "Candidate from search; direct HTTPS needs resolution",
+      "limitations": "Direct fetch failed certificate verification. Keep disabled pending a verified accessible source; do not disable TLS checks.",
+      "checked_on": "2026-09-14",
+      "page_status": "direct_fetch_failed_search_evidence_only",
+      "observed_http_status": null,
+      "observed_page_title": null,
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "eberstadt",
+      "name": "Eberstädter Bürgerverein",
+      "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/liste/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Eberstadt; baking days, concerts, walks and markets",
+      "recommended_collection": "Event JSON-LD; compare list and default iCal exports",
+      "limitations": "Default export returned two events versus eleven on the list. Use Darmstadt-Eberstadt, not the separate municipality eberstadt.de.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen von 20. September – 19. Dezember – Eberstädter Bürgerverein von 1980 e.V.",
+      "observed_event_jsonld_count": 11,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://www.eberstaedter-buergerverein.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.eberstaedter-buergerverein.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/?ical=1",
+          "type": "text/calendar",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.eberstaedter-buergerverein.de/veranstaltungen/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "webcal://www.eberstaedter-buergerverein.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "type": null,
+          "rel": "noopener noreferrer nofollow noindex"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "muckerhaus",
+      "name": "Muckerhaus Arheilgen",
+      "url": "https://www.muckerhaus.de/",
+      "additional_pages": [],
+      "category": "Neighbourhoods and community",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Community breakfasts, family activities and local meetings",
+      "recommended_collection": "HTML calendar with dated event pages",
+      "limitations": "Contains support services as well as activities; distinguish appointments from public leisure events.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "muckerhaus.de - Startseite",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln-Siedlung",
+      "url": "https://www.lincoln-darmstadt.de/",
+      "additional_pages": [
+        "https://www.lincoln-darmstadt.de/events/"
+      ],
+      "category": "Neighbourhoods and community",
+      "role": "federated_calendar",
+      "integration_priority": 1,
+      "coverage": "Neighbourhood meetups, families, youth and community programmes",
+      "recommended_collection": "Verified iCal plus /events/ HTML",
+      "limitations": "Retain organiser and audience restrictions; not every meeting is open to all visitors.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Lincoln-Siedlung – Informationen, Veranstaltungen und vieles mehr in der Siedlung",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.instagram.com/jugendklub_lincoln_siedlung/",
+          "evidence_url": "https://www.lincoln-darmstadt.de/events/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.lincoln-darmstadt.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.lincoln-darmstadt.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.lincoln-darmstadt.de/events/?ical=1",
+          "type": "text/calendar",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.lincoln-darmstadt.de/beispiel-seite/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.lincoln-darmstadt.de/events/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "webcal://www.lincoln-darmstadt.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "type": null,
+          "rel": "noopener noreferrer nofollow noindex"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "postsiedlung",
+      "name": "Zusammen in der Postsiedlung",
+      "url": "https://postsiedlung.de/",
+      "additional_pages": [
+        "https://www.postsiedlung.de/events/"
+      ],
+      "category": "Neighbourhoods and community",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Neighbourhood cafés, meals, markets and social activities",
+      "recommended_collection": "Verified iCal plus current news",
+      "limitations": "Specific invitations may have residency or eligibility conditions. News also includes reports of past events.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Zusammen in der Postsiedlung e.V. – Gemeinsam für mehr Miteinander",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://www.postsiedlung.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.postsiedlung.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.postsiedlung.de/events/?ical=1",
+          "type": "text/calendar",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.postsiedlung.de/events/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "webcal://www.postsiedlung.de/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "type": null,
+          "rel": "noopener noreferrer nofollow noindex"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "vielbunt",
+      "name": "vielbunt and Treffbunt",
+      "url": "https://www.vielbunt.org/kalender/",
+      "additional_pages": [
+        "https://www.vielbunt.org/treffbunt/",
+        "https://www.vielbunt.org/queer-szeneguide-darmstadt/"
+      ],
+      "category": "Community, civic and sustainability",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Queer social gatherings, sport, community and civic events",
+      "recommended_collection": "Verified public Google iCal; linked news and social channels",
+      "limitations": "Large feed mixes history, recurring masters and overrides. Preserve stated participation/age requirements without inferring attendee identities.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Termine – vielbunt e.V.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/SeitransDu/",
+          "evidence_url": "https://www.vielbunt.org/queer-szeneguide-darmstadt/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.vielbunt.org/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.vielbunt.org/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.vielbunt.org/queer-szeneguide-darmstadt/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "transition",
+      "name": "Transition Town Darmstadt",
+      "url": "https://transition-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Community, civic and sustainability",
+      "role": "specialist_aggregator",
+      "integration_priority": 1,
+      "coverage": "Sustainability, community projects, cooking, film and demonstrations",
+      "recommended_collection": "Two verified category-specific iCal feeds",
+      "limitations": "Substantial history and recurrence data; category subsets can overlap and do not represent upcoming-event counts.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Transition Town Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/transitiondarmstadt/",
+          "evidence_url": "https://transition-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/transition_town_darmstadt/",
+          "evidence_url": "https://transition-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://transition-darmstadt.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "webcal://transition-darmstadt.de/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true&ai1ec_cat_ids=18,28",
+          "type": null,
+          "rel": null
+        },
+        {
+          "url": "webcal://transition-darmstadt.de/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true&ai1ec_cat_ids=53,52,19,13,23,73,22,17,57,20,15,16,14,25",
+          "type": null,
+          "rel": null
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "fff",
+      "name": "Fridays for Future Darmstadt",
+      "url": "https://darmstadtforfuture.de/",
+      "additional_pages": [],
+      "category": "Community, civic and sustainability",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Local demonstrations and open organising meetings",
+      "recommended_collection": "Dated blog posts, explicit recurrence and official Instagram",
+      "limitations": "Separate a local event from travel to a demonstration elsewhere; old campaign pages remain indexed.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Fridays For Future Darmstadt – Wir sind Teil der globalen Fridays For Future Bewegung.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://instagram.com/fridaysforfuture.da/",
+          "evidence_url": "https://darmstadtforfuture.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://darmstadtforfuture.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://darmstadtforfuture.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "bund-local",
+      "name": "BUND Darmstadt",
+      "url": "https://darmstadt.bund.net/nc/termine/",
+      "additional_pages": [],
+      "category": "Community, civic and sustainability",
+      "role": "organiser",
+      "integration_priority": 3,
+      "coverage": "Nature activities and open environmental meetings",
+      "recommended_collection": "Candidate from indexed calendar; resolve HTTPS access",
+      "limitations": "Direct fetch failed hostname certificate verification; alternative BUND Hessen source is readable.",
+      "checked_on": "2026-09-14",
+      "page_status": "direct_fetch_failed_search_evidence_only",
+      "observed_http_status": null,
+      "observed_page_title": null,
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "bund-nature",
+      "name": "BUND Zentrum für Stadtnatur",
+      "url": "https://www.bund-hessen.de/stadtnaturzentrum/",
+      "additional_pages": [],
+      "category": "Community, civic and sustainability",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Nature workshops, talks and children's environmental activities",
+      "recommended_collection": "HTML dates and linked programme",
+      "limitations": "BUND Hessen social profiles are statewide, not a Darmstadt event feed; filter online and out-of-city entries.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Zentrum für Stadtnatur in Darmstadt – BUND Hessen",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/BUND.Hessen/",
+          "evidence_url": "https://www.bund-hessen.de/stadtnaturzentrum/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/bund_hessen/",
+          "evidence_url": "https://www.bund-hessen.de/stadtnaturzentrum/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "repair",
+      "name": "Repair-Cafés Darmstadt",
+      "url": "https://www.repaircafes-darmstadt.de/",
+      "additional_pages": [
+        "https://www.repaircafes-darmstadt.de/index.php/kalender/export-im-ical-format"
+      ],
+      "category": "Community, civic and sustainability",
+      "role": "specialist_aggregator",
+      "integration_priority": 1,
+      "coverage": "Practical repair gatherings at multiple neighbourhood venues",
+      "recommended_collection": "Verified event RSS/Atom; iCal generation form available",
+      "limitations": "RSS sample held five events; iCal form was inspected but generated calendar not tested. Region and cancellation categories matter.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Start",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://www.repaircafes-darmstadt.de/index.php?format=feed&type=rss",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.repaircafes-darmstadt.de/index.php?format=feed&type=atom",
+          "type": "application/atom+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.repaircafes-darmstadt.de/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=263&modid=0",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.repaircafes-darmstadt.de/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=atom&Itemid=263&modid=0",
+          "type": "application/atom+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "makerspace",
+      "name": "Makerspace Darmstadt",
+      "url": "https://makerspace-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Learning, science and technology",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Open workshop and making community",
+      "recommended_collection": "Explicit weekly website schedule plus announcements",
+      "limitations": "Public workshop Thursdays 19:00–about 21:00 is distinct from members' 24/7 access.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Makerspace Darmstadt e.V.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://de-de.facebook.com/makerspacedarmstadt/",
+          "evidence_url": "https://makerspace-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://instagram.com/makerspacedarmstadt/",
+          "evidence_url": "https://makerspace-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "ccc",
+      "name": "CCC Darmstadt",
+      "url": "https://chaos-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Learning, science and technology",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Open technology meetings, user groups and talks",
+      "recommended_collection": "Verified news RSS and event-linked posts",
+      "limitations": "Feed includes news and old posts, not only events. Door-status text is not event cancellation.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "CCC Darmstadt e.V.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://chaos-darmstadt.de/feed.xml",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "tu",
+      "name": "TU Darmstadt public calendar",
+      "url": "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/index_1.de.jsp",
+      "additional_pages": [
+        "https://www.webteam.tu-darmstadt.de/hilfe/details_513.de.jsp"
+      ],
+      "category": "Learning, science and technology",
+      "role": "institutional_calendar",
+      "integration_priority": 1,
+      "coverage": "Public science, talks, workshops and exhibitions",
+      "recommended_collection": "Verified RSS; linked detail pages; iCal support documented",
+      "limitations": "RSS sample returned ten items. Exclude online-only/nonpublic sessions from the city map; dates can be inside descriptions.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungskalender - öffentliche Veranstaltungen – TU Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [
+        {
+          "url": "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/veranstaltungen_6/veranstaltungen_rss.de.jsp",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "schader",
+      "name": "Schader-Stiftung",
+      "url": "https://www.schader-stiftung.de/veranstaltungen/aktuell",
+      "additional_pages": [],
+      "category": "Learning, science and technology",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Society, public discussion, science and cultural events",
+      "recommended_collection": "HTML index and verified per-event iCal",
+      "limitations": "One export is one event, not the whole calendar. Some events are invitation-only or use multiple venues.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Aktuelle Veranstaltungen",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.instagram.com/schaderstiftung/",
+          "evidence_url": "https://www.schader-stiftung.de/veranstaltungen/aktuell",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "vhs",
+      "name": "vhs Darmstadt",
+      "url": "https://www.darmstadt-vhs.de/programm",
+      "additional_pages": [],
+      "category": "Learning, science and technology",
+      "role": "institutional_calendar",
+      "integration_priority": 2,
+      "coverage": "Workshops, talks, creative activities and learning",
+      "recommended_collection": "HTML course listings and details",
+      "limitations": "Separate single events from multi-session courses; retain registration, language and online status.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "vhs Darmstadt: Programm",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/wissenschaftsstadtdarmstadt/",
+          "evidence_url": "https://www.darmstadt-vhs.de/programm",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/wissenschaftsstadt_darmstadt/",
+          "evidence_url": "https://www.darmstadt-vhs.de/programm",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "hda-sprachcafe",
+      "name": "h_da Sprachcafé",
+      "url": "https://international.h-da.de/internationalisation/sprachcafe",
+      "additional_pages": [],
+      "category": "Learning, science and technology",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Language exchange and international gatherings",
+      "recommended_collection": "Dated institutional page and linked social channel",
+      "limitations": "Check semester dates, participant eligibility and campus; h_da also has locations outside Darmstadt.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Sprachcafé",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/internationalofficehda/",
+          "evidence_url": "https://international.h-da.de/internationalisation/sprachcafe",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/h_da.international_office/",
+          "evidence_url": "https://international.h-da.de/internationalisation/sprachcafe",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "studierendenwerk",
+      "name": "Studierendenwerk intercultural events",
+      "url": "https://studierendenwerkdarmstadt.de/interkulturelles/events/",
+      "additional_pages": [],
+      "category": "Learning, science and technology",
+      "role": "institutional_calendar",
+      "integration_priority": 2,
+      "coverage": "International social activities and excursions",
+      "recommended_collection": "Programme page and dated details",
+      "limitations": "Programme explicitly targets enrolled h_da/TU students; do not label it unrestricted public access.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen - studierendenwerk darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.instagram.com/studierendenwerkdarmstadt/",
+          "evidence_url": "https://studierendenwerkdarmstadt.de/interkulturelles/events/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "library",
+      "name": "Stadtbibliothek Darmstadt",
+      "url": "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "institutional_calendar",
+      "integration_priority": 1,
+      "coverage": "Reading circles, family activities and library events",
+      "recommended_collection": "HTML event/series details",
+      "limitations": "Includes neighbourhood branches; map the branch, not always Justus-Liebig-Haus.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen in der Stadtbibliothek | Wissenschaftsstadt Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/wissenschaftsstadtdarmstadt/",
+          "evidence_url": "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/wissenschaftsstadt_darmstadt/",
+          "evidence_url": "https://www.darmstadt.de/leben/bildung/stadtbibliothek/veranstaltungen-und-termine",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "literaturhaus",
+      "name": "Literaturhaus Darmstadt",
+      "url": "https://www.literaturhaus-darmstadt.de/programm/filter?action_filter=Suchen",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Readings, writing, talks and programmes of resident associations",
+      "recommended_collection": "HTML programme; PDF supplementary",
+      "limitations": "Separate the main programme from resident organisers; PDFs can lag behind the current web programme.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Programm – Literaturhaus Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/literaturhausdarmstadt/",
+          "evidence_url": "https://www.literaturhaus-darmstadt.de/programm/filter?action_filter=Suchen",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/literaturhausdarmstadt/",
+          "evidence_url": "https://www.literaturhaus-darmstadt.de/programm/filter?action_filter=Suchen",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "hlmd",
+      "name": "Hessisches Landesmuseum Darmstadt",
+      "url": "https://www.hlmd.de/de/besuchen/kalender/",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Tours, workshops, family activities and exhibitions",
+      "recommended_collection": "Calendar HTML and dated details",
+      "limitations": "Exhibition ranges and timed tours are different event types; no JSON-LD found on sampled calendar page.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Kalender – Hessisches Landesmuseum Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://de-de.facebook.com/HessischesLandesmuseumDarmstadt/",
+          "evidence_url": "https://www.hlmd.de/de/besuchen/kalender/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/landesmuseumdarmstadt/",
+          "evidence_url": "https://www.hlmd.de/de/besuchen/kalender/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "mathildenhoehe",
+      "name": "Mathildenhöhe Darmstadt",
+      "url": "https://www.mathildenhoehe.de/besuch/termine",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Art tours, after-work events, workshops and exhibitions",
+      "recommended_collection": "HTML dated programme",
+      "limitations": "Different activities share the site; extract actual meeting location and access conditions.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Termine – Besuch – UNESCO Welterbe Mathildenhöhe Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.instagram.com/mathildenhoehe/",
+          "evidence_url": "https://www.mathildenhoehe.de/besuch/termine",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "filmkreis",
+      "name": "Studentischer Filmkreis",
+      "url": "https://filmkreis.de/programm/aktuell",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Curated screenings and student film culture",
+      "recommended_collection": "HTML programme; RSS discovery link found",
+      "limitations": "Semester gaps are possible. Filmkreis and Rex may announce the same screening.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Aktuelles Programm » Studentischer Filmkreis an der TU Darmstadt e.V.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/Filmkreis/",
+          "evidence_url": "https://filmkreis.de/programm/aktuell",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/filmkreis/",
+          "evidence_url": "https://filmkreis.de/programm/aktuell",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "rex",
+      "name": "Programmkino Rex",
+      "url": "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "venue_calendar",
+      "integration_priority": 2,
+      "coverage": "Cinema, special screenings and partner film series",
+      "recommended_collection": "Programme pages and linked screening details",
+      "limitations": "Distinguish cinema schedules from special events. Linked Instagram is the national Kinopolis account.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Programmübersicht rex – programmkino rex",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/ProgrammkinoRex/",
+          "evidence_url": "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/kinopolis_de/",
+          "evidence_url": "https://www.kinopolis.de/rx/angebote/programmuebersicht-rex/20",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "alleweltkino",
+      "name": "AlleWeltKino / Dekanat Darmstadt",
+      "url": "https://dekanat-darmstadt.de/arbeitsbereiche/bildung-und-gesellschaft/alleweltkino",
+      "additional_pages": [],
+      "category": "Arts, museums, literature and film",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Themed film series and cultural discussion",
+      "recommended_collection": "Series page and programme download",
+      "limitations": "Often overlaps Rex screenings; verify individual dates and year before import.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "AlleWeltKino: Dekanat Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "adfc",
+      "name": "ADFC Darmstadt-Dieburg",
+      "url": "https://www.adfc-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Bike tours, repair workshops and cycling community",
+      "recommended_collection": "HTML tours and linked event records",
+      "limitations": "District-wide coverage; use departure point and participant requirements, not organiser address.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Startseite",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/adfcdarmstadtdieburg/",
+          "evidence_url": "https://www.adfc-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/adfcdarmstadtdieburg/",
+          "evidence_url": "https://www.adfc-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "bad-habits",
+      "name": "Bad Habits Run Club",
+      "url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Social running around Darmstadt and Frankfurt",
+      "recommended_collection": "Official website identity; Instagram/Strava for occurrence details",
+      "limitations": "Website explicitly warns locations may vary. Darmstadt shop address is not confirmation of the next run's meeting point.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Bad Habits Run Club\rAmerican ExpressApple PayBancontactEPSGoogle PayMaestroMastercardMobilePayPayPalShop PayUnion PayVisa",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/asphaltgold/",
+          "evidence_url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/asphaltgold/",
+          "evidence_url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/badhabitsrunclub/",
+          "evidence_url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.strava.com/clubs/badhabits/",
+          "evidence_url": "https://www.asphaltgold.com/pages/badhabits-run-club",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "lauftreff",
+      "name": "Darmstädter Lauf-Treff",
+      "url": "https://www.darmstaedter-lauftreff.de/wann-wo-wie/",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Recurring public running/walking groups",
+      "recommended_collection": "Explicit schedule plus homepage cancellation notices",
+      "limitations": "Preserve seasonal times and cancellation exceptions; don't infer training attendance size.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Wann-Wo-Wie - Darmstädter Lauf-Treff",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "oberfeld-stiftung",
+      "name": "Stiftung Hofgut Oberfeld",
+      "url": "https://www.stiftung-oberfeld.de/aktuelles-termine.html",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Farm education, outdoor culture, exhibitions and concerts",
+      "recommended_collection": "HTML dates and programme downloads",
+      "limitations": "Several meeting points on the grounds; overlaps with Initiative Domäne Oberfeld.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Aktuelles & Termine - Stiftung Hofgut Oberfeld Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "oberfeld-initiative",
+      "name": "Initiative Domäne Oberfeld",
+      "url": "https://www.initiative-oberfeld.de/veranstaltungen.html",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Farm, nature and community programme",
+      "recommended_collection": "HTML event details and calendar downloads",
+      "limitations": "Treat shared Hofgut announcements as one occurrence with multiple sources.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen - Initiative Domäne Oberfeld e. V.",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "holiday-portal",
+      "name": "Kinder-Jugend-Freizeiten",
+      "url": "https://www.kinder-jugend-freizeiten.de/",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "regional_directory",
+      "integration_priority": 3,
+      "coverage": "Holiday activities and youth-provider discovery",
+      "recommended_collection": "Provider directory and programme records",
+      "limitations": "Darmstadt can be a departure point for a trip elsewhere; do not plot destination activities as city events.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "kinder-jugend-freizeiten.de: kinder-jugend-freizeiten.de",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "bdkj",
+      "name": "BDKJ Darmstadt",
+      "url": "https://www.bdkj-darmstadt.de/termine",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Children, youth and community activities",
+      "recommended_collection": "HTML dated listings",
+      "limitations": "Includes regional events and training for specific groups; preserve audience and location filters.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Termine - BDKJ Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/BdkjDarmstadt/",
+          "evidence_url": "https://www.bdkj-darmstadt.de/termine",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/bdkj_darmstadt/",
+          "evidence_url": "https://www.bdkj-darmstadt.de/termine",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "kikuta",
+      "name": "KinderKulturTage Darmstadt",
+      "url": "https://www.kikuta-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Sport, outdoors and family",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Children's culture and family programmes",
+      "recommended_collection": "Seasonal programme and individual notices",
+      "limitations": "Identify the programme year and exact dated activities; mission text is not an event.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "KinderKulturTage Darmstadt - Startseite",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "darmstadtium",
+      "name": "darmstadtium",
+      "url": "https://www.darmstadtium.de/besuchen/veranstaltungskalender",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "venue_calendar",
+      "integration_priority": 2,
+      "coverage": "Shows, fairs, science and conferences",
+      "recommended_collection": "HTML calendar and event detail pages",
+      "limitations": "Venue calendar includes restricted conferences and ceremonies; public attendance cannot be assumed.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungskalender | darmstadtium - Wissenschafts- und Kongresszentrum",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "heinerfest",
+      "name": "Darmstädter Heinerfest",
+      "url": "https://www.heinerfest.de/",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "City festival and many component activities",
+      "recommended_collection": "Annual programme and individual event notices",
+      "limitations": "Live homepage reports 2026 completed and no next events; retain as seasonal source without inventing 2027 dates.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Darmstädter Heinerfest – Das vielfältigste Innenstadtfest Deutschlands",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/Heinerfest/",
+          "evidence_url": "https://www.heinerfest.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/heinerfest/",
+          "evidence_url": "https://www.heinerfest.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "golden-leaves",
+      "name": "Golden Leaves Festival",
+      "url": "https://goldenleavesfestival.de/",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Music festival and associated organiser discovery",
+      "recommended_collection": "Current edition page and programme announcements",
+      "limitations": "Live homepage already advertises 2027 while older indexed pages still show 2026; edition must be explicit.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Golden Leaves Festival 2027",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/GoldenLeavesFestival/",
+          "evidence_url": "https://goldenleavesfestival.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.facebook.com/goldenleavesfestival/",
+          "evidence_url": "https://goldenleavesfestival.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/goldenleavesfestival/",
+          "evidence_url": "https://goldenleavesfestival.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "csd",
+      "name": "CSD Darmstadt",
+      "url": "https://www.csd-darmstadt.de/",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Demonstration, stage programme and related community events",
+      "recommended_collection": "Current edition page, news and linked programme",
+      "limitations": "Live homepage advertises 2027 alongside 2026 programme/route links. Do not attach last year's route to next year's event.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "CSD Darmstadt – 21.08.2027 – Christopher Street Day Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://instagram.com/vielbunt/",
+          "evidence_url": "https://www.csd-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.facebook.com/csd-darmstadt/",
+          "evidence_url": "https://www.csd-darmstadt.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.csd-darmstadt.de/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        },
+        {
+          "url": "https://www.csd-darmstadt.de/comments/feed/",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "citymarketing",
+      "name": "Darmstadt Citymarketing",
+      "url": "https://www.darmstadt-citymarketing.de/aktuelles.html",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Wine festival, markets and special city activities",
+      "recommended_collection": "Dated official announcements",
+      "limitations": "Ignore recruitment, retail promotion and other posts without a relevant event programme.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Aktuelles",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/darmstadtcitymarketing/",
+          "evidence_url": "https://www.darmstadt-citymarketing.de/aktuelles.html",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "kerben",
+      "name": "Darmstadt Tourismus Kerb directory",
+      "url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "directory",
+      "integration_priority": 3,
+      "coverage": "Neighbourhood fairs and organiser discovery",
+      "recommended_collection": "Follow organisers and social links, then verify dates",
+      "limitations": "Recurring annual descriptions alone cannot supply this year's programme; separate event umbrella and component activities.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Kirchweih Veranstaltungen: Darmstadt Tourismus",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/kerbmannschaft/",
+          "evidence_url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.facebook.com/visit.darmstadt/",
+          "evidence_url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/oarhelljer_kerbmannschaft/",
+          "evidence_url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/visit.darmstadt/",
+          "evidence_url": "https://www.darmstadt-tourismus.de/messen-und-maerkte/kirchweih-veranstaltungen.html",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "osthang",
+      "name": "OHA / Osthang",
+      "url": "https://www.osthang.de/",
+      "additional_pages": [],
+      "category": "Festivals, markets and larger events",
+      "role": "organiser",
+      "integration_priority": 2,
+      "coverage": "Community culture, open meetings and temporary outdoor events",
+      "recommended_collection": "Current blog, dated calendar and official social links",
+      "limitations": "Recent posts discuss a new setting and venue uncertainty; historic Olbrichweg address must not be reused automatically.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Osthang | Festivalzentrum | Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [
+        {
+          "url": "https://www.facebook.com/OHAOsthang/",
+          "evidence_url": "https://www.osthang.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.facebook.com/oha.osthang/",
+          "evidence_url": "https://www.osthang.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        },
+        {
+          "url": "https://www.instagram.com/oha.osthang/",
+          "evidence_url": "https://www.osthang.de/",
+          "verification": "linked by source website; profile content and API access not verified"
+        }
+      ],
+      "observed_feed_links": [
+        {
+          "url": "https://www.osthang.de/blog-feed.xml",
+          "type": "application/rss+xml",
+          "rel": "alternate"
+        }
+      ],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "spielmobil-darmstadt",
+      "name": "Das Rotzfreche SPIELMOBIL · SJD Die Falken",
+      "url": "https://spielmobil-darmstadt.de/spielmobil/",
+      "additional_pages": ["https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/kinder-und-jugendhaeuser"],
+      "category": "Family and youth",
+      "role": "organiser",
+      "integration_priority": 1,
+      "coverage": "Free mobile play programme in Darmstadt neighbourhoods, April–October",
+      "recommended_collection": "Route schedule review and manual poster intake",
+      "limitations": "The route is announced on the website, posters and social media; no stable calendar feed was found.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Spielmobil Darmstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [{"url": "https://www.instagram.com/spielmobile_in_darmstadt/", "evidence_url": "https://www.darmstadt.de/leben/soziales/kinder-und-jugendliche/kinder-und-jugendhaeuser", "verification": "linked by the city page"}],
+      "observed_feed_links": [],
+      "automation_status": "researched_not_implemented"
+    },
+    {
+      "id": "griesheim-city",
+      "name": "Stadt Griesheim Veranstaltungskalender",
+      "url": "https://www.griesheim.de/veranstaltungen",
+      "additional_pages": [],
+      "category": "Neighbouring municipalities",
+      "role": "city_calendar",
+      "integration_priority": 1,
+      "coverage": "Public programmes and recurring activities in Griesheim",
+      "recommended_collection": "HTML occurrence pages",
+      "limitations": "The list gives dates and summaries; exact venue details are not present in every list entry.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Veranstaltungen · Stadt Griesheim",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "implemented"
+    },
+    {
+      "id": "weiterstadt-city",
+      "name": "Stadt Weiterstadt Termine & Veranstaltungen",
+      "url": "https://www.weiterstadt.de/verwaltung-service/aktuelles/termine-veranstaltungen/index.php?y=2026",
+      "additional_pages": [],
+      "category": "Neighbouring municipalities",
+      "role": "city_calendar",
+      "integration_priority": 1,
+      "coverage": "Public programmes, clubs and festivals in Weiterstadt and its districts",
+      "recommended_collection": "HTML accordion entries",
+      "limitations": "The year is part of the page URL; the collector follows the configured current-year page.",
+      "checked_on": "2026-09-14",
+      "page_status": "retrieved",
+      "observed_http_status": 200,
+      "observed_page_title": "Termine & Veranstaltungen · Stadt Weiterstadt",
+      "observed_event_jsonld_count": 0,
+      "linked_social_profiles": [],
+      "observed_feed_links": [],
+      "automation_status": "implemented"
+    }
+  ]
+}

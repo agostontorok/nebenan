@@ -1,0 +1,94 @@
+{
+  "last_result": {
+    "successes": 11,
+    "failures": 0,
+    "imported": 692,
+    "started_at": "2026-09-14T14:12:48+02:00",
+    "finished_at": "2026-09-14T14:13:35+02:00"
+  },
+  "next_due": "2026-09-21T14:13:35+02:00",
+  "total_occurrences": 692,
+  "published": 378,
+  "review": 313,
+  "mapped_published": 165,
+  "test_events_in_real_database": 0,
+  "sources": [
+    {
+      "id": "frizz",
+      "name": "FRIZZ regional calendar",
+      "occurrences": 0,
+      "error": "Fetch failed: curl: (28) Operation timed out after 25006 milliseconds with 0 bytes received\n",
+      "horizon_end": null
+    },
+    {
+      "id": "goldene-krone",
+      "name": "Goldene Krone",
+      "occurrences": 100,
+      "error": null,
+      "horizon_end": "2026-11-21T20:00:00+01:00"
+    },
+    {
+      "id": "jazzinstitut",
+      "name": "Jazzinstitut Darmstadt Jazzkalender",
+      "occurrences": 30,
+      "error": null,
+      "horizon_end": "2026-11-28T19:30:00+01:00"
+    },
+    {
+      "id": "nbh",
+      "name": "Nachbarschaftsheim Darmstadt",
+      "occurrences": 30,
+      "error": null,
+      "horizon_end": "2026-09-18T10:00:00+02:00"
+    },
+    {
+      "id": "eberstadt",
+      "name": "Eberstädter Bürgerverein",
+      "occurrences": 10,
+      "error": null,
+      "horizon_end": "2026-12-12T00:00:00+01:00"
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln-Siedlung",
+      "occurrences": 30,
+      "error": null,
+      "horizon_end": "2026-10-30T19:00:00+01:00"
+    },
+    {
+      "id": "postsiedlung",
+      "name": "Zusammen in der Postsiedlung",
+      "occurrences": 15,
+      "error": null,
+      "horizon_end": "2026-09-19T15:00:00+02:00"
+    },
+    {
+      "id": "vielbunt",
+      "name": "vielbunt and Treffbunt",
+      "occurrences": 108,
+      "error": null,
+      "horizon_end": "2026-12-11T22:00:00+01:00"
+    },
+    {
+      "id": "transition",
+      "name": "Transition Town Darmstadt",
+      "occurrences": 36,
+      "error": null,
+      "horizon_end": "2026-12-11T19:00:00+01:00"
+    },
+    {
+      "id": "griesheim-city",
+      "name": "Stadt Griesheim Veranstaltungskalender",
+      "occurrences": 10,
+      "error": null,
+      "horizon_end": "2026-09-19T14:00:00+02:00"
+    },
+    {
+      "id": "weiterstadt-city",
+      "name": "Stadt Weiterstadt Termine & Veranstaltungen",
+      "occurrences": 42,
+      "error": null,
+      "horizon_end": "2026-12-03T15:00:00+01:00"
+    }
+  ]
+}
