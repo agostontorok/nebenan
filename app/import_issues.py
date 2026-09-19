@@ -25,14 +25,17 @@ IMAGE_PATTERN = re.compile(r'!\[[^\]]*\]\((https://[^)]+)\)')
 
 
 def parse_issue_body(body, heading_map=None, admission=ADMISSION):
-    heading_map = heading_map or HEADING_MAP
+    heading_map = heading_map if heading_map is not None else HEADING_MAP
     sections = {}
     current = None
     for line in (body or '').splitlines():
         if line.startswith('### '):
-            current = line[4:].strip()
-            sections.setdefault(current, [])
-        elif current is not None and line.strip():
+            label = line[4:].strip()
+            if label in heading_map:
+                current = label
+                sections.setdefault(label, [])
+                continue
+        if current is not None and line.strip():
             sections[current].append(line.strip())
     fields = {}
     for heading, key in heading_map.items():

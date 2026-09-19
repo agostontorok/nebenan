@@ -36,3 +36,13 @@ def test_parse_issue_body_unknown_admission_and_blanks():
     assert fields['title'] == 'Quiz'
     assert 'free' not in fields
     assert 'end' not in fields
+
+
+def test_parse_issue_body_paid_admission():
+    assert parse_issue_body('### Admission\nPaid\n') == {'free': False}
+
+
+def test_parse_issue_body_keeps_inner_markdown_heading_in_description():
+    body = "### Description / event text\nLine one\n### Highlights\npoint A\n"
+    fields = parse_issue_body(body)
+    assert fields['description'] == 'Line one\n### Highlights\npoint A'
