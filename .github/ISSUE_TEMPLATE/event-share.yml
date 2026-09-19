@@ -1,0 +1,63 @@
+name: Share an event
+description: Suggest an upcoming event for the Darmstadt calendar.
+title: "[Event] "
+labels: ["submission"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Event title
+      placeholder: "Jazz im Herrngarten"
+    validations:
+      required: true
+  - type: input
+    id: start
+    attributes:
+      label: Start (Berlin time)
+      description: Date and time in Berlin time, for example 2026-10-05T19:00.
+      placeholder: "2026-10-05T19:00"
+    validations:
+      required: true
+  - type: input
+    id: end
+    attributes:
+      label: End (optional)
+      placeholder: "2026-10-05T22:00"
+  - type: input
+    id: venue
+    attributes:
+      label: Venue
+      placeholder: "Herrngarten"
+  - type: input
+    id: address
+    attributes:
+      label: Address
+      placeholder: "Herrngarten, 64289 Darmstadt"
+  - type: textarea
+    id: description
+    attributes:
+      label: Description / event text
+      render: markdown
+  - type: dropdown
+    id: free
+    attributes:
+      label: Admission
+      default: Unknown
+      options:
+        - Unknown
+        - Free
+        - Paid
+  - type: input
+    id: price
+    attributes:
+      label: Price / admission details
+  - type: input
+    id: source_url
+    attributes:
+      label: Link / announcement URL
+      placeholder: "https://…"
+  - type: markdown
+    attributes:
+      value: >-
+        After creating the issue you can drag &amp; drop a poster image
+        into a comment. Thanks for sharing!
