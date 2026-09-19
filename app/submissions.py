@@ -51,7 +51,7 @@ def _poster_bytes(poster_data, poster_ext):
     return data, '.png' if png else '.jpg'
 
 
-def submit_manual(db, fields, poster_data=None, poster_ext=None):
+def submit_manual(db, fields, poster_data=None, poster_ext=None, external_id=None):
     fields = dict(fields)
     if not fields.get('title'):
         raise SubmissionError('A title is required; uncertain facts can be left blank')
@@ -60,7 +60,7 @@ def submit_manual(db, fields, poster_data=None, poster_ext=None):
     poster = _poster_bytes(fields.pop('poster', poster_data), poster_ext)
     event = base_event(fields.pop('title'), fields.pop('start', None), **fields)
     event.update(status='review', review_reason='Manual submission · verify details against the announcement',
-                 external_id=str(uuid.uuid4()), url=source_url)
+                 external_id=external_id or str(uuid.uuid4()), url=source_url)
     validate_publication(event)
     if poster:
         event['poster_url'] = store_poster(db, poster[0], poster[1])

@@ -66,6 +66,13 @@ def gh(args):
     return json.loads(result.stdout)
 
 
+def gh_shell(args):
+    result = subprocess.run(['gh', *args], capture_output=True, text=True)
+    if result.returncode:
+        raise SystemExit('gh failed: ' + result.stderr.strip())
+    return result.stdout.strip()
+
+
 def fetch_issues(repo):
     return gh(['issue', 'list', '--repo', repo, '--label', 'submission', '--state', 'open',
                '--json', 'number,title,body,labels,url,comments'])
@@ -98,14 +105,15 @@ def import_issue(db, repo, issue, apply=False):
     try:
         poster_data, poster_ext = _poster(issue)
         event = submit_manual(db, fields, poster_data=poster_data,
-                              poster_ext=poster_ext or ('.png' if poster_data else None))
-        gh(['issue', 'edit', str(issue['number']), '--repo', repo, '--add-label', 'imported'])
-        gh(['issue', 'comment', str(issue['number']), '--repo', repo,
-            '--body', 'Imported into the local review queue.'])
+                              poster_ext=poster_ext or ('.png' if poster_data else None),
+                              external_id=f'gh-{issue["number"]}')
+        gh_shell(['issue', 'edit', str(issue['number']), '--repo', repo, '--add-label', 'imported'])
+        gh_shell(['issue', 'comment', str(issue['number']), '--repo', repo,
+                  '--body', 'Imported into the local review queue.'])
         return event, 'imported'
     except SubmissionError as exc:
-        gh(['issue', 'comment', str(issue['number']), '--repo', repo,
-            '--body', f'Could not import: {exc}'])
+        gh_shell(['issue', 'comment', str(issue['number']), '--repo', repo,
+                  '--body', f'Could not import: {exc}'])
         return None, f'error: {exc}'
 
 

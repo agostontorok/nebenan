@@ -48,7 +48,7 @@ def test_parse_issue_body_keeps_inner_markdown_heading_in_description():
     assert fields['description'] == 'Line one\n### Highlights\npoint A'
 
 
-from app.import_issues import fetch_issues, import_issue, main, default_repo
+from app.import_issues import _poster, fetch_issues, import_issue, main, default_repo
 
 
 def _issue(number, body, labels=()):
@@ -59,31 +59,87 @@ def _issue(number, body, labels=()):
 def test_import_issue_dry_run_and_apply(tmp_path, monkeypatch):
     db = Database(tmp_path / 'events.sqlite')
     calls = []
-    monkeypatch.setattr('app.import_issues.gh', lambda args: calls.append(args) or {'ok': True})
+    monkeypatch.setattr('app.import_issues.gh_shell',
+                        lambda args: calls.append([*args]) or 'https://github.com/o/r/issues/7')
     issue = _issue(7, '### Event title\nQuiz\n\n### Start (Berlin time)\n2026-10-05T19:00\n\n### Venue\nCafé')
 
     fields, note = import_issue(db, 'owner/repo', issue, apply=False)
     assert note == 'would import'
     assert fields['title'] == 'Quiz'
+    assert calls == []
 
     event, note = import_issue(db, 'owner/repo', issue, apply=True)
     assert note == 'imported'
     assert event['status'] == 'review'
     assert len(db.events('review')) == 1
-    joins = [c for c in calls if c and c[0] == 'issue']
-    assert any('--add-label' in c and 'imported' in c for c in joins)
-    assert any(c[0] == 'issue' and c[1] == 'comment' for c in joins)
+    labelled = [c for c in calls if '--add-label' in c]
+    assert labelled and 'imported' in labelled[0]
+    assert any(c[0] == 'issue' and c[1] == 'comment' for c in calls)
+    assert any('7' in c for c in calls)
 
 
 def test_import_issue_skips_existing_and_reports_errors(tmp_path, monkeypatch):
     db = Database(tmp_path / 'events.sqlite')
-    monkeypatch.setattr('app.import_issues.gh', lambda args: {'ok': True})
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: '')
 
     done, note = import_issue(db, 'owner/repo', _issue(1, '### Event title\nX\n', labels=('imported',)), apply=True)
     assert done is None and note == 'skipped (already imported)'
 
     bad, note = import_issue(db, 'owner/repo', _issue(2, '### Start (Berlin time)\n2026-10-05T19:00\n'), apply=True)
     assert bad is None and note.startswith('error:')
+
+
+def test_import_issue_submission_error_posts_comment(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    calls = []
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: calls.append([*args]) or '')
+    from app.submissions import SubmissionError
+    def rejected(db, fields, **kwargs):
+        raise SubmissionError('End must be after start')
+    monkeypatch.setattr('app.import_issues.submit_manual', rejected)
+    issue = _issue(9, '### Event title\nQuiz\n\n### Start (Berlin time)\n2026-10-05T19:00\n\n### End (optional)\n2026-10-05T18:00')
+
+    result, note = import_issue(db, 'owner/repo', issue, apply=True)
+    assert result is None
+    assert note.startswith('error:')
+    comments = [c for c in calls if c[0] == 'issue' and c[1] == 'comment']
+    assert comments
+    body = comments[0][comments[0].index('--body') + 1]
+    assert body.startswith('Could not import: ')
+    assert db.events('review') == []
+
+
+def test_main_counts_only_newly_imported(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    issues = [
+        _issue(1, '### Event title\nOne\n\n### Start (Berlin time)\n2026-10-05T19:00\n', labels=('imported',)),
+        _issue(2, '### Event title\nTwo\n\n### Start (Berlin time)\n2026-10-05T19:00\n'),
+        _issue(3, '### Event title\nThree\n\n### Start (Berlin time)\n2026-10-05T19:00\n'),
+    ]
+    monkeypatch.setattr('app.import_issues.fetch_issues', lambda repo: issues)
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: 'https://github.com/o/r/issues/1')
+    count = main(repo='o/r', apply=True, db=db)
+    assert max(count, 0) == 2
+
+
+def test_poster_fetches_png_without_network(monkeypatch):
+    png = b'\x89PNG\r\n\x1a\n' + b'0' * 16
+    seen = []
+    def fake_fetch(url):
+        seen.append(url)
+        return png
+    monkeypatch.setattr('app.import_issues.public_fetch', fake_fetch)
+    issue = {'body': '![poster](https://example.com/p.png)', 'comments': []}
+    assert _poster(issue) == (png, '.png')
+    assert seen == ['https://example.com/p.png']
+
+
+def test_poster_returns_none_on_fetch_failure(monkeypatch):
+    def fake_fetch(url):
+        raise ConnectionError('no network')
+    monkeypatch.setattr('app.import_issues.public_fetch', fake_fetch)
+    issue = {'body': '![poster](https://example.com/p.png)', 'comments': []}
+    assert _poster(issue) == (None, None)
 
 
 def test_fetch_issues_uses_submission_label(monkeypatch):
