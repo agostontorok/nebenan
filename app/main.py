@@ -1,11 +1,7 @@
-import base64
-import binascii
 import json
 import os
 import threading
-import uuid
 from contextlib import asynccontextmanager
-from datetime import datetime
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Request
@@ -14,10 +10,11 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, ConfigDict, model_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from .collect import Collector, base_event, now_local, iso, text
+from .collect import Collector, iso, text
 from .db import Database, ROOT
 from .network import validate_url
 from .sources import TOPICS, SCALES
+from .submissions import SubmissionError, submit_manual, validate_publication
 
 
 class EventInput(BaseModel):
@@ -74,18 +71,6 @@ class SourceToggle(BaseModel):
 
 class CandidateStatus(BaseModel):
     status: Literal['accepted', 'rejected']
-
-
-def validate_publication(event):
-    if (event.get('lat') is None) != (event.get('lon') is None):
-        raise HTTPException(422, 'Provide both latitude and longitude')
-    if event.get('scale') != 'unknown' and not (event.get('scale_evidence') or '').strip():
-        raise HTTPException(422, 'Describe the source evidence or reviewed estimate for event size')
-    if event.get('end') and event.get('start') and datetime.fromisoformat(event['end']) <= datetime.fromisoformat(event['start']):
-        raise HTTPException(422, 'End must be after start')
-    if event.get('status') == 'published':
-        if not event.get('title') or not event.get('start') or not (event.get('venue') or event.get('address')):
-            raise HTTPException(422, 'Publishing requires a title, start date/time, and event location')
 
 
 def create_app(db=None, scheduling=True):
@@ -158,33 +143,10 @@ def create_app(db=None, scheduling=True):
 
     @app.post('/api/submissions', status_code=201)
     def submission(payload: EventInput):
-        fields = payload.model_dump(exclude_unset=True)
-        if not fields.get('title'):
-            raise HTTPException(422, 'A title is required; uncertain facts can be left blank')
-        fields.pop('status', None)
-        source_url = fields.pop('source_url', '') or ''
-        poster = fields.pop('poster', None)
-        event = base_event(fields.pop('title'), fields.pop('start', None), **fields)
-        event.update(status='review', review_reason='Manual submission · verify details against the announcement',
-                     external_id=str(uuid.uuid4()), url=source_url)
-        validate_publication(event)
-        if poster:
-            try:
-                kind, encoded = poster.split(';base64,', 1)
-                if kind not in ('data:image/png', 'data:image/jpeg'):
-                    raise ValueError('Only PNG and JPEG posters are supported')
-                data = base64.b64decode(encoded, validate=True)
-                if not ((kind.endswith('png') and data.startswith(b'\x89PNG\r\n\x1a\n')) or (kind.endswith('jpeg') and data.startswith(b'\xff\xd8\xff'))):
-                    raise ValueError('Poster is not a valid PNG/JPEG')
-                folder = db.path.parent / 'posters'
-                folder.mkdir(exist_ok=True)
-                filename = str(uuid.uuid4()) + ('.png' if kind.endswith('png') else '.jpg')
-                (folder / filename).write_bytes(data)
-                event['poster_url'] = '/api/posters/' + filename
-            except (ValueError, binascii.Error) as exc:
-                raise HTTPException(422, str(exc))
-        eid = db.upsert_event(event, 'manual', now_local().isoformat())
-        return db.event(eid)
+        try:
+            return submit_manual(db, payload.model_dump(exclude_unset=True))
+        except SubmissionError as exc:
+            raise HTTPException(422, str(exc))
 
     @app.get('/api/posters/{filename}')
     def poster(filename: str):
@@ -205,7 +167,10 @@ def create_app(db=None, scheduling=True):
         for key in ('title', 'venue', 'address', 'description', 'scale_evidence', 'price'):
             if key in changes and changes[key] is not None:
                 changes[key] = text(changes[key])
-        validate_publication(event | changes)
+        try:
+            validate_publication(event | changes)
+        except SubmissionError as exc:
+            raise HTTPException(422, str(exc))
         if changes.get('status') == 'published':
             changes['review_reason'] = ''
         return db.edit_event(eid, changes)

@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from app.main import create_app
 from app.db import Database
+from app.submissions import SubmissionError, submit_manual
 
 
 def test_submission_review_validation_and_persistence(tmp_path):
@@ -30,3 +31,26 @@ def test_local_mutations_reject_foreign_origin_and_bad_data(tmp_path):
         assert client.patch('/api/sources/partyamt', json={'enabled': True}).status_code == 422
         assert client.post('/api/submissions', json={'title': 'X', 'lat': 49.8}).status_code == 422
         assert client.post('/api/submissions', json={'title': 'X', 'poster': 'data:image/svg+xml;base64,PHN2Zz4='}).status_code == 422
+
+
+def test_submit_manual_missing_title_and_persists_review(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    try:
+        submit_manual(db, {'start': '2026-10-05T19:00:00+02:00'})
+        assert False, 'expected SubmissionError'
+    except SubmissionError:
+        pass
+    ok = submit_manual(db, {'title': 'Quiz', 'venue': 'Café'})
+    assert ok['status'] == 'review'
+    assert ok['url'] == ''
+    assert len(db.events('review')) == 1
+
+
+def test_submit_manual_accepts_raw_poster_bytes(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    png = b'\x89PNG\r\n\x1a\n' + b'0' * 16
+    event = submit_manual(db, {'title': 'Photo', 'venue': 'Atelier'}, poster_data=png, poster_ext='.png')
+    assert event['poster_url'].startswith('/api/posters/')
+    assert event['poster_url'].endswith('.png')
+    stored = (db.path.parent / 'posters' / event['poster_url'].split('/')[-1])
+    assert stored.read_bytes() == png
