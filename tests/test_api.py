@@ -67,3 +67,46 @@ def test_submissions_malformed_poster_uri_is_422(tmp_path):
     with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
         response = client.post('/api/submissions', json={'title': 'X', 'poster': 'data:image/png;notbase64'})
     assert response.status_code == 422
+
+
+import subprocess
+
+
+class FakeGit:
+    def __init__(self, status_stdout='M data/events.sqlite'):
+        self.status_stdout = status_stdout
+        self.calls = []
+
+    def run(self, argv, **kwargs):
+        self.calls.append(argv)
+        cmd = argv[3] if len(argv) > 3 and argv[1] == '-C' else argv[0]
+        if cmd == 'status':
+            stdout = self.status_stdout
+        elif cmd == 'rev-parse':
+            stdout = 'main\n'
+        else:
+            stdout = ''
+        return subprocess.CompletedProcess(argv, 0, stdout=stdout)
+
+
+def test_push_returns_unchanged_when_db_clean(tmp_path, monkeypatch):
+    fake = FakeGit(status_stdout='')
+    monkeypatch.setattr('app.main.subprocess.run', fake.run)
+    with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
+        assert client.post('/api/push').json() == {'status': 'unchanged'}
+    assert any('status' in c and '--porcelain' in c for c in fake.calls)
+
+
+def test_push_stages_only_db_and_pushes(tmp_path, monkeypatch):
+    fake = FakeGit()
+    monkeypatch.setattr('app.main.subprocess.run', fake.run)
+    with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
+        result = client.post('/api/push').json()
+    assert result['status'] == 'pushed'
+    assert result['branch'] == 'main'
+    adds = [c for c in fake.calls if 'add' in c]
+    assert adds and all(c[c.index('-C') + 1].startswith('/') for c in adds)
+    assert any('data/events.sqlite' in c for c in adds)
+    assert any('commit' in c for c in fake.calls)
+    assert any('push' in c and 'origin' in c for c in fake.calls)
+    assert not any('-wal' in ' '.join(c) for c in fake.calls)

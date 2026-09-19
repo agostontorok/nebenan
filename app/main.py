@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 import threading
 from contextlib import asynccontextmanager
 from typing import Literal
@@ -102,7 +103,7 @@ def create_app(db=None, scheduling=True):
             expected = f'{request.url.scheme}://{request.headers.get("host")}'
             if (origin and origin != expected) or request.headers.get('sec-fetch-site') == 'cross-site':
                 return JSONResponse({'detail': 'Local changes require the same origin'}, status_code=403)
-            if request.url.path != '/api/collect' and request.headers.get('content-type', '').split(';')[0] != 'application/json':
+            if request.url.path not in ('/api/collect', '/api/push') and request.headers.get('content-type', '').split(';')[0] != 'application/json':
                 return JSONResponse({'detail': 'Send application/json'}, status_code=415)
             if int(request.headers.get('content-length', '0')) > 6_100_000:
                 return JSONResponse({'detail': 'Submission too large'}, status_code=413)
@@ -140,6 +141,32 @@ def create_app(db=None, scheduling=True):
         if not collector.start():
             raise HTTPException(409, 'An update is already running')
         return {'status': 'started'}
+
+    @app.post('/api/push')
+    def push():
+        try:
+            db.checkpoint()
+        except Exception as exc:
+            raise HTTPException(409, 'Database is busy; try again: ' + str(exc))
+        git_root = str(ROOT)
+        status = subprocess.run(['git', '-C', git_root, 'status', '--porcelain', '--', 'data/events.sqlite'],
+                                capture_output=True, text=True)
+        if not status.stdout.strip():
+            return {'status': 'unchanged'}
+        for argv in (
+            ['git', '-C', git_root, 'add', 'data/events.sqlite'],
+            ['git', '-C', git_root, 'commit', '-m', 'events: publish review state'],
+        ):
+            result = subprocess.run(argv, capture_output=True, text=True)
+            if result.returncode:
+                raise HTTPException(500, result.stderr.strip() or 'git command failed')
+        branch = subprocess.run(['git', '-C', git_root, 'rev-parse', '--abbrev-ref', 'HEAD'],
+                                capture_output=True, text=True).stdout.strip()
+        result = subprocess.run(['git', '-C', git_root, 'push', 'origin', branch],
+                                capture_output=True, text=True)
+        if result.returncode:
+            raise HTTPException(500, result.stderr.strip() or 'git push failed')
+        return {'status': 'pushed', 'branch': branch}
 
     @app.post('/api/submissions', status_code=201)
     def submission(payload: EventInput):

@@ -64,6 +64,10 @@ class Database:
         with self.connect() as con:
             con.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', (key, json.dumps(value)))
 
+    def checkpoint(self):
+        with self.connect() as con:
+            con.execute('PRAGMA wal_checkpoint(TRUNCATE)')
+
     def sources(self):
         with self.connect() as con:
             return [json.loads(r[0]) for r in con.execute('SELECT data FROM sources')]
