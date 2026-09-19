@@ -61,3 +61,9 @@ def test_submit_manual_rejects_malformed_poster_uri(tmp_path):
     db = Database(tmp_path / 'events.sqlite')
     with pytest.raises(SubmissionError):
         submit_manual(db, {'title': 'X', 'venue': 'V'}, poster_data='data:image/png;notbase64')
+
+
+def test_submissions_malformed_poster_uri_is_422(tmp_path):
+    with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
+        response = client.post('/api/submissions', json={'title': 'X', 'poster': 'data:image/png;notbase64'})
+    assert response.status_code == 422

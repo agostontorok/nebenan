@@ -1,3 +1,4 @@
+"""Shared manual-submission pipeline for the web endpoint and CLI importer."""
 import base64
 import binascii
 import uuid
