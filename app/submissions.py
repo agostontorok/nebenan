@@ -34,8 +34,8 @@ def _poster_bytes(poster_data, poster_ext):
     if poster_data is None:
         return None
     if isinstance(poster_data, str):
-        kind, encoded = poster_data.split(';base64,', 1)
-        if kind not in ('data:image/png', 'data:image/jpeg'):
+        kind, sep, encoded = poster_data.partition(';base64,')
+        if not sep or kind not in ('data:image/png', 'data:image/jpeg'):
             raise SubmissionError('Only PNG and JPEG posters are supported')
         try:
             data = base64.b64decode(encoded, validate=True)

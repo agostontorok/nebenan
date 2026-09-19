@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 from app.main import create_app
 from app.db import Database
@@ -54,3 +55,9 @@ def test_submit_manual_accepts_raw_poster_bytes(tmp_path):
     assert event['poster_url'].endswith('.png')
     stored = (db.path.parent / 'posters' / event['poster_url'].split('/')[-1])
     assert stored.read_bytes() == png
+
+
+def test_submit_manual_rejects_malformed_poster_uri(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    with pytest.raises(SubmissionError):
+        submit_manual(db, {'title': 'X', 'venue': 'V'}, poster_data='data:image/png;notbase64')
