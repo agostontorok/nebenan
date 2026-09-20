@@ -67,3 +67,16 @@ PYTHONPATH=. .venv/bin/python -m app.import_issues --import
 First-time use on a fresh repo: create the label once with `gh label create imported`.
 
 Each issue becomes a review-queue event with provenance pointing at the issue; a poster dragged into an issue comment is stored as reference material. Imported issues get the `imported` label and a confirmation comment; invalid submissions receive an explanation on the issue.
+
+### Public site on GitHub Pages
+
+The committed database is mirrored online as a read-only site at **https://agostontorok.github.io/nebenan/**. Every push to `main` runs [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which runs the test suite, exports the published review state from `data/events.sqlite` into `web/public/data.json` with `app/export_static.py`, builds `web/` with `VITE_STATIC=1`, and deploys `web/dist`. The editor's **Publish & push** control commits the database to `main`, so the public page redeploys automatically after each publish.
+
+To rebuild manually, run the workflow from the Actions tab (**Run workflow** on *Deploy to GitHub Pages*), or locally:
+
+```sh
+PYTHONPATH=. .venv/bin/python -m app.export_static
+cd web && VITE_STATIC=1 npm run build
+```
+
+The static build loads `./data.json` and needs no backend, so interactions that would call the API — event submissions, source suggestions, review decisions, admin publish — are unavailable on the public site. Sharing still happens via the **Share an event** issue template. Submitted posters stay local (`data/posters/` is gitignored); remote `image_url` images do appear.
