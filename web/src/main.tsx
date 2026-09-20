@@ -20,6 +20,7 @@ import {
   t,
 } from "./i18n.mjs";
 const EDITOR = import.meta.env.VITE_EDITOR === "1";
+const STATIC = import.meta.env.VITE_STATIC === "1";
 type EventItem = {
   id: string;
   title: string;
@@ -737,6 +738,22 @@ function App() {
   }, [language]);
   async function refresh() {
     try {
+      if (STATIC) {
+        const data = await fetch("./data.json").then(async (r) => {
+          if (!r.ok)
+            throw new Error(
+              `Anfrage fehlgeschlagen (${r.status}). Bitte erneut versuchen.`,
+            );
+          return r.json();
+        });
+        setEvents(data.events);
+        setSources(data.sources);
+        setCandidates(data.candidates || []);
+        setStatus(data.status);
+        setReviews(data.review);
+        setError("");
+        return;
+      }
       const [a, b, c, d] = await Promise.all([
         api("/events"),
         api("/sources"),
@@ -757,6 +774,7 @@ function App() {
   }
   useEffect(() => {
     refresh();
+    if (STATIC) return;
     const timer = setInterval(refresh, 10000);
     return () => clearInterval(timer);
   }, []);
@@ -906,7 +924,7 @@ function App() {
             {tr("nav.admin")}
           </button>
         </nav>
-        {!EDITOR && (
+        {!EDITOR && !STATIC && (
           <button
             className="header-contribute"
             onClick={() => setContribute(true)}
@@ -1226,9 +1244,14 @@ function App() {
                 <h2>{tr("banner.heading")}</h2>
                 <p>{tr("banner.copy")}</p>
               </div>
-              <button className="primary" onClick={() => setContribute(true)}>
-                {tr("header.share")} ↗
-              </button>
+              {!STATIC && (
+                <button
+                  className="primary"
+                  onClick={() => setContribute(true)}
+                >
+                  {tr("header.share")} ↗
+                </button>
+              )}
             </section>
           </>
         ) : tab === "sources" ? (
@@ -1283,13 +1306,15 @@ function App() {
                   </p>
                 )}
               </div>
-              <button
-                className="primary"
-                disabled={status?.running}
-                onClick={() => mutate("/collect", "POST")}
-              >
-                {status?.running ? tr("sources.running") : tr("sources.update")}
-              </button>
+              {!STATIC && (
+                <button
+                  className="primary"
+                  disabled={status?.running}
+                  onClick={() => mutate("/collect", "POST")}
+                >
+                  {status?.running ? tr("sources.running") : tr("sources.update")}
+                </button>
+              )}
             </div>
             <p className="capability-note">
               {tr("sources.capability")}
@@ -1301,9 +1326,11 @@ function App() {
             )}
             <div className="section-title">
               <h2>{tr("sources.heading")}</h2>
-              <button onClick={() => setSuggest(true)}>
-                ＋ {tr("sources.suggest")}
-              </button>
+              {!STATIC && (
+                <button onClick={() => setSuggest(true)}>
+                  ＋ {tr("sources.suggest")}
+                </button>
+              )}
             </div>
             <div className="source-grid">
               {sources.map((s) => (
@@ -1318,7 +1345,7 @@ function App() {
                           : tr("sources.collectorPaused")
                         : tr("sources.researched")}
                     </span>
-                    {s.implemented && (
+{s.implemented && !STATIC && (
                       <label className="checkbox">
                         <input
                           type="checkbox"
@@ -1398,7 +1425,7 @@ function App() {
                         {tr("sources.foundOn")}: {c.found_on} · {c.status}
                       </small>
                     </div>
-                    {!["accepted", "rejected"].includes(c.status) && (
+                    {!STATIC && !["accepted", "rejected"].includes(c.status) && (
                       <div>
                         <button
                           onClick={() =>
@@ -1457,9 +1484,11 @@ function App() {
                       {e.review_reason || tr("review.defaultReason")}
                     </p>
                   </div>
-                  <button className="primary" onClick={() => setEditing(e)}>
-                    {tr("review.inspect")}
-                  </button>
+                  {!STATIC && (
+                    <button className="primary" onClick={() => setEditing(e)}>
+                      {tr("review.inspect")}
+                    </button>
+                  )}
                 </article>
               ))
             )}
@@ -1472,7 +1501,7 @@ function App() {
             </p>
             <h1>{tr("admin.heading")}</h1>
             <p className="intro">{tr("admin.intro")}</p>
-            {EDITOR && (
+            {EDITOR && !STATIC && (
               <p className="collection-panel">
                 <button
                   className="primary"
@@ -1512,9 +1541,11 @@ function App() {
                       <h3>{e.title}</h3>
                       <p>{formatDate(e.start)} · {e.venue || tr("event.locationOpen")}</p>
                     </div>
+                    {!STATIC && (
                     <button className="primary" onClick={() => setEditing(e)}>
                       {tr("admin.edit")}
                     </button>
+                  )}
                   </article>
                 ))}
               </div>
@@ -1655,14 +1686,16 @@ function App() {
             >
               {tr("calendar.create")}
             </button>
-            <button
-              onClick={() => {
-                setEditing(selected);
-                setSelected(null);
-              }}
-            >
-              {tr("detail.edit")}
-            </button>
+            {!STATIC && (
+              <button
+                onClick={() => {
+                  setEditing(selected);
+                  setSelected(null);
+                }}
+              >
+                {tr("detail.edit")}
+              </button>
+            )}
           </div>
         </Modal>
       )}
@@ -1679,7 +1712,7 @@ function App() {
           />
         </Modal>
       )}
-      {contribute && (
+      {!STATIC && contribute && (
         <Modal
           title={tr("header.share")}
           closeLabel={tr("modal.close")}
@@ -1695,7 +1728,7 @@ function App() {
           />
         </Modal>
       )}
-      {editing && (
+      {!STATIC && editing && (
         <Modal title={tr("review.inspect")} closeLabel={tr("modal.close")} onClose={() => setEditing(null)}>
           <EventForm
             event={editing}
@@ -1708,7 +1741,7 @@ function App() {
           />
         </Modal>
       )}
-      {suggest && (
+      {!STATIC && suggest && (
         <Modal
           title={tr("suggest.title")}
           closeLabel={tr("modal.close")}
