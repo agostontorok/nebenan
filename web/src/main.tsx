@@ -21,6 +21,8 @@ import {
 } from "./i18n.mjs";
 const EDITOR = import.meta.env.VITE_EDITOR === "1";
 const STATIC = import.meta.env.VITE_STATIC === "1";
+export const SHARE_URL =
+  "https://github.com/agostontorok/nebenan/issues/new?template=event-share.yml";
 type EventItem = {
   id: string;
   title: string;
@@ -928,14 +930,24 @@ function App() {
             </button>
           )}
         </nav>
-        {!EDITOR && !STATIC && (
-          <button
-            className="header-contribute"
-            onClick={() => setContribute(true)}
-          >
-            ＋ {tr("header.share")}
-          </button>
-        )}
+        {!EDITOR &&
+          (STATIC ? (
+            <a
+              className="header-contribute"
+              href={SHARE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ＋ {tr("header.share")} ↗
+            </a>
+          ) : (
+            <button
+              className="header-contribute"
+              onClick={() => setContribute(true)}
+            >
+              ＋ {tr("header.share")}
+            </button>
+          ))}
         <div className="language-switch" role="group" aria-label="Language / Sprache">
           <button
             className={language === "en" ? "selected" : ""}
@@ -1248,7 +1260,16 @@ function App() {
                 <h2>{tr("banner.heading")}</h2>
                 <p>{tr("banner.copy")}</p>
               </div>
-              {!STATIC && (
+              {STATIC ? (
+                <a
+                  className="primary"
+                  href={SHARE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {tr("header.share")} ↗
+                </a>
+              ) : (
                 <button
                   className="primary"
                   onClick={() => setContribute(true)}
