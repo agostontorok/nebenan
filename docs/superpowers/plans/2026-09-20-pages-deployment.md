@@ -73,6 +73,11 @@ the Pages site a live mirror of the review queue.
   submission affordances, review action buttons, and the admin publish/push
   control. Read-only Review and Admin lists stay visible. `VITE_STATIC` is
   independent of `VITE_EDITOR`; the Pages site is public static.
+  Note: esbuild folds the load branch so the static runtime calls only the
+  `./data.json` loader (verified: no poll interval, no `/api` network call);
+  the live-loader definition may remain in the bundle as unreachable code
+  ("dead, not elided") — accepted. `setInterval(fn,1e4)` present only in
+  non-static builds.
 - [ ] **Step 5**: Type-check + build all three variants: default, `VITE_EDITOR=1`,
   `VITE_STATIC=1` (tsc via `npm run build`). Run `cd web && npm test`.
 - [ ] **Step 6**: Commit `feat: static-data build for GitHub Pages`.
