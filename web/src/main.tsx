@@ -712,7 +712,9 @@ function App() {
     [editing, setEditing] = useState<EventItem | null>(null),
     [inviteFor, setInviteFor] = useState<EventItem | null>(null),
     [contribute, setContribute] = useState(false),
-    [suggest, setSuggest] = useState(false);
+    [suggest, setSuggest] = useState(false),
+    [pushing, setPushing] = useState(false),
+    [pushNote, setPushNote] = useState("");
   const semanticClientRef = useRef<ReturnType<typeof createSemanticSearchClient> | null>(null);
   const [semanticScores, setSemanticScores] = useState<Record<string, number> | null>(null);
   const [semanticStatus, setSemanticStatus] = useState<
@@ -830,6 +832,23 @@ function App() {
       await refresh();
     } catch (err) {
       setError((err as Error).message);
+    }
+  }
+  async function pushReview() {
+    setPushing(true);
+    setPushNote("");
+    try {
+      const result = (await api("/push", "POST")) as { status: string };
+      setPushNote(
+        result.status === "pushed"
+          ? tr("admin.pushed")
+          : tr("admin.pushUnchanged"),
+      );
+      await refresh();
+    } catch (err) {
+      setNotice(`${tr("admin.pushFailed")} ${(err as Error).message}`);
+    } finally {
+      setPushing(false);
     }
   }
   function chooseMode(value: string) {
@@ -1447,9 +1466,23 @@ function App() {
           </section>
         ) : (
           <section className="workspace admin-workspace">
-            <p className="eyebrow">{tr("review.eyebrow")}</p>
+            <p className="eyebrow">
+              {tr("review.eyebrow")} · {tr("admin.editor")}
+            </p>
             <h1>{tr("admin.heading")}</h1>
             <p className="intro">{tr("admin.intro")}</p>
+            {EDITOR && (
+              <p className="collection-panel">
+                <button
+                  className="primary"
+                  disabled={pushing}
+                  onClick={pushReview}
+                >
+                  {pushing ? tr("admin.publishing") : tr("admin.publish")}
+                </button>
+                {pushNote && <span className="muted"> {pushNote}</span>}
+              </p>
+            )}
             <label className="search admin-search">
               <span aria-hidden="true">⌕</span>
               <input
