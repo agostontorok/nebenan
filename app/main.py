@@ -149,23 +149,28 @@ def create_app(db=None, scheduling=True):
         except Exception as exc:
             raise HTTPException(409, 'Database is busy; try again: ' + str(exc))
         git_root = str(ROOT)
-        status = subprocess.run(['git', '-C', git_root, 'status', '--porcelain', '--', 'data/events.sqlite'],
-                                capture_output=True, text=True)
-        if not status.stdout.strip():
+        def git(args):
+            return subprocess.run(['git', '-C', git_root, *args], capture_output=True, text=True)
+        branch_run = git(['rev-parse', '--abbrev-ref', 'HEAD'])
+        if branch_run.returncode or not branch_run.stdout.strip():
+            raise HTTPException(500, branch_run.stderr.strip() or 'could not determine branch')
+        branch = branch_run.stdout.strip()
+        add = git(['add', '-f', 'data/events.sqlite'])
+        if add.returncode:
+            raise HTTPException(500, add.stderr.strip() or 'git add failed')
+        staged = git(['diff', '--cached', '--quiet', '--', 'data/events.sqlite'])
+        local = git(['rev-parse', 'HEAD'])
+        remote = git(['rev-parse', '--verify', '--quiet', 'origin/' + branch])
+        ahead = remote.returncode != 0 or (remote.stdout.strip() and remote.stdout.strip() != local.stdout.strip())
+        if staged.returncode == 0 and not ahead:
             return {'status': 'unchanged'}
-        for argv in (
-            ['git', '-C', git_root, 'add', 'data/events.sqlite'],
-            ['git', '-C', git_root, 'commit', '-m', 'events: publish review state'],
-        ):
-            result = subprocess.run(argv, capture_output=True, text=True)
-            if result.returncode:
-                raise HTTPException(500, result.stderr.strip() or 'git command failed')
-        branch = subprocess.run(['git', '-C', git_root, 'rev-parse', '--abbrev-ref', 'HEAD'],
-                                capture_output=True, text=True).stdout.strip()
-        result = subprocess.run(['git', '-C', git_root, 'push', 'origin', branch],
-                                capture_output=True, text=True)
-        if result.returncode:
-            raise HTTPException(500, result.stderr.strip() or 'git push failed')
+        if staged.returncode != 0:
+            commit = git(['commit', '--only', '-m', 'events: publish review state', '--', 'data/events.sqlite'])
+            if commit.returncode:
+                raise HTTPException(500, commit.stderr.strip() or 'git commit failed')
+        push = git(['push', 'origin', branch])
+        if push.returncode:
+            raise HTTPException(500, push.stderr.strip() or 'git push failed')
         return {'status': 'pushed', 'branch': branch}
 
     @app.post('/api/submissions', status_code=201)

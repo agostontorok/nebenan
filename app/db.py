@@ -66,7 +66,9 @@ class Database:
 
     def checkpoint(self):
         with self.connect() as con:
-            con.execute('PRAGMA wal_checkpoint(TRUNCATE)')
+            row = con.execute('PRAGMA wal_checkpoint(TRUNCATE)').fetchone()
+            if row is not None and row[0] != 0:
+                raise RuntimeError('database busy during checkpoint')
 
     def sources(self):
         with self.connect() as con:
