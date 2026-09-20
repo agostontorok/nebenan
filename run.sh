@@ -11,6 +11,11 @@ fi
 if [[ ! -d web/node_modules ]]; then
   (cd web && npm ci)
 fi
-(cd web && npm run build)
+if [[ "${MODE:-}" == "editor" || "${DARMSTADT_MODE:-}" == "editor" ]]; then
+  export DARMSTADT_MODE=editor
+  (cd web && VITE_EDITOR=1 npm run build)
+else
+  (cd web && npm run build)
+fi
 echo "Darmstadt Local: http://127.0.0.1:${PORT:-8765}"
 exec .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port "${PORT:-8765}"
