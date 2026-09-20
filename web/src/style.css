@@ -314,41 +314,74 @@ main {
   color: #d78666;
   line-height: 1;
 }
-.art-house {
+.polaroid-stack {
   position: absolute;
-  left: 115px;
-  top: 85px;
-  background: #41654b;
-  width: 127px;
-  height: 109px;
-  border-radius: 5px;
-  transform: rotate(-9deg);
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
+  left: 74px;
+  top: 6px;
+  width: 184px;
+  height: 198px;
 }
-.art-house:before {
+.polaroid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: block;
+  background: #fdfdf5;
+  border: 1px solid #e8e2c8;
+  border-radius: 3px;
+  padding: 9px 9px 28px;
+  box-shadow:
+    3px 5px 0 rgba(20, 40, 26, 0.14),
+    0 12px 26px rgba(20, 40, 26, 0.22);
+  font-weight: 400;
+  transform: translateY(6px) rotate(var(--rot)) scale(0.86);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+}
+.polaroid:hover {
+  background: #fdfdf5;
+  border-color: #e8e2c8;
+}
+.polaroid.active {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rot)) scale(1);
+  pointer-events: auto;
+}
+.polaroid::before {
   content: "";
   position: absolute;
-  border-left: 80px solid transparent;
-  border-right: 80px solid transparent;
-  border-bottom: 64px solid #41654b;
-  left: -17px;
-  top: -45px;
+  top: -9px;
+  left: 50%;
+  width: 46px;
+  height: 16px;
+  background: rgba(236, 235, 191, 0.85);
+  border: 1px solid rgba(210, 208, 160, 0.9);
+  border-radius: 1px;
+  transform: translateX(-50%) rotate(-4deg);
+  box-shadow: 0 1px 2px rgba(20, 40, 26, 0.12);
 }
-.art-house i {
-  width: 30px;
-  height: 60px;
-  background: #e1e7ce;
-  align-self: end;
-  z-index: 1;
+.polaroid img {
+  display: block;
+  width: 100%;
+  height: 152px;
+  object-fit: cover;
+  background: #ece6d4;
 }
-.art-house b {
-  width: 24px;
-  height: 27px;
-  background: #e1e7ce;
-  z-index: 1;
+.polaroid-caption {
+  display: block;
+  padding: 7px 2px 0;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #4a5647;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .art-label {
   position: absolute;
@@ -1261,11 +1294,11 @@ dialog::backdrop {
   .hero-art .art-star {
     right: 0;
   }
-  .hero-art .art-house {
-    left: 90px;
+  .polaroid-stack {
+    left: 46px;
   }
   .art-label {
-    left: 100px;
+    left: 96px;
   }
 }
 @media (max-width: 760px) {
