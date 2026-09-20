@@ -118,8 +118,69 @@ def test_main_counts_only_newly_imported(tmp_path, monkeypatch):
     ]
     monkeypatch.setattr('app.import_issues.fetch_issues', lambda repo: issues)
     monkeypatch.setattr('app.import_issues.gh_shell', lambda args: 'https://github.com/o/r/issues/1')
-    count = main(repo='o/r', apply=True, db=db)
-    assert max(count, 0) == 2
+    imported, errors = main(repo='o/r', apply=True, db=db)
+    assert imported == 2
+    assert errors == 0
+
+
+def test_main_exit_success_with_nothing_to_import(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    monkeypatch.setattr('app.import_issues.fetch_issues',
+                        lambda repo: [_issue(1, '### Event title\nOne\n', labels=('imported',))])
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: '')
+    imported, errors = main(repo='o/r', apply=True, db=db)
+    assert imported == 0
+    assert errors == 0
+
+
+def test_main_exit_success_with_fresh_imports(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    monkeypatch.setattr('app.import_issues.fetch_issues',
+                        lambda repo: [_issue(1, '### Event title\nOne\n\n### Start (Berlin time)\n2026-10-05T19:00\n')])
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: '')
+    imported, errors = main(repo='o/r', apply=True, db=db)
+    assert imported == 1
+    assert errors == 0
+
+
+def test_main_exit_dry_run_reports_would_import(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    monkeypatch.setattr('app.import_issues.fetch_issues',
+                        lambda repo: [_issue(1, '### Event title\nOne\n\n### Start (Berlin time)\n2026-10-05T19:00\n')])
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: '')
+    imported, errors = main(repo='o/r', apply=False, db=db)
+    assert imported == 0
+    assert errors == 0
+
+
+def test_main_exit_failure_on_import_error(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    monkeypatch.setattr('app.import_issues.fetch_issues',
+                        lambda repo: [_issue(1, '### Start (Berlin time)\n2026-10-05T19:00\n')])
+    monkeypatch.setattr('app.import_issues.gh_shell', lambda args: '')
+    imported, errors = main(repo='o/r', apply=True, db=db)
+    assert imported == 0
+    assert errors == 1
+
+
+def test_main_gh_bookkeeping_failure_continues_and_reports(tmp_path, monkeypatch):
+    db = Database(tmp_path / 'events.sqlite')
+    issues = [
+        _issue(4, '### Event title\nFour\n\n### Start (Berlin time)\n2026-10-05T19:00\n'),
+        _issue(5, '### Event title\nFive\n\n### Start (Berlin time)\n2026-10-05T19:00\n'),
+    ]
+
+    def fake_gh_shell(args):
+        if args[1] == 'edit' and args[2] == '4':
+            raise SystemExit('gh failed: boom')
+        return ''
+
+    monkeypatch.setattr('app.import_issues.fetch_issues', lambda repo: issues)
+    monkeypatch.setattr('app.import_issues.gh_shell', fake_gh_shell)
+    imported, errors = main(repo='o/r', apply=True, db=db)
+    assert imported == 2
+    assert errors == 1
+    assert len(db.events('review')) == 2
 
 
 def test_poster_fetches_png_without_network(monkeypatch):

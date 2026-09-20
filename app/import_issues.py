@@ -107,27 +107,38 @@ def import_issue(db, repo, issue, apply=False):
         event = submit_manual(db, fields, poster_data=poster_data,
                               poster_ext=poster_ext or ('.png' if poster_data else None),
                               external_id=f'gh-{issue["number"]}')
-        gh_shell(['issue', 'edit', str(issue['number']), '--repo', repo, '--add-label', 'imported'])
-        gh_shell(['issue', 'comment', str(issue['number']), '--repo', repo,
-                  '--body', 'Imported into the local review queue.'])
-        return event, 'imported'
     except SubmissionError as exc:
         gh_shell(['issue', 'comment', str(issue['number']), '--repo', repo,
                   '--body', f'Could not import: {exc}'])
         return None, f'error: {exc}'
+    try:
+        gh_shell(['issue', 'edit', str(issue['number']), '--repo', repo, '--add-label', 'imported'])
+        gh_shell(['issue', 'comment', str(issue['number']), '--repo', repo,
+                  '--body', 'Imported into the local review queue.'])
+    except SystemExit as exc:
+        return event, f'warning: imported {issue["number"]} but GH bookkeeping failed: {exc}'
+    return event, 'imported'
 
 
 def main(repo=None, apply=False, db=None):
     repo = repo or default_repo()
     db = db or Database()
     issues = fetch_issues(repo)
-    count = 0
+    imported = 0
+    errors = 0
     for issue in issues:
         _, note = import_issue(db, repo, issue, apply=apply)
         print(f'#{issue["number"]}: {note}')
+        if note.startswith('error:'):
+            errors += 1
+            continue
+        if note.startswith('warning:'):
+            imported += 1
+            errors += 1
+            continue
         if not note.startswith('skipped') and note != 'would import':
-            count += 1
-    return count
+            imported += 1
+    return imported, errors
 
 
 if __name__ == '__main__':
@@ -136,4 +147,5 @@ if __name__ == '__main__':
     parser.add_argument('--repo', default=None, help='owner/name (default: git remote origin)')
     parser.add_argument('--import', dest='apply', action='store_true', help='actually import (default: dry run)')
     args = parser.parse_args()
-    sys.exit(main(repo=args.repo, apply=args.apply))
+    _, errors = main(repo=args.repo, apply=args.apply)
+    sys.exit(1 if errors else 0)

@@ -64,4 +64,6 @@ PYTHONPATH=. .venv/bin/python -m app.import_issues        # dry run
 PYTHONPATH=. .venv/bin/python -m app.import_issues --import
 ```
 
+First-time use on a fresh repo: create the label once with `gh label create imported`.
+
 Each issue becomes a review-queue event with provenance pointing at the issue; a poster dragged into an issue comment is stored as reference material. Imported issues get the `imported` label and a confirmation comment; invalid submissions receive an explanation on the issue.
