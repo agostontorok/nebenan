@@ -849,7 +849,7 @@ function App() {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            setTab("discover");
+            setTab(EDITOR ? "review" : "discover");
           }}
         >
           <span className="brand-mark">
@@ -1508,7 +1508,7 @@ function App() {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            setTab("discover");
+            setTab(EDITOR ? "review" : "discover");
           }}
         >
           nebenan<span>•</span>
