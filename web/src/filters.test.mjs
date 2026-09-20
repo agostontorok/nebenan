@@ -44,14 +44,18 @@ test("all filters share inclusive Berlin dates; unknown locations remain", () =>
     },
   ];
   assert.deepEqual(
-    filterEvents(events, {
-      from: "2026-09-15",
-      to: "2026-09-15",
-      query: "HOF",
-      topic: "Musik",
-      scale: "small",
-      free: true,
-    }).map((e) => e.id),
+    filterEvents(
+      events,
+      {
+        from: "2026-09-15",
+        to: "2026-09-15",
+        query: "HOF",
+        topic: "Musik",
+        scale: "small",
+        free: true,
+      },
+      new Date("2026-09-17T12:00:00Z"),
+    ).map((e) => e.id),
     [1],
   );
 });
@@ -80,13 +84,63 @@ test("ongoing multi-day events overlap filters and all-day ends are exclusive", 
     },
   ];
   assert.deepEqual(
-    filterEvents(events, { from: "2026-09-15", to: "2026-09-15" }).map(
-      (e) => e.id,
-    ),
+    filterEvents(
+      events,
+      { from: "2026-09-15", to: "2026-09-15" },
+      new Date("2026-09-17T12:00:00Z"),
+    ).map((e) => e.id),
     [3, 1],
   );
   assert.deepEqual(
-    filterEvents(events, { from: "2026-09-16", to: "2026-09-14" }),
+    filterEvents(
+      events,
+      { from: "2026-09-16", to: "2026-09-14" },
+      new Date("2026-09-17T12:00:00Z"),
+    ),
     [],
+  );
+});
+
+test("when the range starts today, events ended before now are dropped", () => {
+  const events = [
+    {
+      id: 1,
+      title: "Frühstück",
+      start: "2026-09-14T06:00:00+02:00",
+      end: "2026-09-14T11:00:00+02:00",
+    },
+    {
+      id: 2,
+      title: "Ausstellung",
+      start: "2026-09-14T00:00:00+02:00",
+      end: "2026-09-15T00:00:00+02:00",
+      all_day: true,
+    },
+    {
+      id: 3,
+      title: "Konzert läuft gerade",
+      start: "2026-09-14T14:00:00+02:00",
+      end: "2026-09-14T19:00:00+02:00",
+    },
+    {
+      id: 4,
+      title: "Abendgottesdienst",
+      start: "2026-09-14T18:00:00+02:00",
+    },
+  ];
+  const now = new Date("2026-09-14T15:00:00+02:00");
+  assert.deepEqual(
+    filterEvents(events, { from: "2026-09-14", to: "2026-09-14" }, now).map(
+      (e) => e.id,
+    ),
+    [2, 3, 4],
+  );
+  assert.deepEqual(
+    filterEvents(
+      events,
+      { from: "2026-09-13", to: "2026-09-14" },
+      now,
+    ).map((e) => e.id),
+    [2, 1, 3, 4],
   );
 });

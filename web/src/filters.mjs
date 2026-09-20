@@ -35,19 +35,25 @@ export function eventSearchHaystack(event) {
     .join(" ")
     .toLocaleLowerCase("de");
 }
-export function filterEvents(events, f) {
+export function filterEvents(events, f, now = Date.now()) {
   if (f.from && f.to && f.from > f.to) return [];
+  const startsToday = f.from === berlinDay(now);
   return events
     .filter((e) => {
       const day = e.start ? berlinDay(e.start) : "";
       const endTime = e.end ? new Date(e.end).getTime() : NaN;
-      const lastDay =
-        Number.isFinite(endTime) && endTime > new Date(e.start).getTime()
-          ? berlinDay(endTime - 1)
-          : day;
+      const lasted =
+        Number.isFinite(endTime) && endTime > new Date(e.start).getTime();
+      const lastDay = lasted ? berlinDay(endTime - 1) : day;
+      const endedSinceNow =
+        startsToday &&
+        lastDay === f.from &&
+        Number.isFinite(endTime) &&
+        endTime < now;
       const haystack = eventSearchHaystack(e);
       return (
         day &&
+        !endedSinceNow &&
         (!f.from || lastDay >= f.from) &&
         (!f.to || day <= f.to) &&
         (!f.query || haystack.includes(f.query.toLocaleLowerCase("de"))) &&
