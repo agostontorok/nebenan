@@ -162,6 +162,7 @@ def test_push_integration_real_git(tmp_path, monkeypatch):
     subprocess.run(['git', '-C', str(work), 'remote', 'add', 'origin', str(origin)], check=True, capture_output=True)
     subprocess.run(['git', '-C', str(work), 'commit', '--allow-empty', '-m', 'init'], check=True, capture_output=True)
     subprocess.run(['git', '-C', str(work), 'push', '-u', 'origin', 'HEAD'], check=True, capture_output=True)
+    (work / '.gitignore').write_text('data/\n')
     data = work / 'data'
     data.mkdir()
     (data / 'events.sqlite').write_bytes(b'hello')
