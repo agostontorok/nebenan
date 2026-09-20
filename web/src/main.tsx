@@ -1467,7 +1467,8 @@ function App() {
         ) : (
           <section className="workspace admin-workspace">
             <p className="eyebrow">
-              {tr("review.eyebrow")} · {tr("admin.editor")}
+              {tr("review.eyebrow")}
+              {EDITOR && <> · {tr("admin.editor")}</>}
             </p>
             <h1>{tr("admin.heading")}</h1>
             <p className="intro">{tr("admin.intro")}</p>
