@@ -911,18 +911,22 @@ function App() {
               {tr("nav.sources")}
             </button>
           )}
-          <button
-            className={tab === "review" ? "active" : ""}
-            onClick={() => setTab("review")}
-          >
-            {tr("nav.review")} <span className="count">{reviews.length}</span>
-          </button>
-          <button
-            className={tab === "admin" ? "active" : ""}
-            onClick={() => setTab("admin")}
-          >
-            {tr("nav.admin")}
-          </button>
+          {!STATIC && (
+            <button
+              className={tab === "review" ? "active" : ""}
+              onClick={() => setTab("review")}
+            >
+              {tr("nav.review")} <span className="count">{reviews.length}</span>
+            </button>
+          )}
+          {!STATIC && (
+            <button
+              className={tab === "admin" ? "active" : ""}
+              onClick={() => setTab("admin")}
+            >
+              {tr("nav.admin")}
+            </button>
+          )}
         </nav>
         {!EDITOR && !STATIC && (
           <button
@@ -1280,10 +1284,12 @@ function App() {
                 <strong>{events.length}</strong>
                 <span>{tr("sources.published")}</span>
               </div>
-              <div>
-                <strong>{reviews.length}</strong>
-                <span>{tr("sources.review")}</span>
-              </div>
+              {!STATIC && (
+                <div>
+                  <strong>{reviews.length}</strong>
+                  <span>{tr("sources.review")}</span>
+                </div>
+              )}
             </div>
             <div className="collection-panel">
               <div>
@@ -1452,7 +1458,7 @@ function App() {
               </>
             )}
           </section>
-        ) : tab === "review" ? (
+        ) : !STATIC && tab === "review" ? (
           <section className="workspace">
             <p className="eyebrow">{tr("review.eyebrow")}</p>
             <h1>
@@ -1493,7 +1499,7 @@ function App() {
               ))
             )}
           </section>
-        ) : (
+        ) : !STATIC && tab === "admin" ? (
           <section className="workspace admin-workspace">
             <p className="eyebrow">
               {tr("review.eyebrow")}
@@ -1554,6 +1560,8 @@ function App() {
               <p className="muted">{tr("admin.showing")}</p>
             )}
           </section>
+        ) : (
+          null
         )}
         {notice && (
           <div className="toast" role="status">
