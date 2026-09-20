@@ -40,7 +40,7 @@ The mapping service follows the [Nominatim usage policy](https://operations.osmf
 
 ## Storage and development
 
-`data/events.sqlite` holds events, source states, provenance, review edits, geocoding cache, and schedule. `data/posters/` holds submitted posters. Both are ignored by Git. Back up `data/` with the server stopped. To use a separate database, set `DARMSTADT_DB=/absolute/path/events.sqlite`.
+`data/events.sqlite` holds events, source states, provenance, review edits, geocoding cache, and schedule. The database is tracked by Git; `data/posters/` holds submitted posters and stays ignored. Back up `data/` with the server stopped. To use a separate database, set `DARMSTADT_DB=/absolute/path/events.sqlite`.
 
 ```sh
 .venv/bin/python -m pytest -q
@@ -52,3 +52,16 @@ npm run build
 For frontend development, run the Python API on port 8765, then `cd web && npm run dev` (Vite proxies `/api` to the local API). Keep production operation on the single-origin `run.sh` server. Fetches accept only public HTTP(S) destinations, revalidate every redirect, pin DNS answers, verify TLS, and impose size/time limits. Local changes reject foreign origins.
 
 Architecture: `app/collect.py` extracts and validates; `app/db.py` persists data and overrides; `app/network.py` bounds public requests; `app/main.py` exposes the API and scheduler; `web/` renders the interface. The researched inventory is `docs/research/darmstadt-sources.json`.
+
+### Editor mode and GitHub issues
+
+Run `MODE=editor ./run.sh` to start the local editorial desk with only the Review and Admin views; the Admin view includes a **Publish & push** control that mints a commit and pushes `data/events.sqlite` to the repo. The database is tracked; its WAL sidecar files and `data/posters/` remain ignored.
+
+Visitors share events by opening the **Share an event** issue template on the GitHub repo (issues labeled `submission`). Import those into the local review queue with:
+
+```sh
+PYTHONPATH=. .venv/bin/python -m app.import_issues        # dry run
+PYTHONPATH=. .venv/bin/python -m app.import_issues --import
+```
+
+Each issue becomes a review-queue event with provenance pointing at the issue; a poster dragged into an issue comment is stored as reference material. Imported issues get the `imported` label and a confirmation comment; invalid submissions receive an explanation on the issue.
