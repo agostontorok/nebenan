@@ -19,6 +19,7 @@ import {
   topicLabels as topicLabelsByLanguage,
   t,
 } from "./i18n.mjs";
+const EDITOR = import.meta.env.VITE_EDITOR === "1";
 type EventItem = {
   id: string;
   title: string;
@@ -182,6 +183,71 @@ function EventImage({
       referrerPolicy="no-referrer"
       onError={() => setFailedSrc(src)}
     />
+  );
+}
+
+const POLAROID_ANGLES = [4, -4, 7, -6, 3];
+
+function PolaroidCarousel({
+  events,
+  onSelect,
+  label,
+}: {
+  events: EventItem[];
+  onSelect: (e: EventItem) => void;
+  label: string;
+}) {
+  const [failedSrcs, setFailedSrcs] = useState<string[]>([]);
+  const slides = useMemo(
+    () =>
+      events
+        .map((e) => ({
+          event: e,
+          src: safeImageUrl(e.image_url || e.poster_url),
+        }))
+        .filter((x) => x.src && !failedSrcs.includes(x.src))
+        .filter((x, i, all) => all.findIndex((y) => y.src === x.src) === i)
+        .slice(0, 5),
+    [events, failedSrcs],
+  );
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (slides.length < 2) return;
+    const timer = setInterval(() => setIndex((i) => i + 1), 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+  if (!slides.length) return null;
+  const safeIndex = index % slides.length;
+  return (
+    <div className="polaroid-stack" role="group" aria-label={label}>
+      {slides.map(({ event, src }, i) => (
+        <button
+          key={event.id}
+          type="button"
+          className={`polaroid ${i === safeIndex ? "active" : ""}`}
+          style={
+            {
+              "--rot": `${POLAROID_ANGLES[i % POLAROID_ANGLES.length]}deg`,
+            } as React.CSSProperties
+          }
+          onClick={() => onSelect(event)}
+          aria-hidden={i !== safeIndex}
+          tabIndex={i === safeIndex ? 0 : -1}
+          aria-label={event.title}
+          title={event.title}
+        >
+          <img
+            src={src}
+            alt=""
+            loading="eager"
+            decoding="async"
+            referrerPolicy="no-referrer"
+            onError={() => setFailedSrcs((prev) => [...prev, src])}
+          />
+          <span className="polaroid-caption">{event.title}</span>
+        </button>
+      ))}
+    </div>
   );
 }
 
@@ -617,7 +683,7 @@ function InviteForm({
 }
 
 function App() {
-  const [tab, setTab] = useState("discover"),
+  const [tab, setTab] = useState(EDITOR ? "review" : "discover"),
     [language, setLanguage] = useState<"en" | "de">(() => {
       try {
         return languageFromStorage(window.localStorage.getItem("darmstadt-language"));
@@ -792,18 +858,22 @@ function App() {
           nebenan<span className="brand-city">DARMSTADT</span>
         </a>
         <nav aria-label={tr("nav.aria")}>
-          <button
-            className={tab === "discover" ? "active" : ""}
-            onClick={() => setTab("discover")}
-          >
-            {tr("nav.discover")}
-          </button>
-          <button
-            className={tab === "sources" ? "active" : ""}
-            onClick={() => setTab("sources")}
-          >
-            {tr("nav.sources")}
-          </button>
+          {!EDITOR && (
+            <button
+              className={tab === "discover" ? "active" : ""}
+              onClick={() => setTab("discover")}
+            >
+              {tr("nav.discover")}
+            </button>
+          )}
+          {!EDITOR && (
+            <button
+              className={tab === "sources" ? "active" : ""}
+              onClick={() => setTab("sources")}
+            >
+              {tr("nav.sources")}
+            </button>
+          )}
           <button
             className={tab === "review" ? "active" : ""}
             onClick={() => setTab("review")}
@@ -817,12 +887,14 @@ function App() {
             {tr("nav.admin")}
           </button>
         </nav>
-        <button
-          className="header-contribute"
-          onClick={() => setContribute(true)}
-        >
-          ＋ {tr("header.share")}
-        </button>
+        {!EDITOR && (
+          <button
+            className="header-contribute"
+            onClick={() => setContribute(true)}
+          >
+            ＋ {tr("header.share")}
+          </button>
+        )}
         <div className="language-switch" role="group" aria-label="Language / Sprache">
           <button
             className={language === "en" ? "selected" : ""}
@@ -858,19 +930,19 @@ function App() {
                   <br className="desktop" /> {tr("hero.copy2")}
                 </p>
               </div>
-              <div className="hero-art" aria-hidden="true">
-                <div className="orbit orbit-one" />
-                <div className="orbit orbit-two" />
-                <div className="art-grid" />
-                <span className="art-star">✳</span>
-                <div className="art-house">
-                  <i />
-                  <b />
-                  <b />
-                </div>
+              <div className="hero-art">
+                <div className="orbit orbit-one" aria-hidden="true" />
+                <div className="orbit orbit-two" aria-hidden="true" />
+                <div className="art-grid" aria-hidden="true" />
+                <span className="art-star" aria-hidden="true">✳</span>
+                <PolaroidCarousel
+                  events={events}
+                  onSelect={selectEvent}
+                  label={tr("hero.art")}
+                />
                 <div className="art-label">{tr("hero.art")}</div>
-                <span className="art-dot" />
-                <span className="art-plus">+</span>
+                <span className="art-dot" aria-hidden="true" />
+                <span className="art-plus" aria-hidden="true">+</span>
               </div>
             </section>
             <section className="discovery" aria-label={tr("discover.heading")}>
