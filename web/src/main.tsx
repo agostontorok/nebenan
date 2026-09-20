@@ -1345,7 +1345,7 @@ function App() {
                           : tr("sources.collectorPaused")
                         : tr("sources.researched")}
                     </span>
-{s.implemented && !STATIC && (
+                    {s.implemented && !STATIC && (
                       <label className="checkbox">
                         <input
                           type="checkbox"
@@ -1542,10 +1542,10 @@ function App() {
                       <p>{formatDate(e.start)} · {e.venue || tr("event.locationOpen")}</p>
                     </div>
                     {!STATIC && (
-                    <button className="primary" onClick={() => setEditing(e)}>
-                      {tr("admin.edit")}
-                    </button>
-                  )}
+                      <button className="primary" onClick={() => setEditing(e)}>
+                        {tr("admin.edit")}
+                      </button>
+                    )}
                   </article>
                 ))}
               </div>
