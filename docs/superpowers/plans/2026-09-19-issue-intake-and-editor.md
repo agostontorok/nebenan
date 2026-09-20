@@ -631,55 +631,129 @@ git commit -m "feat: import submission issues into the review queue"
 - Modify: `tests/test_api.py`
 
 **Interface:**
-- `Database.checkpoint() -> None`: runs `PRAGMA wal_checkpoint(TRUNCATE)` so the tracked DB file is consistent before commit.
-- `POST /api/push` -> dict: checkpoints the DB; if `git status --porcelain -- data/events.sqlite` is empty returns `{'status': 'unchanged'}`; otherwise runs `git add data/events.sqlite`, `git commit -m "events: publish review state"`, `git push origin <branch>` and returns `{'status': 'pushed', 'branch': '<name>'}`. Raises HTTP 500 with the git stderr on failure.
+- `Database.checkpoint() -> None`: runs `PRAGMA wal_checkpoint(TRUNCATE)`, reads the result row, and raises `RuntimeError` if the checkpoint reports busy (`row[0] != 0`) — otherwise a stale DB snapshot could be committed.
+- `POST /api/push` -> dict: checkpoints the DB (any error → HTTP 409); resolves the branch via `git rev-parse --abbrev-ref HEAD` (failure → 500); force-adds `data/events.sqlite` (`git add -f`, so it works even while `data/` is ignored — see note below); if `git diff --cached --quiet -- data/events.sqlite` reports no staged change AND HEAD is not ahead of `origin/<branch>`, returns `{'status': 'unchanged'}`; otherwise commits `git commit --only -m "events: publish review state" -- data/events.sqlite` (scoped so unrelated staged WIP is never swept in), does `git push origin <branch>`, and returns `{'status': 'pushed', 'branch': '<name>'}`. Any git failure → HTTP 500 with the git stderr.
+- The ahead-of-origin check makes the endpoint self-healing: after a push failure that left a local commit unpushed, the next call pushes the pending commit instead of reporting `unchanged`.
+
+**Design note (why this is not status/porcelain based):** `data/` is gitignored and `data/events.sqlite` starts untracked, so `git status --porcelain -- data/events.sqlite` prints nothing for an ignored file and a plain `git add` refuses it. Change-detection therefore uses `git add -f` + `git diff --cached --quiet`; `-f` is harmless once the file is tracked.
 
 - [ ] **Step 1: Write the failing `/api/push` tests**
 
-Append to `tests/test_api.py`:
+Append to `tests/test_api.py` (replacing any older FakeGit-based push tests):
 
 ```python
 import subprocess
 
 
 class FakeGit:
-    def __init__(self, status_stdout='M data/events.sqlite'):
-        self.status_stdout = status_stdout
+    def __init__(self, staged_changed=True, remote_sync=True, fail=None):
+        self.staged_changed = staged_changed
+        self.remote_sync = remote_sync
+        self.fail = fail
         self.calls = []
 
     def run(self, argv, **kwargs):
         self.calls.append(argv)
-        cmd = argv[1] if len(argv) > 1 and argv[0] == '-C' else argv[0]
-        if cmd == 'status':
-            stdout = self.status_stdout
-        elif cmd == 'rev-parse':
-            stdout = 'main\n'
-        else:
-            stdout = ''
-        return subprocess.CompletedProcess(argv, 0, stdout=stdout)
+        if self.fail:
+            cmd = argv[3] if len(argv) > 3 and argv[1] == '-C' else argv[0]
+            if cmd in self.fail:
+                return subprocess.CompletedProcess(argv, 1, stdout='', stderr='boom')
+        try:
+            cmd = argv[3] if len(argv) > 3 and argv[1] == '-C' else argv[0]
+        except IndexError:
+            cmd = argv[0]
+        if cmd == 'rev-parse' and '--abbrev-ref' in argv:
+            return subprocess.CompletedProcess(argv, 0, stdout='main\n')
+        if cmd == 'rev-parse' and '--verify' in argv:
+            if not self.remote_sync:
+                return subprocess.CompletedProcess(argv, 1, stdout='')
+            return subprocess.CompletedProcess(argv, 0, stdout='abc123\n')
+        if cmd == 'rev-parse':
+            return subprocess.CompletedProcess(argv, 0, stdout='abc123\n')
+        if cmd == 'diff':
+            return subprocess.CompletedProcess(argv, 0 if not self.staged_changed else 1, stdout='')
+        return subprocess.CompletedProcess(argv, 0, stdout='')
 
 
-def test_push_returns_unchanged_when_db_clean(tmp_path, monkeypatch):
-    fake = FakeGit(status_stdout='')
+def test_push_returns_unchanged_when_no_local_change(tmp_path, monkeypatch):
+    fake = FakeGit(staged_changed=False, remote_sync=True)
     monkeypatch.setattr('app.main.subprocess.run', fake.run)
     with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
         assert client.post('/api/push').json() == {'status': 'unchanged'}
-    assert any('status' in c and '--porcelain' in c for c in fake.calls)
+    assert any('-f' in c and 'data/events.sqlite' in c for c in fake.calls)
+    assert any('diff' in c and '--cached' in c for c in fake.calls)
 
 
-def test_push_stages_only_db_and_pushes(tmp_path, monkeypatch):
-    fake = FakeGit()
+def test_push_stages_only_db_commits_scoped_and_pushes(tmp_path, monkeypatch):
+    fake = FakeGit(staged_changed=True, remote_sync=True)
     monkeypatch.setattr('app.main.subprocess.run', fake.run)
     with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
         result = client.post('/api/push').json()
     assert result['status'] == 'pushed'
     assert result['branch'] == 'main'
     adds = [c for c in fake.calls if 'add' in c]
-    assert adds and all(c[c.index('-C') + 1].startswith('/') for c in adds)
-    assert any('data/events.sqlite' in c for c in adds)
-    assert any('commit' in c for c in fake.calls)
-    assert any('push' in c and 'origin' in c for c in fake.calls)
+    assert adds and all('-f' in c and 'data/events.sqlite' in c for c in adds)
+    commits = [c for c in fake.calls if 'commit' in c]
+    assert commits and all('--only' in c and 'data/events.sqlite' in c and 'events: publish review state' in ' '.join(c) for c in commits)
+    assert any('push' in c and 'origin' in c and 'main' in c for c in fake.calls)
     assert not any('-wal' in ' '.join(c) for c in fake.calls)
+
+
+def test_push_retries_when_ahead_of_remote_without_commit(tmp_path, monkeypatch):
+    fake = FakeGit(staged_changed=False, remote_sync=False)
+    monkeypatch.setattr('app.main.subprocess.run', fake.run)
+    with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
+        result = client.post('/api/push').json()
+    assert result['status'] == 'pushed'
+    assert result['branch'] == 'main'
+    assert not any('commit' in c for c in fake.calls)
+    assert any('push' in c for c in fake.calls)
+
+
+def test_push_failure_returns_500(tmp_path, monkeypatch):
+    fake = FakeGit(staged_changed=True, remote_sync=True, fail=['add'])
+    monkeypatch.setattr('app.main.subprocess.run', fake.run)
+    with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
+        response = client.post('/api/push')
+    assert response.status_code == 500
+
+
+def test_push_busy_database_returns_409(tmp_path, monkeypatch):
+    def boom(db):
+        raise RuntimeError('busy')
+    monkeypatch.setattr('app.main.Database.checkpoint', boom)
+    with TestClient(create_app(Database(tmp_path / 'events.sqlite'), scheduling=False)) as client:
+        response = client.post('/api/push')
+    assert response.status_code == 409
+
+
+def test_push_integration_real_git(tmp_path, monkeypatch):
+    origin = tmp_path / 'origin.git'
+    subprocess.run(['git', 'init', '--bare', str(origin)], check=True, capture_output=True)
+    work = tmp_path / 'work'
+    subprocess.run(['git', 'init', str(work)], check=True, capture_output=True)
+    subprocess.run(['git', '-C', str(work), 'config', 'user.email', 't@example.com'], check=True, capture_output=True)
+    subprocess.run(['git', '-C', str(work), 'config', 'user.name', 'Test'], check=True, capture_output=True)
+    subprocess.run(['git', '-C', str(work), 'remote', 'add', 'origin', str(origin)], check=True, capture_output=True)
+    subprocess.run(['git', '-C', str(work), 'commit', '--allow-empty', '-m', 'init'], check=True, capture_output=True)
+    subprocess.run(['git', '-C', str(work), 'push', '-u', 'origin', 'HEAD'], check=True, capture_output=True)
+    data = work / 'data'
+    data.mkdir()
+    (data / 'events.sqlite').write_bytes(b'hello')
+    monkeypatch.setattr('app.main.ROOT', work)
+    with TestClient(create_app(Database(tmp_path / 'db.sqlite'), scheduling=False)) as client:
+        first = client.post('/api/push').json()
+        second = client.post('/api/push').json()
+    assert first['status'] == 'pushed'
+    assert second == {'status': 'unchanged'}
+    branch = first['branch']
+    files = subprocess.run(['git', '-C', str(work), 'ls-files'], capture_output=True, text=True).stdout.split()
+    assert files == ['data/events.sqlite']
+    remote_head = subprocess.run(['git', '-C', str(work), 'rev-parse', 'origin/' + branch],
+                                 capture_output=True, text=True).stdout.strip()
+    local_head = subprocess.run(['git', '-C', str(work), 'rev-parse', 'HEAD'],
+                                capture_output=True, text=True).stdout.strip()
+    assert remote_head == local_head
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -694,7 +768,9 @@ In `app/db.py`, directly after `set_meta` (`app/db.py:63-65`), add:
 ```python
     def checkpoint(self):
         with self.connect() as con:
-            con.execute('PRAGMA wal_checkpoint(TRUNCATE)')
+            row = con.execute('PRAGMA wal_checkpoint(TRUNCATE)').fetchone()
+            if row is not None and row[0] != 0:
+                raise RuntimeError('database busy during checkpoint')
 ```
 
 - [ ] **Step 4: Add the push endpoint**
@@ -706,7 +782,7 @@ import os
 import subprocess
 ```
 
-Import `ROOT` already exists (`from .db import Database, ROOT`). After the `@app.post('/api/collect' ...)` block (`app/main.py:157`), add:
+Import `ROOT` already exists (`from .db import Database, ROOT`). The `local_guard` middleware currently returns 415 for any non-`/api/collect` POST without a JSON body — extend its exemption tuple to `('/api/collect', '/api/push')` so the body-less push request reaches the endpoint (same-origin/CSRF protection still applies). After the `@app.post('/api/collect' ...)` block (`app/main.py:157`), add:
 
 ```python
     @app.post('/api/push')
@@ -716,30 +792,35 @@ Import `ROOT` already exists (`from .db import Database, ROOT`). After the `@app
         except Exception as exc:
             raise HTTPException(409, 'Database is busy; try again: ' + str(exc))
         git_root = str(ROOT)
-        status = subprocess.run(['git', '-C', git_root, 'status', '--porcelain', '--', 'data/events.sqlite'],
-                                capture_output=True, text=True)
-        if not status.stdout.strip():
+        def git(args):
+            return subprocess.run(['git', '-C', git_root, *args], capture_output=True, text=True)
+        branch_run = git(['rev-parse', '--abbrev-ref', 'HEAD'])
+        if branch_run.returncode or not branch_run.stdout.strip():
+            raise HTTPException(500, branch_run.stderr.strip() or 'could not determine branch')
+        branch = branch_run.stdout.strip()
+        add = git(['add', '-f', 'data/events.sqlite'])
+        if add.returncode:
+            raise HTTPException(500, add.stderr.strip() or 'git add failed')
+        staged = git(['diff', '--cached', '--quiet', '--', 'data/events.sqlite'])
+        local = git(['rev-parse', 'HEAD'])
+        remote = git(['rev-parse', '--verify', '--quiet', 'origin/' + branch])
+        ahead = remote.returncode != 0 or (remote.stdout.strip() and remote.stdout.strip() != local.stdout.strip())
+        if staged.returncode == 0 and not ahead:
             return {'status': 'unchanged'}
-        for argv in (
-            ['git', '-C', git_root, 'add', 'data/events.sqlite'],
-            ['git', '-C', git_root, 'commit', '-m', 'events: publish review state'],
-        ):
-            result = subprocess.run(argv, capture_output=True, text=True)
-            if result.returncode:
-                raise HTTPException(500, result.stderr.strip() or 'git command failed')
-        branch = subprocess.run(['git', '-C', git_root, 'rev-parse', '--abbrev-ref', 'HEAD'],
-                                capture_output=True, text=True).stdout.strip()
-        result = subprocess.run(['git', '-C', git_root, 'push', 'origin', branch],
-                                capture_output=True, text=True)
-        if result.returncode:
-            raise HTTPException(500, result.stderr.strip() or 'git push failed')
+        if staged.returncode != 0:
+            commit = git(['commit', '--only', '-m', 'events: publish review state', '--', 'data/events.sqlite'])
+            if commit.returncode:
+                raise HTTPException(500, commit.stderr.strip() or 'git commit failed')
+        push = git(['push', 'origin', branch])
+        if push.returncode:
+            raise HTTPException(500, push.stderr.strip() or 'git push failed')
         return {'status': 'pushed', 'branch': branch}
 ```
 
 - [ ] **Step 5: Run tests to verify they pass**
 
-Run: `PYTHONPATH=. .venv/bin/python -m pytest tests/test_api.py::test_push_returns_unchanged_when_db_clean tests/test_api.py::test_push_stages_only_db_and_pushes -x -q`
-Expected: both pass. `app.main` module-level `app = create_app()` creates the real repo DB during import; the push test monkeypatches `subprocess.run` so no real git runs against it.
+Run: `PYTHONPATH=. .venv/bin/python -m pytest tests/test_api.py -x -q`
+Expected: all pass, including the real-git integration test (scratch bare origin in `tmp_path`; no network, never touches the real remote). `app.main` module-level `app = create_app()` creates the real repo DB during import; the FakeGit tests monkeypatch `subprocess.run` so no real git runs against it.
 
 - [ ] **Step 6: Run the full Python suite**
 
