@@ -88,6 +88,13 @@ def infer_area(value):
     return None
 
 
+def street_city(value):
+    """Return (street, city) resolved from a venue/address, matching geocode."""
+    street = street_address(value or '')
+    city = infer_area(value or '') or 'Darmstadt'
+    return street, city
+
+
 def base_event(title, start, venue='', address='', description='', end=None, **extra):
     title, venue, address, description = map(text, (title, venue, address, description))
     area = infer_area(address + ' ' + venue)
@@ -596,10 +603,9 @@ class Collector:
                 continue
             addr = event.get('address') or ''
             # Extract a street+number, never turn an organiser name into a venue pin.
-            street = street_address(addr)
+            street, city = street_city(addr)
             if not street:
                 continue
-            city = infer_area(addr) or 'Darmstadt'
             key = street.casefold() + ', ' + city.casefold()
             cached = self.db.geocache(key)
             if cached is None:

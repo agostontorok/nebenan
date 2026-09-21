@@ -8,8 +8,9 @@ import json
 import logging
 import os
 import sys
+from pathlib import Path
 
-from .collect import Collector, street_address, infer_area, now_local
+from .collect import Collector, street_city, now_local
 from .db import Database, ROOT
 from .export_static import collect as collect_payload
 from .network import fetch
@@ -23,10 +24,9 @@ def unresolved_streets(db):
     for event in db.events('published'):
         if event.get('lat') is not None and not str(event.get('coordinate_evidence') or '').startswith('Approximate'):
             continue
-        street = street_address(event.get('address') or '')
+        street, city = street_city(event.get('address') or '')
         if not street:
             continue
-        city = infer_area(event.get('address') or '') or 'Darmstadt'
         seen.add(street.casefold() + ', ' + city.casefold())
     return seen
 
@@ -37,9 +37,12 @@ def main(argv=None):
     collector = Collector(db, fetch=fetch, now=now_local)
     pending = unresolved_streets(db)
     limit = int(args[0]) if args else max(1, len(pending))
-    collector.geocode(limit=limit)
+    try:
+        collector.geocode(limit=limit)
+    except Exception as exc:
+        log.warning('geocoding failed: %s', exc)
     payload = collect_payload(db)
-    out = ROOT / 'web/public/data.json'
+    out = Path(os.environ.get('DARMSTADT_OUT', ROOT / 'web/public/data.json'))
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     log.info('geocoded up to %s new streets; exported %s', limit, out)
     return 0
