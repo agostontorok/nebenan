@@ -6,6 +6,7 @@ import "./style.css";
 import { eventPatch, berlinInput } from "./event-patch.mjs";
 import { berlinDay, dateRange, filterEvents } from "./filters.mjs";
 import { shouldFitInitialMap } from "./map-policy.mjs";
+import { coordKey, groupEvents, locationCount } from "./map-clusters.mjs";
 import { filterAdminEvents } from "./admin-filter.mjs";
 import { eventToIcs, parseAttendees } from "./calendar-invite.mjs";
 import { safeImageUrl } from "./image-url.mjs";
@@ -195,10 +196,14 @@ function EventImage({
 function MapView({
   events,
   onSelect,
+  onSelectPlace,
+  onClearPlace,
   language,
 }: {
   events: EventItem[];
   onSelect: (e: EventItem) => void;
+  onSelectPlace?: (keys: string[]) => void;
+  onClearPlace?: () => void;
   language: "en" | "de";
 }) {
   const ref = useRef<HTMLDivElement>(null),
@@ -225,6 +230,7 @@ function MapView({
     m.on("dragstart zoomstart", () => {
       if (hasFitted.current) userInteracted.current = true;
     });
+    m.on("click", () => onClearPlace?.());
     // Mobile CSS hides the map while the list is active. Observe actual layout
     // instead of inferring visibility from the selected page.
     let resizeFrame = 0;
@@ -249,29 +255,49 @@ function MapView({
     };
   }, []);
   useEffect(() => {
+    const m = map.current;
+    if (!m) return;
+    const zoom = m.getZoom();
     layer.current?.clearLayers();
     const coords: L.LatLngTuple[] = [];
-    events.forEach((e, i) => {
-      if (
-        e.lat == null ||
-        e.lon == null ||
-        !Number.isFinite(e.lat) ||
-        !Number.isFinite(e.lon)
-      )
-        return;
-      const pos: L.LatLngTuple = [e.lat, e.lon];
+    const groups = groupEvents(events, zoom);
+    groups.forEach((g, index) => {
+      const pos: L.LatLngTuple = [g.lat, g.lon];
       coords.push(pos);
+      if (g.events.length === 1) {
+        const e = g.events[0];
+        L.marker(pos, {
+          keyboard: true,
+          title: e.title,
+          icon: L.divIcon({
+            className: "event-pin",
+            html: `<span></span>`,
+            iconSize: [32, 38],
+            iconAnchor: [16, 38],
+          }),
+        })
+          .on("click", () => onSelect(e))
+          .addTo(layer.current!);
+        return;
+      }
+      const count = g.events.length;
       L.marker(pos, {
         keyboard: true,
-        title: e.title,
+        title: `${count} ${language === "de" ? "Termine" : "events"}`,
         icon: L.divIcon({
-          className: "event-pin",
-          html: `<span>${i + 1}</span>`,
-          iconSize: [32, 38],
-          iconAnchor: [16, 38],
+          className: "cluster-pin",
+          html: `<span>${count}</span>`,
+          iconSize: [44, 44],
+          iconAnchor: [22, 22],
         }),
       })
-        .on("click", () => onSelect(e))
+        .on("click", () => {
+          const keys = (g.events as EventItem[]).map((e) =>
+            coordKey(e.lat!, e.lon!),
+          );
+          onSelectPlace?.(keys);
+          m.setView(pos, Math.min(zoom + 1, 19), { animate: true });
+        })
         .addTo(layer.current!);
     });
     if (
@@ -286,7 +312,7 @@ function MapView({
         maxZoom: 14,
       });
     }
-  }, [events, onSelect]);
+  }, [events, onSelect, onSelectPlace, language]);
   return (
     <div className="map-shell">
       <div
@@ -304,7 +330,9 @@ function MapView({
       <div className="map-caption">
         <span className="live-dot" /> {t(language, "results.areaCaption")}{" "}
         <span>
-          {events.filter((e) => e.lat != null && e.lon != null).length} {language === "de" ? "Orte / Termine" : "mapped events"}
+          {locationCount(events)} {language === "de" ? "Orte /" : "places ·"}{" "}
+          {events.filter((e) => e.lat != null && e.lon != null).length}{" "}
+          {language === "de" ? "Termine" : "events"}
         </span>
       </div>
     </div>
