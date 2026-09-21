@@ -215,7 +215,20 @@ button.icon-button {
 }
 .header-contribute {
   font-size: 13px;
-  border-color: #9cab9b;
+  border: 1px solid #9cab9b;
+  background: transparent;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+}
+.header-contribute:hover {
+  background: #e9eee4;
+  border-color: #8f9f91;
 }
 .language-switch {
   display: flex;
@@ -653,6 +666,11 @@ main {
 .cancel-tag {
   background: #fae1d9 !important;
   color: #a23d2b !important;
+}
+.event-tags .ai-tag {
+  background: #ece7f6;
+  color: #523e8a;
+  cursor: help;
 }
 .event-card h3 {
   font-size: 16px;
@@ -1222,6 +1240,21 @@ dialog::backdrop {
   font-size: 11px;
   color: #86927a;
   margin-top: 18px;
+}
+.ai-notice {
+  background: #f3f0fb;
+  border: 1px solid #ddd4f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.ai-notice p {
+  margin: 0 0 8px;
+}
+.ai-notice a {
+  font-size: 12px;
 }
 .sr-only {
   position: absolute;

@@ -12,6 +12,7 @@ COLLECTORS = {
     'goldene-krone': ('jsonld', 'https://www.goldene-krone.de/'),
     'griesheim-city': ('griesheim-html', 'https://www.griesheim.de/veranstaltungen'),
     'weiterstadt-city': ('weiterstadt-html', 'https://www.weiterstadt.de/verwaltung-service/aktuelles/termine-veranstaltungen/index.php?y=2026'),
+    'hoffart': ('llm', 'https://www.hoffart-theater.de/veranstaltungen/'),
 }
 
 # These municipal and special-programme sources were added after the initial

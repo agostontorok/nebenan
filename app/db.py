@@ -49,6 +49,17 @@ class Database:
                               method=COLLECTORS[sid][0] if sid in COLLECTORS else 'Discovered · manual integration',
                               last_attempt=None, last_success=None, error=None, event_count=0)
                 con.execute('INSERT OR IGNORE INTO sources VALUES (?,?)', (sid, json.dumps(source)))
+            # Activate newly added collectors in an existing database. Only
+            # rows that were never implemented before are bumped; disabling an
+            # already implemented source stays intact across restarts.
+            for sid, (method, _url) in COLLECTORS.items():
+                row = con.execute('SELECT data FROM sources WHERE id=?', (sid,)).fetchone()
+                if row is None:
+                    continue
+                stored = json.loads(row[0])
+                if not stored.get('implemented'):
+                    stored.update(implemented=True, enabled=True, method=method)
+                    con.execute('UPDATE sources SET data=? WHERE id=?', (json.dumps(stored), sid))
 
     def connect(self):
         con = sqlite3.connect(self.path, timeout=30)

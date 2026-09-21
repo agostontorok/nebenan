@@ -1,0 +1,48 @@
+name: Flag an extracted event
+description: Report an event extracted by the assistant (AI) that is wrong, out of date, or cancelled.
+title: "[Flag] "
+labels: ["flag"]
+body:
+  - type: input
+    id: event_title
+    attributes:
+      label: Event title shown on next-door.dev
+      placeholder: "DIE BESONDERE PLATTE #81"
+    validations:
+      required: true
+  - type: input
+    id: event_date
+    attributes:
+      label: Event date (Berlin time)
+      description: Day shown on the site, for example 2026-10-23.
+      placeholder: "2026-10-23"
+  - type: input
+    id: event_url
+    attributes:
+      label: Link shown on the site
+      placeholder: "https://…"
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What is wrong?
+      default: Wrong date/time
+      options:
+        - Wrong date/time
+        - Cancelled
+        - Wrong venue / location
+        - Does not exist
+        - No longer happening
+        - Moved
+        - Wrong title
+        - Duplicate
+        - Other
+  - type: textarea
+    id: details
+    attributes:
+      label: What did you notice, and what is correct instead?
+      render: markdown
+  - type: markdown
+    attributes:
+      value: >-
+        Thanks — the maintainer checks the original source and updates the
+        calendar. A link to the official announcement helps a lot.

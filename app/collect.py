@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 from icalendar import Calendar
 import recurring_ical_events
 
+from .llm_extract import extract_events_from_html, strip_html
 from .network import fetch as public_fetch, validate_url
 from .sources import AREA_CENTROIDS, COLLECTORS, KRONE_ADDRESS, SUPPORTED_PLACES
 
@@ -459,6 +460,36 @@ def parse_city_html(raw, source_id, start, end):
     return events
 
 
+def parse_html_llm(raw, source_id, start, end):
+    """Extract calendar entries from a human-readable website page via the local model.
+
+    Every extracted event lands in the review queue: the local model is only a
+    field extraction aid, the human editor confirms the listing before it is
+    published on the public site.
+    """
+    soup = BeautifulSoup(raw, 'html.parser')
+    page_url = None
+    canonical = soup.select_one('link[rel="canonical"]')
+    if canonical and canonical.get('href'):
+        page_url = urljoin(COLLECTORS[source_id][1], canonical['href'])
+    page_url = page_url or COLLECTORS[source_id][1]
+    events = []
+    for item in extract_events_from_html(raw, page_url, start):
+        item_start = datetime.fromisoformat(item['start'])
+        item_end = datetime.fromisoformat(item['end']) if item.get('end') else None
+        if not _event_in_window(item_start, item_end, start, end):
+            continue
+        event = base_event(
+            item['title'], iso(item_start), venue=item['venue'], address=item['address'],
+            description=item['description'], end=iso(item_end) if item_end else None,
+            external_id='llm:' + item['external_id'], url=item['url'])
+        event['status'] = 'published'
+        event['ai_extracted'] = True
+        event['review_reason'] = ''
+        events.append(event)
+    return events
+
+
 class Collector:
     def __init__(self, db, fetch=public_fetch, now=now_local):
         self.db, self.fetch, self.now = db, fetch, now
@@ -497,6 +528,8 @@ class Collector:
                         events = parse_ical(raw, sid, window_start, window_end)
                     elif method == 'jsonld':
                         events = parse_jsonld(raw, sid, window_start, window_end)
+                    elif method == 'llm':
+                        events = parse_html_llm(raw, sid, window_start, window_end)
                     else:
                         events = parse_city_html(raw, sid, window_start, window_end)
                     for event in events:

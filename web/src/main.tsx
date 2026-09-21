@@ -23,6 +23,8 @@ const EDITOR = import.meta.env.VITE_EDITOR === "1";
 const STATIC = import.meta.env.VITE_STATIC === "1";
 export const SHARE_URL =
   "https://github.com/agostontorok/nebenan/issues/new?template=event-share.yml";
+export const FLAG_URL =
+  "https://github.com/agostontorok/nebenan/issues/new?template=event-flag.yml";
 type EventItem = {
   id: string;
   title: string;
@@ -42,6 +44,7 @@ type EventItem = {
   lon: number | null;
   coordinate_evidence?: string | null;
   status: string;
+  ai_extracted?: boolean;
   poster_url?: string;
   image_url?: string | null;
   cancelled: boolean;
@@ -1200,6 +1203,11 @@ function App() {
                             {e.free === true && (
                               <span className="free-tag">{tr("event.free")}</span>
                             )}
+                            {e.ai_extracted && (
+                              <span className="ai-tag" title={tr("event.aiTitle")}>
+                                {tr("event.aiBadge")}
+                              </span>
+                            )}
                             {e.cancelled && (
                               <span className="cancel-tag">{tr("event.cancelled")}</span>
                             )}
@@ -1691,6 +1699,22 @@ function App() {
             {selected.description ||
               tr("detail.more")}
           </p>
+          {selected.ai_extracted && (
+            <div className="ai-notice">
+              <p>
+                <strong>{tr("detail.aiTitle")}</strong> {tr("detail.aiWarning")}
+              </p>
+              <a
+                href={`${FLAG_URL}?title=${encodeURIComponent(
+                  `[Flag] ${selected.title} (${formatDate(selected.start, { dateStyle: "short" })})`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {tr("detail.aiFlag")} ↗
+              </a>
+            </div>
+          )}
           <div className="provenance">
             <h3>{tr("detail.source")}</h3>
             {selected.provenance?.map((p, i) => (
