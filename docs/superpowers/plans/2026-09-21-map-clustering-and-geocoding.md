@@ -50,6 +50,8 @@ NOW = datetime(2026, 9, 14, 12, tzinfo=TZ)
 
 def _published_event(eid, address):
     return {
+        'external_id': str(eid),
+        'url': f'https://example.com/event/{eid}',
         'id': eid,
         'title': 'Kurs',
         'start': '2026-09-14T12:00:00+02:00',
@@ -163,11 +165,6 @@ if __name__ == '__main__':
     raise SystemExit(main())
 ```
 
-
-if __name__ == '__main__':
-    raise SystemExit(main())
-```
-
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `.venv/bin/python -m pytest tests/test_backfill_geocode.py -v`
@@ -189,37 +186,23 @@ git commit -m "feat: backfill geocoder warms cache and re-exports static map dat
 
 ## Task 2: Run the backfill against the live database
 
-**Files:**
-- No source changes; operational step.
+**Files:** No source changes; operational step (later amended with a geocode acceptance fix, see "Outcome" below).
 
-- [ ] **Step 1: Run the backfill**
+- [x] **Step 1: Run the backfill**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan && .venv/bin/python -m app.backfill_geocode`
-Expected: prints nothing (logging default), exits 0, takes roughly (number of unique streets × 1.1 s), ≈ 70 s for 61 streets.
+Took ≈ 70 s, exited 0. First pass resolved only 12 of ~61 streets because `Collector.geocode()` requires exactly ONE Nominatim row with a house_number. → **Amended:** fixed `app/collect.py` to accept the first row with a house_number (commit `c0a00a1`), deleted the 43 permanent miss rows from `data/events.sqlite` (misses are cached forever by design, so clearing them was required for a retry), and re-ran (≈ 57 s).
 
-- [ ] **Step 2: Verify the export grew**
+- [x] **Step 2: Verify the export grew**
 
-Run:
-```bash
-node -e '
-const d=require("/Users/agostontorok/Documents/code/nebenan/web/public/data.json");
-const arr=Array.isArray(d)?d:(d.events||[]);
-const withC=arr.filter(e=>e.lat!=null&&e.lon!=null);
-const uniq=new Map();
-withC.forEach(e=>uniq.set(e.lat+","+e.lon,""));
-console.log("total",arr.length,"with coords",withC.length,"unique coords",uniq.size);
-'
-```
-Expected: `with coords` jumps from 135 toward ~573 (135 + 438), unique coords toward ~75 (15 + unique streets that resolved).
+Run the `node -e` count snippet (above).
+**Actual result:** `total 2118, with coords 555, unique coords 62` (plan estimated ~573/~75; the gap is exactly the 6 streets that remain genuinely unlocalizable — e.g. `Hof der alten Schlossschule` is a venue name, not a street — covering only 11 events total). Re-ran `VITE_STATIC=1 npx vite build` so the served `web/dist/data.json` (which the uvicorn server at :8765 actually serves) reflects the new coordinates.
 
-- [ ] **Step 3: Commit the data export**
+- [x] **Step 3: Commit the data export — SKIPPED by user decision**
 
-```bash
-git add web/public/data.json
-git commit -m "data: backfill map coordinates for located streets"
-```
+`web/public/data.json` (4.5 MB generated artifact) is gitignored (`.gitignore:8`). The user chose to keep it untracked: the file exists on disk and is served, but is not versioned. `data/events.sqlite` also stays untracked. No commit for this step.
 
-Do NOT commit `data/events.sqlite` here unless the user explicitly asks (the 4.9 MB SQLite is a separate open decision).
+Do NOT commit `data/events.sqlite` here unless the user explicitly asks (the SQLite is a separate open decision).
 
 ---
 
