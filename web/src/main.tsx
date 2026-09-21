@@ -212,6 +212,7 @@ function MapView({
     hasFitted = useRef(false),
     userInteracted = useRef(false);
   const [tileError, setTileError] = useState(false);
+  const [zoom, setZoom] = useState(13);
   useEffect(() => {
     if (!ref.current) return;
     const m = L.map(ref.current, { scrollWheelZoom: false }).setView(
@@ -231,6 +232,7 @@ function MapView({
       if (hasFitted.current) userInteracted.current = true;
     });
     m.on("click", () => onClearPlace?.());
+    m.on("zoomend", () => setZoom(m.getZoom()));
     // Mobile CSS hides the map while the list is active. Observe actual layout
     // instead of inferring visibility from the selected page.
     let resizeFrame = 0;
@@ -257,11 +259,10 @@ function MapView({
   useEffect(() => {
     const m = map.current;
     if (!m) return;
-    const zoom = m.getZoom();
     layer.current?.clearLayers();
     const coords: L.LatLngTuple[] = [];
     const groups = groupEvents(events, zoom);
-    groups.forEach((g, index) => {
+    groups.forEach((g) => {
       const pos: L.LatLngTuple = [g.lat, g.lon];
       coords.push(pos);
       if (g.events.length === 1) {
@@ -307,12 +308,12 @@ function MapView({
       })
     ) {
       hasFitted.current = true;
-      map.current?.fitBounds(L.latLngBounds(coords), {
+      m.fitBounds(L.latLngBounds(coords), {
         padding: [45, 45],
         maxZoom: 14,
       });
     }
-  }, [events, onSelect, onSelectPlace, language]);
+  }, [events, onSelect, onSelectPlace, language, zoom]);
   return (
     <div className="map-shell">
       <div
