@@ -20,6 +20,26 @@ def vevent(uid='one', start='20260914T190000', extra=''):
     return f'BEGIN:VEVENT\r\nUID:{uid}\r\nDTSTART;TZID=Europe/Berlin:{start}\r\nSUMMARY:Spieleabend\r\nLOCATION:Café, Darmstadt\r\n{extra}END:VEVENT\r\n'
 
 
+def _published_event(eid, address):
+    return {
+        'external_id': str(eid),
+        'url': f'https://example.com/event/{eid}',
+        'id': eid,
+        'title': 'Kurs',
+        'start': '2026-09-14T12:00:00+02:00',
+        'venue': f'Volkshochschule {eid}',
+        'address': address,
+        'description': '',
+        'topics': [],
+        'scale': 'small',
+        'free': None,
+        'lat': None,
+        'lon': None,
+        'status': 'published',
+        'area': 'Darmstadt',
+    }
+
+
 def test_recurrence_exdate_override_and_dst():
     raw = calendar(vevent(extra='RRULE:FREQ=WEEKLY;COUNT=8\r\nEXDATE;TZID=Europe/Berlin:20260921T190000\r\n') + vevent(start='20260929T200000', extra='RECURRENCE-ID;TZID=Europe/Berlin:20260928T190000\r\n'))
     events = parse_ical(raw, 'nbh', NOW, NOW + timedelta(days=60))
@@ -235,3 +255,34 @@ def test_weiterstadt_html_parser_preserves_multiday_end():
     assert events[0]['coordinate_evidence'].startswith('Approximate')
     assert events[0]['start'].startswith('2026-10-02T18:00')
     assert events[0]['end'].startswith('2026-10-05T23:00')
+
+
+def test_geocode_accepts_first_house_number_match(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    db.upsert_event(_published_event(1, 'Schustergasse 18, 64283 Darmstadt'), 'nbh', NOW.isoformat())
+    fetch_calls = []
+    def fetch(url):
+        fetch_calls.append(url)
+        return ('[{"lat": "49.870", "lon": "8.660", "display_name": "Bezirk, Darmstadt", "address": {}},'
+                '{"lat": "49.872", "lon": "8.653", "display_name": "Goldene Krone, 18, Schustergasse, Darmstadt", "address": {"house_number": "18"}}]').encode()
+    collector = Collector(db, fetch=fetch, now=lambda: NOW)
+    collector.geocode()
+    event = db.events('published')[0]
+    assert event['lat'] == pytest.approx(49.872, abs=0.001)
+    assert event['lon'] == pytest.approx(8.653, abs=0.001)
+    assert event['coordinate_evidence'].startswith('https://nominatim.openstreetmap.org/search?')
+    collector.geocode()
+    assert len(fetch_calls) == 1  # cached on re-run, no second fetch
+
+
+def test_geocode_rejects_out_of_box_even_with_house_number(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    db.upsert_event(_published_event(1, 'Schustergasse 18, 64283 Darmstadt'), 'nbh', NOW.isoformat())
+    def fetch(url):
+        return '[{"lat": "50.5", "lon": "13.5", "display_name": "Schustergasse 18, Darmstadt", "address": {"house_number": "18"}}]'.encode()
+    collector = Collector(db, fetch=fetch, now=lambda: NOW)
+    collector.geocode()
+    event = db.events('published')[0]
+    assert event['lat'] is None
+    assert event['lon'] is None
+    assert db.geocache('schustergasse 18, darmstadt') == {'lat': None, 'lon': None}

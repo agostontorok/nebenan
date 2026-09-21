@@ -616,9 +616,12 @@ class Collector:
                 try:
                     data = json.loads(self.fetch(url))
                     cached = {'lat': None, 'lon': None}
-                    if len(data) == 1 and data[0].get('address', {}).get('house_number'):
-                        lat, lon = local_coordinates(data[0].get('lat'), data[0].get('lon'))
-                        cached = {'lat': lat, 'lon': lon, 'evidence': data[0].get('display_name'), 'url': url}
+                    match = next((row for row in data
+                                  if row.get('address', {}).get('house_number')), None)
+                    if match:
+                        lat, lon = local_coordinates(match.get('lat'), match.get('lon'))
+                        if lat is not None:
+                            cached = {'lat': lat, 'lon': lon, 'evidence': match.get('display_name'), 'url': url}
                     self.db.geocache(key, cached)
                 finally:
                     time.sleep(1.1)
