@@ -60,3 +60,16 @@ test("cellCenter places the point inside its own cell", () => {
   assert.ok(Math.abs(lat - 49.8728) < cellSize(13));
   assert.ok(Math.abs(lon - 8.6512) < cellSize(13));
 });
+
+test("groupEvents skips events without valid coordinates", () => {
+  const groups = groupEvents(
+    [ev(1, 0, 0), ev(2, 49.87, 8.65), { ...ev(3, null, null) }, { ...ev(4, NaN, 8.65) }, {}],
+    13,
+  );
+  assert.equal(groups.length, 2);
+  assert.deepEqual(groups.map((g) => g.events.length).sort(), [1, 1]);
+});
+
+test("groupEvents returns an empty array for empty input", () => {
+  assert.deepEqual(groupEvents([], 13), []);
+});
