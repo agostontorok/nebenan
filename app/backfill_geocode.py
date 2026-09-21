@@ -12,7 +12,7 @@ from pathlib import Path
 
 from .collect import Collector, street_city, now_local
 from .db import Database, ROOT
-from .export_static import collect as collect_payload
+from .export_static import DEFAULT_OUT, collect as collect_payload
 from .network import fetch
 
 log = logging.getLogger(__name__)
@@ -42,7 +42,8 @@ def main(argv=None):
     except Exception as exc:
         log.warning('geocoding failed: %s', exc)
     payload = collect_payload(db)
-    out = Path(os.environ.get('DARMSTADT_OUT', ROOT / 'web/public/data.json'))
+    out = Path(os.environ.get('DARMSTADT_OUT', DEFAULT_OUT))
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     log.info('geocoded up to %s new streets; exported %s', limit, out)
     return 0
