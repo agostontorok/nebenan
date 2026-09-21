@@ -192,71 +192,6 @@ function EventImage({
   );
 }
 
-const POLAROID_ANGLES = [4, -4, 7, -6, 3];
-
-function PolaroidCarousel({
-  events,
-  onSelect,
-  label,
-}: {
-  events: EventItem[];
-  onSelect: (e: EventItem) => void;
-  label: string;
-}) {
-  const [failedSrcs, setFailedSrcs] = useState<string[]>([]);
-  const slides = useMemo(
-    () =>
-      events
-        .map((e) => ({
-          event: e,
-          src: safeImageUrl(e.image_url || e.poster_url),
-        }))
-        .filter((x) => x.src && !failedSrcs.includes(x.src))
-        .filter((x, i, all) => all.findIndex((y) => y.src === x.src) === i)
-        .slice(0, 5),
-    [events, failedSrcs],
-  );
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    if (slides.length < 2) return;
-    const timer = setInterval(() => setIndex((i) => i + 1), 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-  if (!slides.length) return null;
-  const safeIndex = index % slides.length;
-  return (
-    <div className="polaroid-stack" role="group" aria-label={label}>
-      {slides.map(({ event, src }, i) => (
-        <button
-          key={event.id}
-          type="button"
-          className={`polaroid ${i === safeIndex ? "active" : ""}`}
-          style={
-            {
-              "--rot": `${POLAROID_ANGLES[i % POLAROID_ANGLES.length]}deg`,
-            } as React.CSSProperties
-          }
-          onClick={() => onSelect(event)}
-          aria-hidden={i !== safeIndex}
-          tabIndex={i === safeIndex ? 0 : -1}
-          aria-label={event.title}
-          title={event.title}
-        >
-          <img
-            src={src}
-            alt=""
-            loading="eager"
-            decoding="async"
-            referrerPolicy="no-referrer"
-            onError={() => setFailedSrcs((prev) => [...prev, src])}
-          />
-          <span className="polaroid-caption">{event.title}</span>
-        </button>
-      ))}
-    </div>
-  );
-}
-
 function MapView({
   events,
   onSelect,
@@ -709,10 +644,15 @@ function App() {
     [from, setFrom] = useState(berlinDay()),
     [to, setTo] = useState(dateRange("week")[1]),
     [query, setQuery] = useState(""),
+    [area, setArea] = useState(""),
     [topic, setTopic] = useState(""),
     [scale, setScale] = useState(""),
     [free, setFree] = useState(false),
     [mobileMap, setMobileMap] = useState(false),
+    [evening, setEvening] = useState(false),
+    [timeVenue, setTimeVenue] = useState<"time" | "venue">("time"),
+    [view, setView] = useState<"split" | "list">("split"),
+    [searchOpen, setSearchOpen] = useState(false),
     [adminQuery, setAdminQuery] = useState("");
   const [selected, setSelected] = useState<EventItem | null>(null),
     [editing, setEditing] = useState<EventItem | null>(null),
@@ -733,6 +673,8 @@ function App() {
     value: string,
     options?: Intl.DateTimeFormatOptions,
   ) => dateLabel(value, options, language);
+  const hourOf = (value: string) =>
+    Number(formatDate(value, { hour: "2-digit", hourCycle: "h23" }).replace(/\D/g, ""));
   useEffect(() => {
     try {
       window.localStorage.setItem("darmstadt-language", language);
@@ -808,9 +750,15 @@ function App() {
     [events, from, to, query, topic, scale, free],
   );
   const filtered = useMemo(() => {
-    if (!query.trim() || !semanticScores) return lexicalFiltered;
-    return rankSemanticMatches(baseFiltered, query, semanticScores) as EventItem[];
-  }, [baseFiltered, lexicalFiltered, query, semanticScores]);
+    const base =
+      !query.trim() || !semanticScores
+        ? lexicalFiltered
+        : (rankSemanticMatches(baseFiltered, query, semanticScores) as EventItem[]);
+    const byArea = area ? base.filter((e) => e.area === area) : base;
+    return evening
+      ? byArea.filter((e) => hourOf(e.start) >= 18)
+      : byArea;
+  }, [baseFiltered, lexicalFiltered, query, semanticScores, area, evening]);
   useEffect(() => {
     if (!query.trim()) {
       setSemanticScores(null);
@@ -882,7 +830,54 @@ function App() {
       setTo(r[1]);
     }
   }
-  const mapped = filtered.filter((e) => e.lat != null && e.lon != null).length;
+  const areas = useMemo(
+    () =>
+      [...new Set(events.map((e) => e.area).filter(Boolean) as string[])],
+    [events],
+  );
+  const dayPartOf = (e: EventItem): "all" | "morning" | "afternoon" | "evening" => {
+    if (e.all_day) return "all";
+    const hour = hourOf(e.start);
+    return hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
+  };
+  const timetable = useMemo(() => {
+    const days: {
+      day: string;
+      total: number;
+      slots: Record<"all" | "morning" | "afternoon" | "evening", EventItem[]>;
+    }[] = [];
+    const index = new Map<string, number>();
+    filtered.forEach((e) => {
+      const key = berlinDay(new Date(e.start));
+      let i = index.get(key);
+      if (i === undefined) {
+        i = days.length;
+        index.set(key, i);
+        days.push({
+          day: key,
+          total: 0,
+          slots: { all: [], morning: [], afternoon: [], evening: [] },
+        });
+      }
+      days[i].total++;
+      days[i].slots[dayPartOf(e)].push(e);
+    });
+    return days;
+  }, [filtered]);
+  const todayKey = berlinDay();
+  const tomorrowKey = (() => {
+    const d = new Date(todayKey + "T12:00:00Z");
+    d.setUTCDate(d.getUTCDate() + 1);
+    return d.toISOString().slice(0, 10);
+  })();
+  const slotsLabel = (key: string) =>
+    key === "all"
+      ? tr("schedule.allday")
+      : key === "morning"
+        ? `${tr("schedule.morning")} ${tr("schedule.morningRange")}`
+        : key === "afternoon"
+          ? `${tr("schedule.afternoon")} ${tr("schedule.afternoonRange")}`
+          : `${tr("schedule.evening")} ${tr("schedule.eveningRange")}`;
   return (
     <>
       <header className="site-header">
@@ -933,6 +928,38 @@ function App() {
             </button>
           )}
         </nav>
+        {tab === "discover" && !EDITOR && (
+          searchOpen ? (
+            <label className="header-search">
+              <span aria-hidden="true">⌕</span>
+              <input
+                autoFocus
+                aria-label={tr("filters.search")}
+                placeholder={tr("filters.search")}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onBlur={() => {
+                  if (!query.trim()) setSearchOpen(false);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    setQuery("");
+                    setSearchOpen(false);
+                  }
+                }}
+              />
+            </label>
+          ) : (
+            <button
+              className="header-search-toggle"
+              aria-label={tr("filters.search")}
+              title={tr("filters.search")}
+              onClick={() => setSearchOpen(true)}
+            >
+              <span aria-hidden="true">⌕</span>
+            </button>
+          )
+        )}
         {!EDITOR &&
           (STATIC ? (
             <a
@@ -971,271 +998,336 @@ function App() {
       <main>
         {tab === "discover" ? (
           <>
-            <section className="hero">
-              <div>
-                <p className="eyebrow">
-                  <span /> {tr("hero.eyebrow")}
-                </p>
-                <h1>
-                  {tr("hero.titleA")}
-                  <br />
-                  <em>{tr("hero.titleB")}</em>
-                </h1>
-                <p className="hero-copy">
-                  {tr("hero.copy")}
-                  <br className="desktop" /> {tr("hero.copy2")}
-                </p>
-              </div>
-              <div className="hero-art">
-                <div className="orbit orbit-one" aria-hidden="true" />
-                <div className="orbit orbit-two" aria-hidden="true" />
-                <div className="art-grid" aria-hidden="true" />
-                <span className="art-star" aria-hidden="true">✳</span>
-                <PolaroidCarousel
-                  events={events}
-                  onSelect={selectEvent}
-                  label={tr("hero.art")}
-                />
-                <div className="art-label">{tr("hero.art")}</div>
-                <span className="art-dot" aria-hidden="true" />
-                <span className="art-plus" aria-hidden="true">+</span>
-              </div>
-            </section>
-            <section className="discovery" aria-label={tr("discover.heading")}>
-              <div className="discovery-heading">
-                <h2>{tr("discover.heading")}</h2>
-                <span className="local-badge">
-                  <span className="live-dot" /> {tr("discover.badge")}
-                </span>
-              </div>
+            <section className="timetable-page">
               <div className="filter-bar">
-                <label className="search">
-                  <span aria-hidden="true">⌕</span>
-                  <input
-                    aria-label={tr("filters.search")}
-                    placeholder={tr("filters.search")}
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                  />
-                  {query && (
-                    <button
-                      onClick={() => setQuery("")}
-                      aria-label={tr("filters.clear")}
+                  <select
+                    className="area-select"
+                    aria-label={tr("filters.area")}
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                  >
+                    <option value="">{tr("filters.area")}</option>
+                    {areas.map((a) => (
+                      <option key={a} value={a}>
+                        {a}
+                      </option>
+                    ))}
+                  </select>
+                  {query.trim() && (
+                    <span
+                      className={`semantic-status semantic-${semanticStatus}`}
+                      role="status"
+                      aria-live="polite"
                     >
-                      ×
-                    </button>
+                      {semanticStatus === "loading"
+                        ? tr("filters.semanticLoading")
+                        : semanticStatus === "ready"
+                          ? tr("filters.semanticReady")
+                          : tr("filters.semanticFallback")}
+                    </span>
                   )}
-                </label>
-                {query.trim() && (
-                  <span
-                    className={`semantic-status semantic-${semanticStatus}`}
-                    role="status"
-                    aria-live="polite"
-                  >
-                    {semanticStatus === "loading"
-                      ? tr("filters.semanticLoading")
-                      : semanticStatus === "ready"
-                        ? tr("filters.semanticReady")
-                        : tr("filters.semanticFallback")}
-                  </span>
-                )}
-                <div className="date-tabs" role="group" aria-label={tr("filters.date")}>
-                  {[
-                    ["today", tr("filters.today")],
-                    ["weekend", tr("filters.weekend")],
-                    ["week", tr("filters.week")],
-                    ["custom", tr("filters.custom")],
-                  ].map(([v, t]) => (
+                  <div className="view-toggle" role="group" aria-label={tr("filters.split")}>
                     <button
-                      aria-pressed={mode === v}
-                      className={mode === v ? "selected" : ""}
-                      key={v}
-                      onClick={() => chooseMode(v)}
+                      className={`view-toggle-btn ${view === "split" ? "active" : ""}`}
+                      aria-pressed={view === "split"}
+                      aria-label={view === "split" ? tr("results.list") : tr("filters.split")}
+                      title={view === "split" ? tr("results.list") : tr("filters.split")}
+                      onClick={() => {
+                        if (view === "split") {
+                          setView("list");
+                          setMobileMap(true);
+                        } else {
+                          setView("split");
+                          setMobileMap(false);
+                        }
+                      }}
                     >
-                      {t}
+                      <span className="material-symbols-outlined" aria-hidden="true">view_column</span>
                     </button>
-                  ))}
+                  </div>
+                  <span className="chip-divider" aria-hidden="true" />
+                  <button
+                    className={`chip ${!topic && !free && mode !== "today" && !evening ? "chip-primary" : ""}`}
+                    onClick={() => {
+                      setTopic("");
+                      setScale("");
+                      setFree(false);
+                      setEvening(false);
+                      setArea("");
+                      setQuery("");
+                      chooseMode("week");
+                      setView("split");
+                      setMobileMap(false);
+                    }}
+                  >
+                    {tr("chips.all")} <strong>{loading ? "…" : filtered.length}</strong>
+                  </button>
+                  <button
+                    className={`chip ${mode === "today" && !evening ? "chip-primary" : ""}`}
+                    onClick={() => {
+                      if (mode === "today" && !evening) chooseMode("week");
+                      else {
+                        chooseMode("today");
+                        setEvening(false);
+                        setTopic("");
+                        setScale("");
+                        setFree(false);
+                      }
+                    }}
+                  >
+                    <span className="pulse-dot" aria-hidden="true" /> {tr("chips.now")}
+                  </button>
+                  <button
+                    className={`chip ${evening ? "chip-primary" : ""}`}
+                    onClick={() => {
+                      chooseMode("today");
+                      setEvening((v) => !v);
+                      setTopic("");
+                      setScale("");
+                      setFree(false);
+                    }}
+                  >
+                    <span className="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+                    {tr("chips.tonight")}
+                  </button>
+                  <button
+                    className={`chip ${topic === "music" ? "chip-primary" : ""}`}
+                    onClick={() => setTopic((prev) => (prev === "music" ? "" : "music"))}
+                  >
+                    <span className="material-symbols-outlined" aria-hidden="true">music_note</span>
+                    {tr("chips.music")}
+                  </button>
+                  <button
+                    className={`chip ${topic === "outdoors" ? "chip-primary" : ""}`}
+                    onClick={() => setTopic((prev) => (prev === "outdoors" ? "" : "outdoors"))}
+                  >
+                    <span className="material-symbols-outlined" aria-hidden="true">fitness_center</span>
+                    {tr("chips.sports")}
+                  </button>
+                  <button
+                    className={`chip ${topic === "culture" ? "chip-primary" : ""}`}
+                    onClick={() => setTopic((prev) => (prev === "culture" ? "" : "culture"))}
+                  >
+                    <span className="material-symbols-outlined" aria-hidden="true">theater_comedy</span>
+                    {tr("chips.culture")}
+                  </button>
                 </div>
-              </div>
-              <div className="filter-row">
-                <label>
-                  <span className="sr-only">{tr("filters.topic")}</span>
-                  <select
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                  >
-                    <option value="">{tr("filters.allTopics")}</option>
-                    {topics.map((t) => (
-                      <option value={t} key={t}>
-                        {topicLabels[t] || t}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label>
-                  <span className="sr-only">{tr("filters.scale")}</span>
-                  <select
-                    value={scale}
-                    onChange={(e) => setScale(e.target.value)}
-                  >
-                    <option value="">{tr("filters.allScales")}</option>
-                    {Object.entries(scales).map(([v, t]) => (
-                      <option key={v} value={v}>
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="checkbox free-filter">
-                  <input
-                    type="checkbox"
-                    checked={free}
-                    onChange={(e) => setFree(e.target.checked)}
-                  />{" "}
-                  {tr("filters.freeOnly")}
-                </label>
-                {mode === "custom" && (
-                  <>
-                    <label className="date-input">
-                      {tr("filters.from")}{" "}
-                      <input
-                        type="date"
-                        value={from}
-                        onChange={(e) => setFrom(e.target.value)}
-                      />
-                    </label>
-                    <label className="date-input">
-                      {tr("filters.to")}{" "}
-                      <input
-                        type="date"
-                        min={from}
-                        value={to}
-                        onChange={(e) => setTo(e.target.value)}
-                      />
-                    </label>
-                  </>
-                )}
-                <span className="timezone">{tr("filters.timezone")}</span>
-              </div>
               {from > to && (
                 <p role="alert" className="error">
                   {tr("filters.invalid")}
                 </p>
               )}
-              <div className="results-heading">
-                <p>
-                  <strong>{loading ? "…" : filtered.length}</strong>{" "}
-                  {tr("results.events")}{" "}
-                  <span>
-                    ·{" "}
-                    {formatDate(from + "T12:00:00Z", {
-                      day: "numeric",
-                      month: "short",
-                    })}{" "}
-                    –{" "}
-                    {formatDate(to + "T12:00:00Z", {
-                      day: "numeric",
-                      month: "short",
-                    })}
+              <div className="results-bar">
+                <div className="results-title">
+                  <h2>
+                    {mode === "today" ? tr("schedule.title") : tr("results.events")}
+                  </h2>
+                  <em className="editorial-date">
+                    {mode === "today"
+                      ? formatDate(from + "T12:00:00Z", {
+                          weekday: "long",
+                          day: "numeric",
+                          month: "long",
+                        })
+                      : `${formatDate(from + "T12:00:00Z", {
+                          day: "numeric",
+                          month: "short",
+                        })} – ${formatDate(to + "T12:00:00Z", {
+                          day: "numeric",
+                          month: "short",
+                        })}`}
+                  </em>
+                </div>
+                <div className="results-tools">
+                  <span className="slots-pill">
+                    {loading ? "…" : filtered.length} {tr("schedule.slots")}
                   </span>
-                </p>
-                <div className="mobile-toggle">
+                  <span className="sorted">
+                    <span className="material-symbols-outlined" aria-hidden="true">swap_vert</span>
+                    {tr("schedule.sorted")}
+                  </span>
                   <button
-                    aria-pressed={!mobileMap}
-                    onClick={() => setMobileMap(false)}
+                    className={`toggle-time ${timeVenue === "venue" ? "pressed" : ""}`}
+                    aria-pressed={timeVenue === "venue"}
+                    onClick={() =>
+                      setTimeVenue((v) => (v === "time" ? "venue" : "time"))
+                    }
                   >
-                    {tr("results.list")}
-                  </button>
-                  <button
-                    aria-pressed={mobileMap}
-                    onClick={() => setMobileMap(true)}
-                  >
-                    {tr("results.map")}
+                    {tr("schedule.toggle")}
                   </button>
                 </div>
-                <span className="map-note">
-                  {filtered.length - mapped > 0
-                    ? `${filtered.length - mapped} ${tr("results.noMap")}`
-                    : tr("results.mapEmpty")}
-                </span>
               </div>
               {error && (
                 <div className="error" role="alert">
                   {error} <button onClick={refresh}>Erneut laden</button>
                 </div>
               )}
-              <div className={`results-layout ${mobileMap ? "show-map" : ""}`}>
-                <div className="event-list" aria-live="polite">
+              <div
+                className={`tt-layout ${view === "list" ? "list-only" : ""} ${mobileMap ? "show-map" : ""}`}
+              >
+                <div className="tt-col" aria-live="polite">
                   {loading ? (
                     <div className="empty">
                       <span className="loading-spinner" />
                       <h3>{tr("loading")}</h3>
                     </div>
                   ) : filtered.length ? (
-                    filtered.map((e, i) => (
-                    <button
-                        className={`event-card ${e.cancelled ? "cancelled" : ""}`}
-                        key={e.id}
-                        onClick={() => setSelected(e)}
-                      >
-                        <EventImage
-                          url={e.image_url || e.poster_url}
-                          title={e.title}
-                          className="event-card-image"
-                        />
-                        <div className="event-date">
-                          <strong>
-                            {formatDate(e.start, { day: "2-digit" })}
-                          </strong>
-                          <span>
-                            {formatDate(e.start, { month: "short" })
-                              .replace(".", "")
-                              .toUpperCase()}
-                          </span>
-                        </div>
-                        <div className="event-body">
-                          <div className="event-tags">
-                            <span>
-                              {topicLabels[e.topics?.[0]] ||
-                                e.topics?.[0] ||
-                                tr("results.discover")}
+                    timetable.map(
+                      (d) => (
+                        <section className="tt-day" key={d.day}>
+                          <header className="tt-day-head">
+                            <span className="material-symbols-outlined" aria-hidden="true">
+                              {d.day === todayKey
+                                ? "today"
+                                : d.day === tomorrowKey
+                                  ? "event"
+                                  : "calendar_month"}
                             </span>
-                            {e.free === true && (
-                              <span className="free-tag">{tr("event.free")}</span>
-                            )}
-                            {e.ai_extracted && (
-                              <span className="ai-tag" title={tr("event.aiTitle")}>
-                                {tr("event.aiBadge")}
-                              </span>
-                            )}
-                            {e.cancelled && (
-                              <span className="cancel-tag">{tr("event.cancelled")}</span>
-                            )}
-                          </div>
-                          <h3>{e.title}</h3>
-                          <p className="event-meta">
-                            {formatDate(e.start, { weekday: "short" })} ·{" "}
-                            {e.all_day
-                              ? tr("event.allDay")
-                              : formatDate(e.start, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                })}{" "}
-                            <span>·</span> {e.venue || tr("event.locationOpen")}
-                            {e.area && e.area !== "Darmstadt" && <><span>·</span> {e.area}</>}
-                          </p>
-                          <div className="event-bottom">
-                            <span>{scales[e.scale] || tr("event.sizeOpen")}</span>
-                            <span>
-                              {e.lat != null && e.lon != null
-                                ? `↗ ${i + 1} ${tr("results.onMap")}`
-                                : `⌖ ${tr("results.mapLocationOpen")}`}
+                            <h3>
+                              {d.day === todayKey
+                                ? tr("schedule.dayToday")
+                                : d.day === tomorrowKey
+                                  ? tr("schedule.dayTomorrow")
+                                  : formatDate(d.day + "T12:00:00Z", {
+                                      weekday: "long",
+                                    })}
+                            </h3>
+                            <em>
+                              {formatDate(d.day + "T12:00:00Z", {
+                                day: "numeric",
+                                month: "long",
+                              })}
+                            </em>
+                            <span className="tt-count">
+                              {d.total} {tr("results.events")}
                             </span>
-                          </div>
-                        </div>
-                        <span className="card-arrow">↗</span>
-                      </button>
-                    ))
+                          </header>
+                          {(["all", "morning", "afternoon", "evening"] as const).map(
+                            (k) =>
+                              d.slots[k].length > 0 && (
+                                <section className="tt-group" key={k}>
+                                  <header className="tt-group-head">
+                                    <span className="material-symbols-outlined" aria-hidden="true">
+                                      {k === "all"
+                                        ? "calendar_today"
+                                        : k === "morning"
+                                          ? "wb_sunny"
+                                          : k === "afternoon"
+                                            ? "schedule"
+                                            : "nightlight"}
+                                    </span>
+                                    <h3>{slotsLabel(k)}</h3>
+                                    <span className="tt-count">
+                                      {d.slots[k].length} {tr("results.events")}
+                                    </span>
+                                  </header>
+                                  {d.slots[k].map((e) => (
+                                    <button
+                                      className={`tt-row ${e.cancelled ? "cancelled" : ""}`}
+                                      key={e.id}
+                                      onClick={() => setSelected(e)}
+                                    >
+                                <div className="tt-time">
+                                  {timeVenue === "time" ? (
+                                    <>
+                                      <strong>
+                                        {e.all_day
+                                          ? tr("event.allDay")
+                                          : formatDate(e.start, {
+                                              hour: "2-digit",
+                                              minute: "2-digit",
+                                            })}
+                                      </strong>
+                                      {e.end && !e.all_day && (
+                                        <span>
+                                          {formatDate(e.end, {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                          })}
+                                        </span>
+                                      )}
+                                    </>
+                                  ) : (
+                                    <>
+                                      <strong>
+                                        {e.venue || tr("event.locationOpen")}
+                                      </strong>
+                                      <span>
+                                        {e.area && e.area !== "Darmstadt"
+                                          ? e.area
+                                          : formatDate(e.start, {
+                                              hour: "2-digit",
+                                              minute: "2-digit",
+                                            })}
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
+                                <div className="tt-main">
+                                  <div className="tt-tags">
+                                    {e.topics?.[0] && (
+                                      <span
+                                        className={`cat-chip cat-${topics.indexOf(e.topics[0]) >= 0 ? topics.indexOf(e.topics[0]) % 3 : 0}`}
+                                      >
+                                        {topicLabels[e.topics[0]] || e.topics[0]}
+                                      </span>
+                                    )}
+                                    {e.ai_extracted && (
+                                      <span className="ai-tag" title={tr("event.aiTitle")}>
+                                        {tr("event.aiBadge")}
+                                      </span>
+                                    )}
+                                    {e.cancelled && (
+                                      <span className="cancel-tag">
+                                        {tr("event.cancelled")}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <h3 className="tt-title">{e.title}</h3>
+                                  <p className="tt-meta">
+                                    <em>
+                                      {e.description
+                                        ? e.description.length > 140
+                                          ? e.description.trim().slice(0, 140) + "…"
+                                          : e.description
+                                        : tr("detail.more")}
+                                    </em>
+                                    <span>
+                                      {" "}
+                                      · {e.venue || tr("event.locationOpen")}
+                                    </span>
+                                    {e.area && e.area !== "Darmstadt" && (
+                                      <span> · {e.area}</span>
+                                    )}
+                                  </p>
+                                </div>
+                                <div className="tt-side">
+                                  <EventImage
+                                    url={e.image_url || e.poster_url}
+                                    title={e.title}
+                                    className="tt-thumb"
+                                  />
+                                  <span
+                                    className={
+                                      e.free === true ? "free-badge" : "price-badge"
+                                    }
+                                  >
+                                    {e.free === true
+                                      ? tr("event.free")
+                                      : e.price || tr("detail.noPrice")}
+                                  </span>
+                                  <span className="details-link">
+                                    {tr("schedule.details")} ↗
+                                  </span>
+                                </div>
+                              </button>
+                            ))}
+                          </section>
+                        ),
+                      )}
+                        </section>
+                      ),
+                    )
                   ) : (
                     <div className="empty">
                       <div className="empty-symbol">✳</div>
@@ -1248,9 +1340,13 @@ function App() {
                       <button
                         onClick={() => {
                           setQuery("");
+                          setArea("");
                           setTopic("");
                           setScale("");
                           setFree(false);
+                          setEvening(false);
+                          setView("split");
+                          setMobileMap(false);
                           chooseMode("week");
                         }}
                       >
@@ -1259,32 +1355,10 @@ function App() {
                     </div>
                   )}
                 </div>
-                <MapView events={filtered} onSelect={selectEvent} language={language} />
+                <aside className="map-col">
+                  <MapView events={filtered} onSelect={selectEvent} language={language} />
+                </aside>
               </div>
-            </section>
-            <section className="contribute-banner">
-              <div>
-                <p className="eyebrow">{tr("banner.eyebrow")}</p>
-                <h2>{tr("banner.heading")}</h2>
-                <p>{tr("banner.copy")}</p>
-              </div>
-              {STATIC ? (
-                <a
-                  className="primary"
-                  href={SHARE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {tr("header.share")} ↗
-                </a>
-              ) : (
-                <button
-                  className="primary"
-                  onClick={() => setContribute(true)}
-                >
-                  {tr("header.share")} ↗
-                </button>
-              )}
             </section>
           </>
         ) : tab === "sources" ? (
@@ -1615,8 +1689,15 @@ function App() {
         >
           nebenan<span>•</span>
         </a>
-        <p>{tr("footer.copy")}</p>
-        <span>{tr("footer.note")}</span>
+        <p className="footer-rights">
+          {tr("footer.rights").replace("{year}", String(new Date().getFullYear()))}
+          {" "}· {tr("footer.guide")}
+        </p>
+        <div className="footer-links">
+          <span>{tr("footer.imprint")}</span>
+          <span>{tr("footer.privacy")}</span>
+          <span>{tr("footer.contact")}</span>
+        </div>
       </footer>
       {selected && (
         <Modal title={selected.title} closeLabel={tr("modal.close")} onClose={() => setSelected(null)}>
