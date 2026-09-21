@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 from .collect import Collector, street_city, now_local
-from .db import Database, ROOT
+from .db import Database
 from .export_static import DEFAULT_OUT, collect as collect_payload
 from .network import fetch
 
