@@ -679,6 +679,7 @@ function App() {
     [free, setFree] = useState(false),
     [mobileMap, setMobileMap] = useState(false),
     [evening, setEvening] = useState(false),
+    [placeKeys, setPlaceKeys] = useState<string[] | null>(null),
     [timeVenue, setTimeVenue] = useState<"time" | "venue">("time"),
     [view, setView] = useState<"split" | "list">("split"),
     [searchOpen, setSearchOpen] = useState(false),
@@ -826,6 +827,13 @@ function App() {
     [events, adminQuery],
   );
   const selectEvent = React.useCallback((e: EventItem) => setSelected(e), []);
+  const selectPlace = React.useCallback((keys: string[]) => setPlaceKeys(keys), []);
+  const clearPlace = React.useCallback(() => setPlaceKeys(null), []);
+  const placeFiltered = useMemo(() => {
+    if (!placeKeys) return filtered;
+    const keySet = new Set(placeKeys);
+    return filtered.filter((e) => e.lat != null && e.lon != null && keySet.has(coordKey(e.lat, e.lon)));
+  }, [filtered, placeKeys]);
   async function mutate(path: string, method: string, body?: unknown) {
     try {
       await api(path, method, body);
@@ -876,7 +884,7 @@ function App() {
       slots: Record<"all" | "morning" | "afternoon" | "evening", EventItem[]>;
     }[] = [];
     const index = new Map<string, number>();
-    filtered.forEach((e) => {
+    placeFiltered.forEach((e) => {
       const key = berlinDay(new Date(e.start));
       let i = index.get(key);
       if (i === undefined) {
@@ -892,7 +900,7 @@ function App() {
       days[i].slots[dayPartOf(e)].push(e);
     });
     return days;
-  }, [filtered]);
+  }, [placeFiltered]);
   const todayKey = berlinDay();
   const tomorrowKey = (() => {
     const d = new Date(todayKey + "T12:00:00Z");
@@ -1078,6 +1086,7 @@ function App() {
                   <button
                     className={`chip ${!topic && !free && mode !== "today" && !evening ? "chip-primary" : ""}`}
                     onClick={() => {
+                      setPlaceKeys(null);
                       setTopic("");
                       setScale("");
                       setFree(false);
@@ -1200,7 +1209,7 @@ function App() {
                       <span className="loading-spinner" />
                       <h3>{tr("loading")}</h3>
                     </div>
-                  ) : filtered.length ? (
+                  ) : placeFiltered.length ? (
                     timetable.map(
                       (d) => (
                         <section className="tt-day" key={d.day}>
@@ -1385,7 +1394,13 @@ function App() {
                   )}
                 </div>
                 <aside className="map-col">
-                  <MapView events={filtered} onSelect={selectEvent} language={language} />
+                  <MapView
+                    events={filtered}
+                    onSelect={selectEvent}
+                    onSelectPlace={selectPlace}
+                    onClearPlace={clearPlace}
+                    language={language}
+                  />
                 </aside>
               </div>
             </section>
