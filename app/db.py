@@ -136,6 +136,31 @@ class Database:
             events = [self._event(row, names, provenance[row['id']]) for row in rows]
         return sorted((e for e in events if status is None or e['status'] == status), key=lambda e: e.get('start') or '9999')
 
+    def ai_events(self):
+        """Published AI-extracted events with their private review marker.
+
+        The marker is read from the `_ai_reviewed_at` override, which is
+        stripped from effective data everywhere else, so live payloads never
+        expose it.
+        """
+        with self.connect() as con:
+            rows = con.execute('SELECT * FROM events').fetchall()
+            names = self._source_names(con)
+            provenance = {row['id']: [] for row in rows}
+            for record in con.execute(
+                    'SELECT source_id,external_id,event_id,url,checked_at,snapshot FROM refs ORDER BY checked_at DESC'):
+                if record['event_id'] in provenance:
+                    provenance[record['event_id']].append(self._provenance(record, names))
+            result = []
+            for row in rows:
+                overrides = json.loads(row['overrides'])
+                event = self._event(row, names, provenance[row['id']])
+                if event.get('status') != 'published' or not event.get('ai_extracted'):
+                    continue
+                event['ai_reviewed_at'] = overrides.get('_ai_reviewed_at')
+                result.append(event)
+        return sorted(result, key=lambda e: e.get('start') or '9999')
+
     @staticmethod
     def _review_signature(records):
         facts = []

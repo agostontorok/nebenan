@@ -38,6 +38,7 @@ class EventInput(BaseModel):
     status: Literal['review', 'published', 'rejected'] | None = None
     source_url: str | None = Field(None, max_length=3000)
     poster: str | None = Field(None, max_length=6_000_000)
+    ai_reviewed_at: str | None = None
 
     @model_validator(mode='after')
     def validate_fields(self):
@@ -121,6 +122,10 @@ def create_app(db=None, scheduling=True):
     def review():
         return {'events': db.events('review')}
 
+    @app.get('/api/review/ai')
+    def review_ai():
+        return {'events': db.ai_events()}
+
     @app.get('/api/status')
     def status():
         sources = db.sources()
@@ -196,6 +201,8 @@ def create_app(db=None, scheduling=True):
         except KeyError:
             raise HTTPException(404, 'Event not found')
         changes = payload.model_dump(exclude_unset=True, exclude={'source_url', 'poster'})
+        if 'ai_reviewed_at' in changes:
+            changes['_ai_reviewed_at'] = changes.pop('ai_reviewed_at') or None
         for key in ('title', 'venue', 'address', 'description', 'scale_evidence', 'price'):
             if key in changes and changes[key] is not None:
                 changes[key] = text(changes[key])

@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 from app.main import create_app
 from app.db import Database
 from app.submissions import SubmissionError, submit_manual
+from app.chat_ingest import ingest, ref_id, _event_id
 
 
 def test_submission_review_validation_and_persistence(tmp_path):
@@ -180,3 +181,56 @@ def test_push_integration_real_git(tmp_path, monkeypatch):
     local_head = subprocess.run(['git', '-C', str(work), 'rev-parse', 'HEAD'],
                                 capture_output=True, text=True).stdout.strip()
     assert remote_head == local_head
+
+
+def seed_ai_event(db, title, venue='Stadtbibliothek', start='2026-11-06T20:00', source='stadtbib'):
+    ingest(db, [{
+        'source': source,
+        'page_url': 'https://programm.example/',
+        'events': [{
+            'title': title,
+            'start': start,
+            'venue': venue,
+            'address': 'Grassweg 4, Darmstadt',
+            'description': '',
+            'url': 'https://programm.example/',
+        }],
+    }])
+
+
+def test_ai_review_lists_only_published_ai_events(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    seed_ai_event(db, 'Konzert', venue='Stadthalle')
+    submit_manual(db, {'title': 'Manuell', 'venue': 'Café', 'start': '2026-11-06T19:00:00+02:00'})
+    with TestClient(create_app(db, scheduling=False)) as client:
+        events = client.get('/api/review/ai').json()['events']
+    assert len(events) == 1
+    assert events[0]['title'] == 'Konzert'
+    assert events[0]['ai_reviewed_at'] is None
+
+
+def test_ai_reviewed_at_is_private_override(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    seed_ai_event(db, 'Konzert')
+    with TestClient(create_app(db, scheduling=False)) as client:
+        eid = client.get('/api/review/ai').json()['events'][0]['id']
+        r = client.patch(f'/api/events/{eid}', json={'ai_reviewed_at': '2026-09-22T10:00:00+02:00'})
+        assert r.status_code == 200
+        reviewed = client.get('/api/review/ai').json()['events'][0]
+        assert reviewed['ai_reviewed_at'] == '2026-09-22T10:00:00+02:00'
+        published = client.get('/api/events').json()['events'][0]
+        assert 'ai_reviewed_at' not in published
+        assert '_ai_reviewed_at' not in published
+
+
+def test_ai_hide_rejects_and_removes_from_public(tmp_path):
+    db = Database(tmp_path / 'events.sqlite')
+    seed_ai_event(db, 'Konzert')
+    with TestClient(create_app(db, scheduling=False)) as client:
+        eid = client.get('/api/review/ai').json()['events'][0]['id']
+        r = client.patch(f'/api/events/{eid}', json={
+            'status': 'rejected',
+            'ai_reviewed_at': '2026-09-22T10:00:00+02:00'})
+        assert r.status_code == 200
+        assert client.get('/api/events').json()['events'] == []
+        assert client.get('/api/review/ai').json()['events'] == []
