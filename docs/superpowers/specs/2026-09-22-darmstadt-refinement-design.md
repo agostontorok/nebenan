@@ -6,7 +6,7 @@
 
 ## Context
 
-The timetable app (FastAPI + Vite static site, published to GitHub Pages) has been through map clustering and geocoding work. This batch refines the user-facing behavior: the list shows what the map shows, the AI-extracted badge moves to the detail view, the area filter is removed in favor of the map, the map toggle moves to the right of the filter bar, the default language follows the browser, Simple Analytics is added, and GitHub Pages serves the app at `nebenan/darmstadt`.
+The timetable app (FastAPI + Vite static site, published to GitHub Pages) has been through map clustering and geocoding work. This batch refines the user-facing behavior: the list shows what the map shows, the AI-extracted badge moves to the detail view, the area filter is removed in favor of the map, the map toggle moves to the right of the filter bar, the default language follows the browser, Simple Analytics is added, the repo is renamed `nahe`, and the site is restructured so the app lives at the URL `/nahe/darmstadt/` behind a city hub.
 
 ## Changes
 
@@ -77,30 +77,39 @@ SPA page views are auto-tracked by the script; no further wiring needed.
 - `web/src/main.tsx:659`: initial language state uses `languageFromBrowser(window.localStorage.getItem("darmstadt-language"))`.
 - `web/src/i18n.test.mjs`: add a unit test for `languageFromBrowser` (stored pref wins, de browser → de, en/other browser → en).
 
-### 7. GitHub Pages serves the app at `nebenan/darmstadt`
+### 7. Repo renamed to `nahe`; GitHub Pages serves a city hub at `/nahe/` with the app at `/nahe/darmstadt/`
 
-Target URL: `https://agostontorok.github.io/nebenan/darmstadt/` via the user-pages repo `agostontorok/agostontorok.github.io` (branch `master`, exists).
+Renamed repo `agostontorok/nebenan` → `agostontorok/nahe` (done during design review; local git remote updated). GitHub Pages project URLs follow the repo name, so the site root is now `https://agostontorok.github.io/nahe/`. No PAT or cross-repo push is needed — subfolders of the built site are served under the project path.
 
-- Rewrite `.github/workflows/pages.yml`:
-  - Keep the existing build steps (Python tests + `export_static`, `npm ci`, `VITE_STATIC=1 npm run build`).
-  - Replace `actions/configure-pages` + `upload-pages-artifact` + `deploy-pages` with a cross-repo publish of `web/dist` into `agostontorok.github.io` at `nebenan/darmstadt/`.
-  - Use `peaceiris/actions-gh-pages@v4` with `personal_token: ${{ secrets.GH_PAGES_TOKEN }}`, `publish_dir: web/dist`, `destination_dir: nebenan/darmstadt`, `publish_branch: master`, `keep_files: true` (preserve anything else already on the user-pages site).
-- `web/vite.config.ts` already uses `base: "./"`; the static site (including `./data.json` fetches and tab-based routing with no `location.pathname` use) works from any sub-path. No Vite change.
-- **Prerequisite (blocker):** no repo secrets exist today. The current deployment works only because the native `deploy-pages` action needs no secret. Cross-repo push needs a new PAT secret:
-  - Create a fine-grained or classic PAT scoped to `agostontorok.github.io` (contents read/write).
-  - Add it as the repo secret `GH_PAGES_TOKEN` (owner has admin rights on this repo).
-  - Until that secret exists, the build steps run but the publish step fails; the old bare `/nebenan/` project Pages remains live until the user disables it in Pages settings.
+**Hub + city restructure (single repo, existing `pages.yml` unchanged):**
+
+- `web/index.html` becomes a small static **hub** page ("nahe — local calendars"): brand mark, tagline, one city card linking to `darmstadt/`. Plain HTML/CSS in the existing pine/coral style; no React.
+- The app moves to a Vite multi-page entry `web/darmstadt/index.html` — the same shell markup, same `/src/main.tsx` module — built to `dist/darmstadt/`. The current `index.html` app shell becomes the `darmstadt` entry.
+- `web/vite.config.ts` gains `build.rollupOptions.input = { hub: web/index.html, darmstadt: web/darmstadt/index.html }`. `base: "./"` is unchanged; relative asset/math paths keep the app working from any sub-path, and `./data.json` resolves under the city path at runtime.
+- `app/export_static.py` writes city data to `web/public/<city>/data.json` (default city `darmstadt`); the `DEFAULT_OUT` path changes accordingly, and the workflow's `python -m app.export_static` step is unchanged (defaults to `darmstadt`).
+- The app's tab routing uses only React state (no `location.pathname`), so no router change.
+
+**URLs after deploy:** `/nahe/` → hub; `/nahe/darmstadt/` → app. Future cities (e.g. `paris`) = new `web/<city>/index.html` entry + `web/public/<city>/data.json` + hub card; no workflow change.
+
+**Brand updates for the rename:**
+
+- `web/src/main.tsx:26,28` — GitHub issue-template URLs become `https://github.com/agostontorok/nahe/issues/...`.
+- `web/src/main.tsx:932` — header brand `nebenan<span class="brand-city">DARMSTADT</span>` → `nahe<span class="brand-city">DARMSTADT</span>`.
+- `web/src/main.tsx:1746` — footer brand mark `nebenan` → `nahe`.
+- New hub page uses `nahe` as its wordmark.
+
+**Local preview** (`127.0.0.1:8765`, serves `web/dist`): root becomes the hub, app preview at `/darmstadt/`.
 
 ## Non-goals
 
 - No visual/UX redesign of markers beyond existing cluster styling.
-- No change to `/api` behavior or the local dev server mount path (local preview keeps working at `/`; the GH Pages address is handled by the workflow).
-- No data/geocoding changes.
+- No change to `/api` behavior. Local preview stays on the dev server but its root becomes the city hub; the app preview is at `/darmstadt/`.
+- No data/geocoding changes; only the `export_static` output path moves under `web/public/<city>/`.
 
 ## Testing
 
-- `cd web && npm test` — keep 37 passing. Update `src/i18n.test.mjs`: remove `map.clearPlace` from the required-key list (key is deleted in change 5) and add `languageFromBrowser` cases (stored pref wins; `de` browser → `de`; `en`/other → `en`). No new module test files needed.
+- `cd web && npm test` — keep 37 passing. Update `src/i18n.test.mjs`: remove `map.clearPlace` from the required-key list (the key is deleted in change 2 alongside the place-chip) and add `languageFromBrowser` cases (stored pref wins; `de` browser → `de`; `en`/other → `en`). No new module test files needed.
 - `cd web && npx tsc --noEmit` — clean.
-- `VITE_STATIC=1 npx vite build` — succeeds; regenerated `web/dist` serves at `127.0.0.1:8765` for local preview.
-- `.venv/bin/python -m pytest tests -q` — unaffected (no server changes).
-- Grep check: no remaining `placeKeys`, `selectPlace`, `onSelectPlace`, `placeFiltered`, `setArea`, `area-select`, `map.clearPlace` references.
+- `VITE_STATIC=1 npx vite build` — succeeds; `web/dist/` contains the hub `index.html` and a `darmstadt/` subfolder; regenerated `web/dist` serves at `127.0.0.1:8765` (hub at `/`, app at `/darmstadt/`) for local preview.
+- `.venv/bin/python -m pytest tests -q` — unaffected (no server changes); plus a run of `python -m app.export_static` to confirm the new `web/public/darmstadt/data.json` output.
+- Grep checks: no remaining `placeKeys`, `selectPlace` (as a map prop), `placeFiltered`, `setArea`, `area-select`, `map.clearPlace` references; remaining `nebenan` instances are only the report link text/title casing if other than the renamed brand.
