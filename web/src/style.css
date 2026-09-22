@@ -650,22 +650,48 @@ main {
 .cluster-pin {
   background: none;
   border: none;
+  position: relative;
+}
+.cluster-pin::before,
+.cluster-pin::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  background: var(--pine);
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 4px;
+  box-shadow: 0 2px 6px #0b192c33;
+}
+.cluster-pin::before {
+  transform: translate(-10px, -8px) rotate(-20deg);
+  z-index: 1;
+}
+.cluster-pin::after {
+  transform: translate(10px, -8px) rotate(20deg);
+  z-index: 1;
 }
 .cluster-pin > span {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--coral);
+  min-width: 26px;
+  height: 26px;
+  margin: 9px auto 0;
+  background: var(--pine);
   color: #fff;
   border: 3px solid #fff;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  box-shadow: 0 3px 10px #0b192c44;
-  font: 700 13px "Plus Jakarta Sans", sans-serif;
+  box-shadow: 0 3px 10px #0b192c55;
+  font: 700 12px "Plus Jakarta Sans", sans-serif;
 }
 .cluster-pin:hover > span {
-  background: #e04a2c;
+  background: #1c3a5f;
 }
 .place-chip {
   display: inline-flex;
