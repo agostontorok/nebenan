@@ -674,7 +674,7 @@ main {
 }
 .cluster-pin::before {
   content: "";
-  transform: translate(-11px, 3px) rotate(-10deg);
+  transform: translate(-8px, -6px);
   z-index: 1;
 }
 .cluster-pin > span {
@@ -683,7 +683,7 @@ main {
 }
 .cluster-pin::after {
   content: "";
-  transform: translate(11px, 3px) rotate(10deg);
+  transform: translate(8px, -6px);
   z-index: 2;
 }
 .cluster-pin:hover > span {
