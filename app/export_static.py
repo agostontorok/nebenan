@@ -5,7 +5,7 @@ from pathlib import Path
 
 from .db import Database, ROOT
 
-DEFAULT_OUT = ROOT / 'web/public/data.json'
+DEFAULT_OUT = ROOT / 'web/public/darmstadt/data.json'
 
 
 def collect(db):

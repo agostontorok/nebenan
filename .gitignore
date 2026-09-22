@@ -5,6 +5,6 @@ data/*
 !data/events.sqlite
 web/node_modules/
 web/dist/
-web/public/data.json
+web/public/**/data.json
 web/*.tsbuildinfo
 .DS_Store
