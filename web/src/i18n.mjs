@@ -4,6 +4,15 @@ export function languageFromStorage(value) {
   return value === "de" || value === "en" ? value : "en";
 }
 
+export function languageFromBrowser(stored) {
+  if (stored === "de" || stored === "en") return stored;
+  const nav =
+    typeof navigator !== "undefined" && navigator.language
+      ? navigator.language.toLowerCase()
+      : "";
+  return nav.startsWith("de") ? "de" : "en";
+}
+
 export const topicLabels = {
   en: {
     music: "Music",
