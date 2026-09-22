@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { shouldFitInitialMap } from "./map-policy.mjs";
+import { shouldFitInitialMap, MAX_DRIFT_ZOOM } from "./map-policy.mjs";
 
 test("map auto-fit happens once when coordinates first appear", () => {
   assert.equal(
@@ -22,4 +22,8 @@ test("refreshes and marker changes preserve a user viewport", () => {
     shouldFitInitialMap({ hasFitted: false, coordinateCount: 0 }),
     false,
   );
+});
+
+test("drill-down zoom is capped for tiles", () => {
+  assert.equal(MAX_DRIFT_ZOOM, 19);
 });

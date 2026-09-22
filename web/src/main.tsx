@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import "./style.css";
 import { eventPatch, berlinInput } from "./event-patch.mjs";
 import { berlinDay, dateRange, filterEvents } from "./filters.mjs";
-import { shouldFitInitialMap } from "./map-policy.mjs";
+import { shouldFitInitialMap, MAX_DRIFT_ZOOM } from "./map-policy.mjs";
 import { coordKey, groupEvents, locationCount } from "./map-clusters.mjs";
 import { filterAdminEvents } from "./admin-filter.mjs";
 import { eventToIcs, parseAttendees } from "./calendar-invite.mjs";
@@ -297,7 +297,7 @@ function MapView({
             coordKey(e.lat!, e.lon!),
           );
           onSelectPlace?.(keys);
-          m.setView(pos, Math.min(zoom + 1, 19), { animate: true });
+          m.setView(pos, Math.min(zoom + 1, MAX_DRIFT_ZOOM), { animate: true });
         })
         .addTo(layer.current!);
     });
