@@ -540,11 +540,6 @@ main {
   background: #fae1d9 !important;
   color: #a23d2b !important;
 }
-.event-tags .ai-tag {
-  background: #d3e4ff;
-  color: #00419d;
-  cursor: help;
-}
 .event-card h3 {
   font-size: 17px;
   font-weight: 500;
@@ -688,28 +683,6 @@ main {
 }
 .cluster-pin:hover > span {
   background: #1c3a5f;
-}
-.place-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 14px;
-  border: 1px solid var(--coral);
-  background: #fff4ef;
-  color: #c0392b;
-  white-space: nowrap;
-}
-.place-chip button {
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font-size: 14px;
-  line-height: 1;
-  padding: 0;
-  cursor: pointer;
 }
 .leaflet-container {
   font-family: "Plus Jakarta Sans", Arial, sans-serif;
@@ -1586,13 +1559,6 @@ dialog::backdrop {
   padding-bottom: 16px;
   border-bottom: 1px solid var(--line);
 }
-.area-select {
-  border-radius: 999px;
-  background-color: #fff;
-  padding: 0 26px 0 14px;
-  font-size: 13px;
-  flex: none;
-}
 .view-toggle {
   flex: none;
 }
@@ -1893,7 +1859,6 @@ dialog::backdrop {
   background: #fdeadf;
   color: #a3452e;
 }
-.ai-tag,
 .cancel-tag {
   display: inline-block;
   font-size: 9px;
@@ -1902,12 +1867,6 @@ dialog::backdrop {
   letter-spacing: 0.5px;
   border-radius: 999px;
   padding: 3px 9px;
-}
-.ai-tag {
-  background: var(--pine);
-  color: #fff;
-}
-.cancel-tag {
   background: #fdeadf;
   color: #a3452e;
 }
@@ -1998,9 +1957,6 @@ footer .footer-rights {
   color: var(--pine);
 }
 @media (max-width: 1050px) {
-  .area-select {
-    flex: 1;
-  }
   .tt-layout {
     gap: 20px;
   }
