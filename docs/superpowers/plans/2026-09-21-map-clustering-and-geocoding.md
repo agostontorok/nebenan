@@ -30,7 +30,7 @@
 - Modify: `app/collect.py:587-625`
 - Test: `tests/test_backfill_geocode.py`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `tests/test_backfill_geocode.py`:
 
@@ -106,12 +106,12 @@ cd /Users/agostontorok/Documents/code/nebenan
 
 Expected: FAIL with `ModuleNotFoundError: No module named 'app.backfill_geocode'`.
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `.venv/bin/python -m pytest tests/test_backfill_geocode.py -v`
 Expected: FAIL with `ModuleNotFoundError: No module named 'app.backfill_geocode'`.
 
-- [ ] **Step 3: Create `app/backfill_geocode.py`**
+- [x] **Step 3: Create `app/backfill_geocode.py`**
 
 ```python
 """Warm the geocache for every unresolved street, then geocode to completion.
@@ -165,17 +165,17 @@ if __name__ == '__main__':
     raise SystemExit(main())
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `.venv/bin/python -m pytest tests/test_backfill_geocode.py -v`
 Expected: PASS (2 passed).
 
-- [ ] **Step 5: Run the full Python suite**
+- [x] **Step 5: Run the full Python suite**
 
 Run: `.venv/bin/python -m pytest tests -v 2>&1 | tail -5`
 Expected: all pass (no regressions from new module import).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add app/backfill_geocode.py tests/test_backfill_geocode.py
@@ -208,11 +208,15 @@ Do NOT commit `data/events.sqlite` here unless the user explicitly asks (the SQL
 
 ## Task 3: Cluster-grouping module (`web/src/map-clusters.mjs`)
 
+> **Outcome:** DONE — `web/src/map-clusters.mjs` + `web/src/map-clusters.test.mjs` committed verbatim per spec (`21283db`); added 2 guard tests for null/zero-coordinate skipping and empty input (`e3e065b`). Web tests: 27 → 36 pass (7 spec tests + 2 guard tests). Reviewer (spec + quality): **Approved**, no changes needed.
+
+> **Accepted deviation (none in Task 3). Note for Task 4:** reviewer flagged that the render effect must track real map zoom or badges never subdivide — addressed as Task 4's zoom-state fix below.
+
 **Files:**
 - Create: `web/src/map-clusters.mjs`
 - Test: `web/src/map-clusters.test.mjs`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `web/src/map-clusters.test.mjs`:
 
@@ -281,12 +285,12 @@ test("cellCenter places the point inside its own cell", () => {
 });
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npm test -- --test-name-pattern="map-clusters"`
 Expected: FAIL with module-not-found.
 
-- [ ] **Step 3: Implement the module**
+- [x] **Step 3: Implement the module**
 
 Create `web/src/map-clusters.mjs`:
 
@@ -332,17 +336,17 @@ export function locationCount(events) {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npm test -- --test-name-pattern="map-clusters"`
 Expected: PASS.
 
-- [ ] **Step 5: Run entire web test suite**
+- [x] **Step 5: Run entire web test suite**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npm test`
 Expected: all pass (27 existing + 6 new).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add web/src/map-clusters.mjs web/src/map-clusters.test.mjs
@@ -353,15 +357,17 @@ git commit -m "feat: zoom-scaled cluster grouping for map markers"
 
 ## Task 4: Rewrite `MapView` to render clusters
 
+> **Outcome:** DONE — committed in `30b1eda` (spec-verbatim) + `8f40d39` (**plan deviation, required**): code-quality reviewer found the approved effect shape reads `m.getZoom()` at render and never re-runs on zoom, so cluster badges froze at the initial zoom and repeated drill-down clicks stalled (the closure's `zoom` never advanced). Fixed by driving grouping from a `zoom` state updated by a `m.on("zoomend")` listener (`setZoom(m.getZoom())`), making the render effect depend on it; this is what makes cluster → zoom → re-cluster → single pins actually work. Also dropped the now-unused `index` param. Accepted deviation: `(g.events as EventItem[])` cast at the cluster-key computation, required because `map-clusters.mjs` is untyped (`checkJs:false`).
+
 **Files:**
 - Modify: `web/src/main.tsx:195-312` (`MapView` component)
 - Test: verification only (typescript build + manual)
 
-- [ ] **Step 1: Read the current MapView**
+- [x] **Step 1: Read the current MapView**
 
 Confirm the current block spans `function MapView(` through the closing brace before `function EventForm(` (~lines 195-312 of `web/src/main.tsx`).
 
-- [ ] **Step 2: Add the new imports at the top of `main.tsx`**
+- [x] **Step 2: Add the new imports at the top of `main.tsx`**
 
 After the existing `import { shouldFitInitialMap } from "./map-policy.mjs";` line insert:
 
@@ -369,7 +375,7 @@ After the existing `import { shouldFitInitialMap } from "./map-policy.mjs";` lin
 import { coordKey, groupEvents, locationCount } from "./map-clusters.mjs";
 ```
 
-- [ ] **Step 3: Update the component signature and map events**
+- [x] **Step 3: Update the component signature and map events**
 
 Change the `MapView` props destructure and type annotation. The new handlers are optional in TypeScript so the component compiles before App passes them (Task 5):
 
@@ -395,7 +401,7 @@ In the map-init effect, after `m.on("dragstart zoomstart", ...)` add a backgroun
     m.on("click", () => onClearPlace?.());
 ```
 
-- [ ] **Step 4: Rewrite the marker-render effect**
+- [x] **Step 4: Rewrite the marker-render effect**
 
 Replace the effect body that called `layer.current?.clearLayers()` and looped markers with:
 
@@ -459,7 +465,7 @@ Replace the effect body that called `layer.current?.clearLayers()` and looped ma
   }, [events, onSelect, onSelectPlace, language]);
 ```
 
-- [ ] **Step 5: Update the caption**
+- [x] **Step 5: Update the caption**
 
 Update the caption block (lines ~304-309) to show real counts via the new `locationCount` import:
 
@@ -474,14 +480,14 @@ Update the caption block (lines ~304-309) to show real counts via the new `locat
       </div>
 ```
 
-- [ ] **Step 6: Typecheck and build**
+- [x] **Step 6: Typecheck and build**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npx tsc --noEmit`
 Expected: PASS even before Task 5, because `onSelectPlace`/`onClearPlace` are optional (`?.` guard) and unused App props are not an error (`noUnusedLocals` is unset).
 Then: `VITE_STATIC=1 npx vite build`
 Expected: build succeeds.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add web/src/main.tsx
@@ -492,10 +498,12 @@ git commit -m "feat: render clustered map markers with drill-down badges"
 
 ## Task 5: Wire selected-place state in the App component
 
+> **Outcome:** DONE — committed in `5871563` (spec-verbatim) + `fb12ab8` (reviewer fixes): empty-state **Reset** button also calls `setPlaceKeys(null)` (otherwise Reset left the list stuck empty when the active place was excluded by the pre-reset filters), and the slots-pill count now uses `placeFiltered.length` (it previously showed `filtered.length`, e.g. "52 slots" above a 4-event place-filtered list). Deferred to Task 8 by plan: visible clear-place chip; stale-filter intersection when the active place is excluded by a filter change is still cleared only via All chip / Reset / chip-× (acceptable per plan). Quality review: **Approved**.
+
 **Files:**
 - Modify: `web/src/main.tsx:640-665` (state block), `:728-761` (filtered memo), `:1168-1361` (list + map)
 
-- [ ] **Step 1: Add state**
+- [x] **Step 1: Add state**
 
 In the state block (after `[evening, setEvening]`), add:
 
@@ -503,7 +511,7 @@ In the state block (after `[evening, setEvening]`), add:
     [placeKeys, setPlaceKeys] = useState<string[] | null>(null),
 ```
 
-- [ ] **Step 2: Add selectors and filtered variants**
+- [x] **Step 2: Add selectors and filtered variants**
 
 After the `selectEvent` line (`~799`) add:
 
@@ -517,7 +525,7 @@ After the `selectEvent` line (`~799`) add:
   }, [filtered, placeKeys]);
 ```
 
-- [ ] **Step 3: Point the timetable at `placeFiltered`**
+- [x] **Step 3: Point the timetable at `placeFiltered`**
 
 In the timetable memo (line ~843), replace the dependency and source:
 
@@ -533,7 +541,7 @@ Also change the `timetable.map(` source at line ~1175 to `placeFiltered.length ?
 
 Replace `) : filtered.length ? (` with `) : placeFiltered.length ? (`.
 
-- [ ] **Step 4: Pass the new props to `MapView`**
+- [x] **Step 4: Pass the new props to `MapView`**
 
 At line ~1359 replace:
 
@@ -553,24 +561,24 @@ with:
 />
 ```
 
-- [ ] **Step 5: Reset place on existing clear actions**
+- [x] **Step 5: Reset place on existing clear actions**
 
 Make the "All" chip handler (line ~1051) also clear the place. Its handler body starts with `setTopic("");`. Add `setPlaceKeys(null);` as the first statement. Keep it minimal for Task 5; the full clear chip UI is Task 8.
 
-- [ ] **Step 6: Typecheck and build**
+- [x] **Step 6: Typecheck and build**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npx tsc --noEmit`
 Expected: PASS (no unused-vars errors; `noUnusedLocals` is not set).
 Then: `VITE_STATIC=1 npx vite build`
 Expected: build succeeds.
 
-- [ ] **Step 7: Manual verification at the running server**
+- [x] **Step 7: Manual verification at the running server**
 
 Run: `curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8765`
 Expected: 200 (dev server serves `dist/` assets, so the rebuild reflects the new bundle).
 Note: Manual click-through — clicking a cluster badge must freeze the side list to that place and zoom in; clicking bare map background must clear it.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add web/src/main.tsx
@@ -587,7 +595,7 @@ git commit -m "feat: selected-place state filters timetable from map drill-down"
 
 This task is optional — the cluster click handler already calls `m.setView(pos, min(zoom+1, 19))` with animation, which is the full drill-down behaviour. Complete this task only if you want the initial fit and cluster jump to share a maxZoom policy; otherwise mark it skipped and move on. If done:
 
-- [ ] **Step 1: Add `maxDrillZoom`**
+- [x] **Step 1: Add `maxDrillZoom`**
 
 ```javascript
 export const MAX_DRIFT_ZOOM = 19;
@@ -598,7 +606,7 @@ export function shouldFitInitialMap({ hasFitted, coordinateCount }) {
 
 (Constant added for centralisation; the cluster handler in Task 4 uses `Math.min(zoom + 1, 19)` — replace `19` with `MAX_DRIFT_ZOOM`.)
 
-- [ ] **Step 2: Test**
+- [x] **Step 2: Test**
 
 Add to `web/src/map-policy.test.mjs`:
 
@@ -612,7 +620,7 @@ test("drill-down zoom is capped for tiles", () => {
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npm test -- --test-name-pattern="map-policy"`
 Expected: PASS.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add web/src/map-policy.mjs web/src/map-policy.test.mjs
@@ -626,7 +634,7 @@ git commit -m "refactor: centralise maximum drill-down zoom"
 **Files:**
 - Modify: `web/src/style.css:626-649` (near `.event-pin`)
 
-- [ ] **Step 1: Add cluster-badge and place-chip CSS**
+- [x] **Step 1: Add cluster-badge and place-chip CSS**
 
 Insert after the `.leaflet-marker-icon.event-pin > span` rule:
 
@@ -675,12 +683,12 @@ Insert after the `.leaflet-marker-icon.event-pin > span` rule:
 }
 ```
 
-- [ ] **Step 2: Build**
+- [x] **Step 2: Build**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && VITE_STATIC=1 npx vite build 2>&1 | tail -2`
 Expected: build succeeds.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add web/src/style.css
@@ -696,7 +704,7 @@ git commit -m "style: cluster count badges and selected-place chip"
 - Modify: `web/src/main.tsx` (filter-bar region ~1002-1064)
 - Test: `web/src/i18n.test.mjs`
 
-- [ ] **Step 1: Add i18n keys**
+- [x] **Step 1: Add i18n keys**
 
 English block — after `"results.areaCaption"`:
 
@@ -714,7 +722,7 @@ German block — after `"results.areaCaption"` (German):
     "map.clearPlace": "Alle Orte anzeigen",
 ```
 
-- [ ] **Step 2: Test keys exist**
+- [x] **Step 2: Test keys exist**
 
 Append to `web/src/i18n.test.mjs`, inside the existing `for (const lang of ["en", "de"])` loop's key list, the new keys:
 
@@ -725,7 +733,7 @@ Append to `web/src/i18n.test.mjs`, inside the existing `for (const lang of ["en"
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npm test -- --test-name-pattern="i18n"`
 Expected: PASS.
 
-- [ ] **Step 3: Update the caption in `main.tsx` to use the new keys**
+- [x] **Step 3: Update the caption in `main.tsx` to use the new keys**
 
 In MapView, `tr` is not defined (it uses `t(language, key)` directly). Replace the literal German/English strings from Task 4 Step 4 with the new i18n keys:
 
@@ -742,7 +750,7 @@ In MapView, `tr` is not defined (it uses `t(language, key)` directly). Replace t
 
 (Note: `results.events` already exists for both languages. The `place-chip` render in Step 4 below uses `tr`, which IS defined in the App component scope where that JSX lives.)
 
-- [ ] **Step 4: Render the clear-place chip in the filter bar**
+- [x] **Step 4: Render the clear-place chip in the filter bar**
 
 In the `.filter-bar` row, immediately after the view-toggle block (line ~1047), insert:
 
@@ -760,7 +768,7 @@ In the `.filter-bar` row, immediately after the view-toggle block (line ~1047), 
                   )}
 ```
 
-- [ ] **Step 5: Typecheck, build, test**
+- [x] **Step 5: Typecheck, build, test**
 
 Run:
 ```bash
@@ -772,12 +780,12 @@ curl -s -o /dev/null -w "%{http_code}\n" 127.0.0.1:8765
 ```
 Expected: tsc PASS; build succeeds; `npm test` PASS; server 200.
 
-- [ ] **Step 6: Verify the rebuilt bundle carries the new symbols**
+- [x] **Step 6: Verify the rebuilt bundle carries the new symbols**
 
 Run: `curl -s 127.0.0.1:8765/assets/index-*.js | rg -o "map.clearPlace|cluster-pin|place-chip" | sort | uniq -c`
 Expected: at least one occurrence each of `cluster-pin` and `place-chip`.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add web/src/i18n.mjs web/src/i18n.test.mjs web/src/main.tsx
@@ -791,17 +799,17 @@ git commit -m "feat: clear-place chip and i18n for map location counts"
 **Files:**
 - None (verification only)
 
-- [ ] **Step 1: Run the entire web suite**
+- [x] **Step 1: Run the entire web suite**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan/web && npx tsc --noEmit && VITE_STATIC=1 npx vite build && npm test`
 Expected: tsc PASS, build OK, `pass 27` (or more) and `fail 0`.
 
-- [ ] **Step 2: Run the entire Python suite**
+- [x] **Step 2: Run the entire Python suite**
 
 Run: `cd /Users/agostontorok/Documents/code/nebenan && .venv/bin/python -m pytest tests -v 2>&1 | tail -5`
 Expected: all pass.
 
-- [ ] **Step 3: Confirm the served bundle is current**
+- [x] **Step 3: Confirm the served bundle is current**
 
 Run: `curl -s 127.0.0.1:8765/assets/index-*.js | rg -o "cluster-pin" | wc -l`
 Expected: ≥ 1 (new bundle is what the dev server serves).
