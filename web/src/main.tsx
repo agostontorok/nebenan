@@ -23,9 +23,9 @@ import {
 const EDITOR = import.meta.env.VITE_EDITOR === "1";
 const STATIC = import.meta.env.VITE_STATIC === "1";
 export const SHARE_URL =
-  "https://github.com/agostontorok/nebenan/issues/new?template=event-share.yml";
+  "https://github.com/agostontorok/nahe/issues/new?template=event-share.yml";
 export const FLAG_URL =
-  "https://github.com/agostontorok/nebenan/issues/new?template=event-flag.yml";
+  "https://github.com/agostontorok/nahe/issues/new?template=event-flag.yml";
 type EventItem = {
   id: string;
   title: string;
@@ -973,7 +973,7 @@ function App() {
           <span className="brand-mark">
             n<span>•</span>
           </span>
-          nebenan<span className="brand-city">DARMSTADT</span>
+          nahe<span className="brand-city">DARMSTADT</span>
         </a>
         <nav aria-label={tr("nav.aria")}>
           {!EDITOR && (
@@ -1756,7 +1756,7 @@ function App() {
             setTab(EDITOR ? "review" : "discover");
           }}
         >
-          nebenan<span>•</span>
+          nahe<span>•</span>
         </a>
         <p className="footer-rights">
           {tr("footer.rights").replace("{year}", String(new Date().getFullYear()))}
