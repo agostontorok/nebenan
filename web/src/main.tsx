@@ -331,9 +331,9 @@ function MapView({
       <div className="map-caption">
         <span className="live-dot" /> {t(language, "results.areaCaption")}{" "}
         <span>
-          {locationCount(events)} {language === "de" ? "Orte /" : "places ·"}{" "}
+          {locationCount(events)} {t(language, "results.placesDivider")}{" "}
           {events.filter((e) => e.lat != null && e.lon != null).length}{" "}
-          {language === "de" ? "Termine" : "events"}
+          {t(language, "results.events")}
         </span>
       </div>
     </div>
@@ -1082,6 +1082,17 @@ function App() {
                       <span className="material-symbols-outlined" aria-hidden="true">view_column</span>
                     </button>
                   </div>
+                  {placeKeys && (
+                    <span className="place-chip">
+                      <span className="material-symbols-outlined" aria-hidden="true">
+                        place
+                      </span>
+                      {tr("map.clearPlace")}
+                      <button aria-label={tr("map.clearPlace")} onClick={clearPlace}>
+                        ×
+                      </button>
+                    </span>
+                  )}
                   <span className="chip-divider" aria-hidden="true" />
                   <button
                     className={`chip ${!topic && !free && mode !== "today" && !evening ? "chip-primary" : ""}`}
