@@ -6,7 +6,7 @@ import "./style.css";
 import { eventPatch, berlinInput } from "./event-patch.mjs";
 import { berlinDay, dateRange, filterEvents } from "./filters.mjs";
 import { shouldFitInitialMap, MAX_DRIFT_ZOOM } from "./map-policy.mjs";
-import { coordKey, groupEvents, locationCount } from "./map-clusters.mjs";
+import { groupEvents, locationCount } from "./map-clusters.mjs";
 import { filterAdminEvents } from "./admin-filter.mjs";
 import { eventToIcs, parseAttendees } from "./calendar-invite.mjs";
 import { safeImageUrl } from "./image-url.mjs";
@@ -15,7 +15,7 @@ import {
   rankSemanticMatches,
 } from "./semantic-search.mjs";
 import {
-  languageFromStorage,
+  languageFromBrowser,
   scaleLabels as scaleLabelsByLanguage,
   topicLabels as topicLabelsByLanguage,
   t,
@@ -196,14 +196,14 @@ function EventImage({
 function MapView({
   events,
   onSelect,
-  onSelectPlace,
-  onClearPlace,
+  onMapVisible,
+  fitRequest,
   language,
 }: {
   events: EventItem[];
   onSelect: (e: EventItem) => void;
-  onSelectPlace?: (keys: string[]) => void;
-  onClearPlace?: () => void;
+  onMapVisible: (events: EventItem[]) => void;
+  fitRequest: number;
   language: "en" | "de";
 }) {
   const ref = useRef<HTMLDivElement>(null),
@@ -211,6 +211,11 @@ function MapView({
     layer = useRef<L.LayerGroup | null>(null),
     hasFitted = useRef(false),
     userInteracted = useRef(false);
+  const eventsRef = useRef(events);
+  const onMapVisibleRef = useRef(onMapVisible);
+  eventsRef.current = events;
+  onMapVisibleRef.current = onMapVisible;
+  const reportVisible = useRef<() => void>(() => {});
   const [tileError, setTileError] = useState(false);
   const [zoom, setZoom] = useState(13);
   useEffect(() => {
@@ -231,8 +236,19 @@ function MapView({
     m.on("dragstart zoomstart", () => {
       if (hasFitted.current) userInteracted.current = true;
     });
-    m.on("click", () => onClearPlace?.());
-    m.on("zoomend", () => setZoom(m.getZoom()));
+    reportVisible.current = () => {
+      const m2 = map.current;
+      if (!m2) return;
+      const b = m2.getBounds();
+      const visible = eventsRef.current.filter(
+        (e) => e.lat != null && e.lon != null && b.contains([e.lat, e.lon]),
+      );
+      onMapVisibleRef.current(visible);
+    };
+    m.on("moveend zoomend", () => {
+      setZoom(m.getZoom());
+      reportVisible.current();
+    });
     // Mobile CSS hides the map while the list is active. Observe actual layout
     // instead of inferring visibility from the selected page.
     let resizeFrame = 0;
@@ -293,11 +309,16 @@ function MapView({
         }),
       })
         .on("click", () => {
-          const keys = (g.events as EventItem[]).map((e) =>
-            coordKey(e.lat!, e.lon!),
+          const clusterBounds = L.latLngBounds(
+            (g.events as EventItem[]).map(
+              (e) => [e.lat!, e.lon!] as L.LatLngTuple,
+            ),
           );
-          onSelectPlace?.(keys);
-          m.setView(pos, Math.min(zoom + 1, MAX_DRIFT_ZOOM), { animate: true });
+          m.fitBounds(clusterBounds, {
+            padding: [45, 45],
+            maxZoom: MAX_DRIFT_ZOOM,
+            animate: true,
+          });
         })
         .addTo(layer.current!);
     });
@@ -312,8 +333,24 @@ function MapView({
         padding: [45, 45],
         maxZoom: 14,
       });
+      reportVisible.current();
     }
-  }, [events, onSelect, onSelectPlace, language, zoom]);
+  }, [events, onSelect, language, zoom]);
+  useEffect(() => {
+    const m = map.current;
+    if (!m) return;
+    const coords: L.LatLngTuple[] = [];
+    groupEvents(eventsRef.current, 13).forEach((g) => {
+      coords.push([g.lat, g.lon]);
+    });
+    if (!coords.length) return;
+    m.fitBounds(L.latLngBounds(coords), {
+      padding: [45, 45],
+      maxZoom: 14,
+    });
+    hasFitted.current = true;
+    reportVisible.current();
+  }, [fitRequest]);
   return (
     <div className="map-shell">
       <div
@@ -656,7 +693,9 @@ function App() {
   const [tab, setTab] = useState(EDITOR ? "review" : "discover"),
     [language, setLanguage] = useState<"en" | "de">(() => {
       try {
-        return languageFromStorage(window.localStorage.getItem("darmstadt-language"));
+        return languageFromBrowser(
+          window.localStorage.getItem("darmstadt-language"),
+        );
       } catch {
         return "en";
       }
@@ -673,15 +712,18 @@ function App() {
     [from, setFrom] = useState(berlinDay()),
     [to, setTo] = useState(dateRange("week")[1]),
     [query, setQuery] = useState(""),
-    [area, setArea] = useState(""),
     [topic, setTopic] = useState(""),
     [scale, setScale] = useState(""),
     [free, setFree] = useState(false),
     [mobileMap, setMobileMap] = useState(false),
     [evening, setEvening] = useState(false),
-    [placeKeys, setPlaceKeys] = useState<string[] | null>(null),
     [timeVenue, setTimeVenue] = useState<"time" | "venue">("time"),
     [view, setView] = useState<"split" | "list">("split"),
+    [isDesktop, setIsDesktop] = useState(() =>
+      window.matchMedia("(min-width: 761px)").matches,
+    ),
+    [mapVisible, setMapVisible] = useState<EventItem[] | null>(null),
+    [fitRequest, setFitRequest] = useState(0),
     [searchOpen, setSearchOpen] = useState(false),
     [adminQuery, setAdminQuery] = useState("");
   const [selected, setSelected] = useState<EventItem | null>(null),
@@ -713,6 +755,12 @@ function App() {
     }
     document.documentElement.lang = language;
   }, [language]);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 761px)");
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
   async function refresh() {
     try {
       if (STATIC) {
@@ -784,11 +832,10 @@ function App() {
       !query.trim() || !semanticScores
         ? lexicalFiltered
         : (rankSemanticMatches(baseFiltered, query, semanticScores) as EventItem[]);
-    const byArea = area ? base.filter((e) => e.area === area) : base;
     return evening
-      ? byArea.filter((e) => hourOf(e.start) >= 18)
-      : byArea;
-  }, [baseFiltered, lexicalFiltered, query, semanticScores, area, evening]);
+      ? base.filter((e) => hourOf(e.start) >= 18)
+      : base;
+  }, [baseFiltered, lexicalFiltered, query, semanticScores, evening]);
   useEffect(() => {
     if (!query.trim()) {
       setSemanticScores(null);
@@ -827,13 +874,15 @@ function App() {
     [events, adminQuery],
   );
   const selectEvent = React.useCallback((e: EventItem) => setSelected(e), []);
-  const selectPlace = React.useCallback((keys: string[]) => setPlaceKeys(keys), []);
-  const clearPlace = React.useCallback(() => setPlaceKeys(null), []);
-  const placeFiltered = useMemo(() => {
-    if (!placeKeys) return filtered;
-    const keySet = new Set(placeKeys);
-    return filtered.filter((e) => e.lat != null && e.lon != null && keySet.has(coordKey(e.lat, e.lon)));
-  }, [filtered, placeKeys]);
+  const mapShown = isDesktop ? view === "split" : mobileMap;
+  const listEvents = useMemo(() => {
+    if (mapShown && mapVisible)
+      return [
+        ...mapVisible,
+        ...filtered.filter((e) => e.lat == null || e.lon == null),
+      ];
+    return filtered;
+  }, [mapShown, mapVisible, filtered]);
   async function mutate(path: string, method: string, body?: unknown) {
     try {
       await api(path, method, body);
@@ -867,11 +916,6 @@ function App() {
       setTo(r[1]);
     }
   }
-  const areas = useMemo(
-    () =>
-      [...new Set(events.map((e) => e.area).filter(Boolean) as string[])],
-    [events],
-  );
   const dayPartOf = (e: EventItem): "all" | "morning" | "afternoon" | "evening" => {
     if (e.all_day) return "all";
     const hour = hourOf(e.start);
@@ -884,7 +928,7 @@ function App() {
       slots: Record<"all" | "morning" | "afternoon" | "evening", EventItem[]>;
     }[] = [];
     const index = new Map<string, number>();
-    placeFiltered.forEach((e) => {
+    listEvents.forEach((e) => {
       const key = berlinDay(new Date(e.start));
       let i = index.get(key);
       if (i === undefined) {
@@ -900,7 +944,7 @@ function App() {
       days[i].slots[dayPartOf(e)].push(e);
     });
     return days;
-  }, [placeFiltered]);
+  }, [listEvents]);
   const todayKey = berlinDay();
   const tomorrowKey = (() => {
     const d = new Date(todayKey + "T12:00:00Z");
@@ -1037,19 +1081,6 @@ function App() {
           <>
             <section className="timetable-page">
               <div className="filter-bar">
-                  <select
-                    className="area-select"
-                    aria-label={tr("filters.area")}
-                    value={area}
-                    onChange={(e) => setArea(e.target.value)}
-                  >
-                    <option value="">{tr("filters.area")}</option>
-                    {areas.map((a) => (
-                      <option key={a} value={a}>
-                        {a}
-                      </option>
-                    ))}
-                  </select>
                   {query.trim() && (
                     <span
                       className={`semantic-status semantic-${semanticStatus}`}
@@ -1063,50 +1094,19 @@ function App() {
                           : tr("filters.semanticFallback")}
                     </span>
                   )}
-                  <div className="view-toggle" role="group" aria-label={tr("filters.split")}>
-                    <button
-                      className={`view-toggle-btn ${view === "split" ? "active" : ""}`}
-                      aria-pressed={view === "split"}
-                      aria-label={view === "split" ? tr("results.list") : tr("filters.split")}
-                      title={view === "split" ? tr("results.list") : tr("filters.split")}
-                      onClick={() => {
-                        if (view === "split") {
-                          setView("list");
-                          setMobileMap(true);
-                        } else {
-                          setView("split");
-                          setMobileMap(false);
-                        }
-                      }}
-                    >
-                      <span className="material-symbols-outlined" aria-hidden="true">view_column</span>
-                    </button>
-                  </div>
-                  {placeKeys && (
-                    <span className="place-chip">
-                      <span className="material-symbols-outlined" aria-hidden="true">
-                        place
-                      </span>
-                      {tr("map.clearPlace")}
-                      <button aria-label={tr("map.clearPlace")} onClick={clearPlace}>
-                        ×
-                      </button>
-                    </span>
-                  )}
                   <span className="chip-divider" aria-hidden="true" />
                   <button
                     className={`chip ${!topic && !free && mode !== "today" && !evening ? "chip-primary" : ""}`}
                     onClick={() => {
-                      setPlaceKeys(null);
                       setTopic("");
                       setScale("");
                       setFree(false);
                       setEvening(false);
-                      setArea("");
                       setQuery("");
                       chooseMode("week");
                       setView("split");
                       setMobileMap(false);
+                      setFitRequest((n) => n + 1);
                     }}
                   >
                     {tr("chips.all")} <strong>{loading ? "…" : filtered.length}</strong>
@@ -1160,6 +1160,25 @@ function App() {
                     <span className="material-symbols-outlined" aria-hidden="true">theater_comedy</span>
                     {tr("chips.culture")}
                   </button>
+                  <div className="view-toggle" role="group" aria-label={tr("filters.split")}>
+                    <button
+                      className={`view-toggle-btn ${view === "split" ? "active" : ""}`}
+                      aria-pressed={view === "split"}
+                      aria-label={view === "split" ? tr("results.list") : tr("filters.split")}
+                      title={view === "split" ? tr("results.list") : tr("filters.split")}
+                      onClick={() => {
+                        if (view === "split") {
+                          setView("list");
+                          setMobileMap(true);
+                        } else {
+                          setView("split");
+                          setMobileMap(false);
+                        }
+                      }}
+                    >
+                      <span className="material-symbols-outlined" aria-hidden="true">view_column</span>
+                    </button>
+                  </div>
                 </div>
               {from > to && (
                 <p role="alert" className="error">
@@ -1189,7 +1208,7 @@ function App() {
                 </div>
                 <div className="results-tools">
                   <span className="slots-pill">
-                    {loading ? "…" : placeFiltered.length} {tr("schedule.slots")}
+                    {loading ? "…" : listEvents.length} {tr("schedule.slots")}
                   </span>
                   <span className="sorted">
                     <span className="material-symbols-outlined" aria-hidden="true">swap_vert</span>
@@ -1220,7 +1239,7 @@ function App() {
                       <span className="loading-spinner" />
                       <h3>{tr("loading")}</h3>
                     </div>
-                  ) : placeFiltered.length ? (
+                  ) : listEvents.length ? (
                     timetable.map(
                       (d) => (
                         <section className="tt-day" key={d.day}>
@@ -1321,11 +1340,6 @@ function App() {
                                         {topicLabels[e.topics[0]] || e.topics[0]}
                                       </span>
                                     )}
-                                    {e.ai_extracted && (
-                                      <span className="ai-tag" title={tr("event.aiTitle")}>
-                                        {tr("event.aiBadge")}
-                                      </span>
-                                    )}
                                     {e.cancelled && (
                                       <span className="cancel-tag">
                                         {tr("event.cancelled")}
@@ -1388,9 +1402,7 @@ function App() {
                       </p>
                       <button
                         onClick={() => {
-                          setPlaceKeys(null);
                           setQuery("");
-                          setArea("");
                           setTopic("");
                           setScale("");
                           setFree(false);
@@ -1398,6 +1410,7 @@ function App() {
                           setView("split");
                           setMobileMap(false);
                           chooseMode("week");
+                          setFitRequest((n) => n + 1);
                         }}
                       >
                         {tr("empty.reset")}
@@ -1409,8 +1422,8 @@ function App() {
                   <MapView
                     events={filtered}
                     onSelect={selectEvent}
-                    onSelectPlace={selectPlace}
-                    onClearPlace={clearPlace}
+                    onMapVisible={setMapVisible}
+                    fitRequest={fitRequest}
                     language={language}
                   />
                 </aside>
