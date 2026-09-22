@@ -1,7 +1,7 @@
 # AI Reviewer Flow — Design
 
 - **Date:** 2026-09-22
-- **Status:** Draft (pending design review)
+- **Status:** Approved (design review, 2026-09-23)
 - **Scope:** One implementation plan. A local-only editorial tool to review and fix AI-extracted events, with batch-fix propagation: correcting a field on one event also fixes every other event that shares the identical old value.
 
 ## Context
