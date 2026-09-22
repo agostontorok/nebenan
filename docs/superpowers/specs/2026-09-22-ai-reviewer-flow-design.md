@@ -68,9 +68,11 @@ Pure module `web/src/ai-review.mjs` exporting:
   - `matches = events.filter(o => o.id !== original.id && normalized(o[field]) === normalized(oldValue))` — same source by construction (the wrapper passes only the current source group), exact-match only
 - Candidates are recomputed at confirm time (the saved event is excluded; already-changed events no longer match).
 
+Location edits already clear coordinates: `db.edit_event` sets `lat`/`lon`/`coordinate_evidence` to null whenever `venue`/`address` change (existing behavior for single-event edits). A batch venue/address fix therefore also clears the affected events' pins; re-geocoding happens on the next collection run (cached address lookups). Noted here as intended — a corrected venue should relocate the pin.
+
 In the wrapper's `onSaved`:
 
-1. Build `propagationCandidates` from the current source group and the patch.
+1. Reload the source group (`/api/review/ai`) after the edited event's save so propagation never matches stale values, then build `propagationCandidates` from the fresh group.
 2. If none, do nothing extra.
 3. Otherwise show a confirm listing, per changed field: *"6 other events share venue ›Stadthalle‹ — set it to ›Stadthalle Darmstadt‹?"* with the affected titles. On confirm, PATCH each match with only that field (`{venue: newValue}` etc., no status change); stop on first failure and report. On decline, only the edited event is changed.
 
