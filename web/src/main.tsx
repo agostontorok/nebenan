@@ -272,7 +272,7 @@ function MapView({
           title: e.title,
           icon: L.divIcon({
             className: "event-pin",
-            html: `<span></span>`,
+            html: `<span>1</span>`,
             iconSize: [32, 38],
             iconAnchor: [16, 38],
           }),
