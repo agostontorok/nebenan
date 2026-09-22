@@ -1178,7 +1178,7 @@ function App() {
                 </div>
                 <div className="results-tools">
                   <span className="slots-pill">
-                    {loading ? "…" : filtered.length} {tr("schedule.slots")}
+                    {loading ? "…" : placeFiltered.length} {tr("schedule.slots")}
                   </span>
                   <span className="sorted">
                     <span className="material-symbols-outlined" aria-hidden="true">swap_vert</span>
@@ -1377,6 +1377,7 @@ function App() {
                       </p>
                       <button
                         onClick={() => {
+                          setPlaceKeys(null);
                           setQuery("");
                           setArea("");
                           setTopic("");
