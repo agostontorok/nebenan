@@ -647,6 +647,48 @@ main {
   transform: none;
   border-radius: 50% 50% 50% 4px;
 }
+.cluster-pin {
+  background: none;
+  border: none;
+}
+.cluster-pin > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--coral);
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 3px 10px #0b192c44;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
+}
+.cluster-pin:hover > span {
+  background: #e04a2c;
+}
+.place-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border: 1px solid var(--coral);
+  background: #fff4ef;
+  color: #c0392b;
+  white-space: nowrap;
+}
+.place-chip button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
 .leaflet-container {
   font-family: "Plus Jakarta Sans", Arial, sans-serif;
 }
