@@ -50,18 +50,21 @@ Runs from the repository root, mirrors the `pages.yml` step order, fails loudly 
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# 1. Python dependencies for the data export.
-if python3 -m pip --version >/dev/null 2>&1; then
-  python3 -m pip install -r requirements.txt
-elif command -v uv >/dev/null 2>&1; then
-  uv pip install --system -r requirements.txt
-else
-  echo "build-static: need pip or uv to install requirements.txt" >&2
+# 1. Build in a throwaway environment so a laptop, Actions and Vercel all
+#    resolve the same dependencies, whatever the ambient python is. A system
+#    python may be externally managed (PEP 668) and refuse installs.
+BUILD_VENV="${BUILD_VENV:-$(mktemp -d)/venv}"
+trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+if ! python3 -m venv "$BUILD_VENV" 2>/dev/null && ! uv venv "$BUILD_VENV" >/dev/null 2>&1; then
+  echo "build-static: need python3 -m venv or uv to create $BUILD_VENV" >&2
   exit 1
+fi
+if ! "$BUILD_VENV/bin/python" -m pip install --quiet -r requirements.txt 2>/dev/null; then
+  uv pip install --python "$BUILD_VENV/bin/python" -r requirements.txt
 fi
 
 # 2. Export the database to the static JSON the read-only frontend fetches.
-PYTHONPATH=. python3 -m app.export_static
+PYTHONPATH=. "$BUILD_VENV/bin/python" -m app.export_static
 
 # 3. Build the frontend in read-only mode.
 cd web
@@ -71,7 +74,9 @@ VITE_STATIC=1 npm run build
 
 Notes:
 - `requirements.txt` keeps `pytest`, which is harmless; the script does not run tests. Test gating stays in `pages.yml`, which already runs `python -m pytest -q` before building.
-- The `pip`-then-`uv` branch is the mitigation for a build image that ships only one of the two.
+- Dependencies install into a throwaway virtual environment rather than the ambient python, so a build behaves the same on a laptop, on `actions/setup-python` and on Vercel regardless of whether the system python refuses installs (PEP 668). A `trap` removes the environment on both success and failure.
+- `python3 -m venv` is tried first and `uv venv` second, so an image that can create a virtual environment by only one of the two still builds. The venv's own `pip` is then preferred, with `uv pip install --python` as the fallback for a `uv`-created environment that has no `pip`.
+- `BUILD_VENV` can be set in the environment to reuse a cached virtual environment across builds; by default the script builds a fresh one under `mktemp -d` and deletes it on exit.
 - `export_static` writes to `web/public/darmstadt/data.json` by default (`app/export_static.py:6`); Vite copies `public/` to the output root, so the file lands at `web/dist/darmstadt/data.json`, which is what `/darmstadt/` requests.
 
 ### 2. `vercel.json` (new)

@@ -184,18 +184,21 @@ cat > scripts/build-static.sh <<'SCRIPT'
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# 1. Python dependencies for the database export.
-if python3 -m pip --version >/dev/null 2>&1; then
-  python3 -m pip install --quiet -r requirements.txt
-elif command -v uv >/dev/null 2>&1; then
-  uv pip install --system -r requirements.txt
-else
-  echo "build-static: need pip or uv to install requirements.txt" >&2
+# 1. Build in a throwaway environment so a laptop, Actions and Vercel all
+#    resolve the same dependencies, whatever the ambient python is. A system
+#    python may be externally managed (PEP 668) and refuse installs.
+BUILD_VENV="${BUILD_VENV:-$(mktemp -d)/venv}"
+trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+if ! python3 -m venv "$BUILD_VENV" 2>/dev/null && ! uv venv "$BUILD_VENV" >/dev/null 2>&1; then
+  echo "build-static: need python3 -m venv or uv to create $BUILD_VENV" >&2
   exit 1
+fi
+if ! "$BUILD_VENV/bin/python" -m pip install --quiet -r requirements.txt 2>/dev/null; then
+  uv pip install --python "$BUILD_VENV/bin/python" -r requirements.txt
 fi
 
 # 2. Export the database to the JSON the read-only frontend fetches.
-PYTHONPATH=. python3 -m app.export_static
+PYTHONPATH=. "$BUILD_VENV/bin/python" -m app.export_static
 
 # 3. Build the frontend with VITE_STATIC=1, which hides every mutating view
 #    and makes the app read data.json instead of calling the API.
@@ -214,7 +217,7 @@ chmod +x scripts/build-static.sh
 - [ ] **Step 3: Verify the script runs end to end locally**
 
 Run: `bash scripts/build-static.sh`
-Expected: exit code 0, ending with Vite's build summary. Confirm both artifacts exist:
+Expected: exit code 0, ending with Vite's build summary. The script builds in its own throwaway virtual environment, so it needs nothing on `PATH` but `python3` (or `uv`), `node` and `npm` — no venv need be activated, and an ambient PEP 668 "externally managed" python is not a problem. Confirm both artifacts exist:
 
 ```bash
 ls -l web/dist/index.html web/dist/darmstadt/index.html web/dist/darmstadt/data.json
