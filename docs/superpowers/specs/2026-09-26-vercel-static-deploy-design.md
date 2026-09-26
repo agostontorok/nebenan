@@ -152,6 +152,9 @@ Replace the three inline build steps with the shared script, keeping the existin
         with:
           python-version: '3.12'
 
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
       - name: Run tests
         run: python -m pytest -q
 
@@ -165,7 +168,7 @@ Replace the three inline build steps with the shared script, keeping the existin
       - uses: actions/configure-pages@v5
 ```
 
-The four existing steps — `Install Python dependencies`, `Export static review state`, `Install frontend dependencies`, `Build static site` — collapse into one, because the script now performs the install, the export, and `npm ci` + `VITE_STATIC=1 npm run build`. `actions/setup-python` and `actions/setup-node` stay, because the test gate above still needs Python and the script's `npm ci` still needs Node 20; both were already pinned by the existing workflow.
+The three existing build steps — `Export static review state`, `Install frontend dependencies`, `Build static site` — collapse into one, because the script now performs the export, and `npm ci` + `VITE_STATIC=1 npm run build`. `Install Python dependencies` stays, and it is worth being explicit about why, because it is redundant for the build and looks removable: `Run tests` runs `python -m pytest -q` in the workflow's own environment, and `actions/setup-python` provisions an interpreter without installing project dependencies. The step is what puts `pytest` — which `requirements.txt` pins — on the path for that test gate. Removing it fails `Run tests`, and since the gate runs before the build, the deploy fails before any artifact exists. The script is unaffected either way: it creates its own venv in a `mktemp -d` and installs `requirements.txt` into it, so it neither needs nor reuses this step. `actions/setup-python` and `actions/setup-node` stay, because the test gate above still needs Python and the script's `npm ci` still needs Node 20; both were already pinned by the existing workflow.
 
 Behaviour of the Pages deploy is unchanged: same artifact, same commands, same order.
 

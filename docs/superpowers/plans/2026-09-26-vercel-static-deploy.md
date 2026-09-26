@@ -353,9 +353,9 @@ git commit -m "build: exclude local state from the Vercel upload"
 **Files:**
 - Modify: `.github/workflows/pages.yml`
 
-- [ ] **Step 1: Replace the four inline build steps**
+- [ ] **Step 1: Replace the three inline build steps**
 
-In the `build` job, delete the steps `Install Python dependencies`, `Export static review state`, `Install frontend dependencies`, and `Build static site`. Keep `actions/checkout`, `actions/setup-python`, `Run tests`, `actions/setup-node`, and everything from `actions/configure-pages` onwards. The result is:
+In the `build` job, delete the steps `Export static review state`, `Install frontend dependencies`, and `Build static site`. Keep `actions/checkout`, `actions/setup-python`, `Install Python dependencies`, `Run tests`, `actions/setup-node`, and everything from `actions/configure-pages` onwards. The result is:
 
 ```yaml
   build:
@@ -366,6 +366,9 @@ In the `build` job, delete the steps `Install Python dependencies`, `Export stat
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
       - name: Run tests
         run: python -m pytest -q
@@ -383,6 +386,18 @@ In the `build` job, delete the steps `Install Python dependencies`, `Export stat
         with:
           path: web/dist
 ```
+
+Keep `Install Python dependencies`. It looks redundant next to the script, and it is — for the
+build. `scripts/build-static.sh` creates its own venv in a `mktemp -d` and installs
+`requirements.txt` into it, so it does not depend on this step at all. The step exists for
+`Run tests`, which is the step before the build: `Run tests` shells out to
+`python -m pytest -q` in the workflow's own environment, and `actions/setup-python@v5`
+provisions an interpreter without installing any project dependencies. Delete this step and
+`pytest` is not on the path, `Run tests` fails, and because it runs *before* the build the
+whole Pages deploy fails without ever producing an artifact. `requirements.txt` pins
+`pytest`, so this one install is what makes the test step runnable. The duplication with the
+script's venv is deliberate and cheap: the workflow installs for the tests, the script
+installs for the build.
 
 The `deploy` job is unchanged.
 
