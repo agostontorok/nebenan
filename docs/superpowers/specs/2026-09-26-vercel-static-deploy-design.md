@@ -219,6 +219,21 @@ Add a short "Deploying" section covering:
 3. **Stale data.** Only if `events.sqlite` is committed without a checkpoint; documented in the README. Not recoverable after the fact, since uncommitted WAL content is never pushed.
 4. **Upload size.** `.venv/` and `web/node_modules/` are large; `.vercelignore` keeps them out. `data/events.sqlite` is 5.4 MB and is intentionally included.
 
+## Status
+
+Verified against both real services on 2026-09-26, at commit `eb055e1`.
+
+- **GitHub Pages.** Runs `36256222632`, success. `https://agostontorok.github.io/nahe/darmstadt/data.json` returns 200 with the 2118 published events in the committed database, so the shared script built and exported the data it was given.
+- **Vercel.** Production deployment `nahe-ii3q0h8fr-atoroks-projects.vercel.app`, aliased to `https://nahe-kappa.vercel.app`, status Ready. The same URL returns a byte-identical `data.json` (`sha256` prefix `305822924ffc0441` from both), `/darmstadt` 308-redirects to `/darmstadt/`, and the served bundle contains `fetch("./data.json")` behind the static flag with no `/api/` calls and no `POST`/`PUT`/`PATCH`/`DELETE`, so the public site cannot write.
+- **Risk 1 did not occur.** The build image created a venv and installed dependencies. Vercel's own `uv` provided CPython 3.12.14, so the `python3 -m venv` path succeeded and no fallback was needed.
+
+One real defect was found only by deploying, and is now fixed in `eb055e1`: the first Vercel build failed with `FileNotFoundError: docs/research/darmstadt-sources.json`, because `.vercelignore` excluded `docs/` wholesale while `app/db.py:43` reads that registry while opening the database. The ignore list now names `docs/screenshots/` and `docs/superpowers/` instead, and `tests/test_static_deploy.py` guards the registry. Neither the build script nor the workflow changed, so the two pipelines are still the same code.
+
+### Still open, both need a browser
+
+- **Git integration.** `vercel git connect` failed: the Vercel GitHub App has no access to `agostontorok/nahe`. Authorise the app at `https://github.com/settings/installations` and re-run `vercel git connect git@github.com:agostontorok/nahe.git`. Until then Vercel deploys are CLI-driven rather than on push. The GitHub Pages pipeline is unaffected and does not depend on this.
+- **Custom domain.** No domain is attached. Add it in the Vercel project settings, then point the DNS record at Vercel and add the domain to the README.
+
 ## Out of scope
 
 - The GitHub Pages deploy is not removed.

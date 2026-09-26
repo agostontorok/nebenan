@@ -40,11 +40,15 @@ The mapping service follows the [Nominatim usage policy](https://operations.osmf
 
 ## Deploying
 
-The public site is static and read-only. `scripts/build-static.sh` is the single static build: it exports the committed `data/events.sqlite` with `app/export_static.py` and builds `web/` with `VITE_STATIC=1`. GitHub Pages runs that script from `.github/workflows/pages.yml` on every push to `main`, and `vercel.json` builds Vercel from the same script into the same `web/dist` output.
+The public site is static and read-only. `scripts/build-static.sh` is the single static build: it exports the committed `data/events.sqlite` with `app/export_static.py` and builds `web/` with `VITE_STATIC=1`. GitHub Pages runs that script from `.github/workflows/pages.yml` on every push to `main`, and `vercel.json` builds Vercel from the same script into the same `web/dist` output, so both hosts serve the same bytes.
+
+The same read-only site is published on Vercel at **https://nahe-kappa.vercel.app/darmstadt/**, with the splash page at **https://nahe-kappa.vercel.app/**. That URL is the Vercel-generated production alias, not a custom domain; attaching a domain is a separate step in the Vercel project settings.
 
 `VITE_STATIC=1` makes the build read-only: the frontend fetches `./data.json` instead of calling the API, and Admin, Review, submissions and editing are absent. Those stay in the local `./run.sh` server, which never sets `VITE_STATIC`. Visitors submit events through the **Share an event** issue template.
 
 To refresh the live data, run a collection locally, then use **Publish & push to GitHub** in the editor view. It pushes the current branch, so publishing from `main` is what refreshes the public site. Before committing it checkpoints the SQLite write-ahead log, and only `data/events.sqlite` is tracked, so the committed database is self-contained. Committing that database without the checkpoint deploys the older state, because the write-ahead log is ignored and never reaches the build; the site keeps the older data until the next publish.
+
+A push to `main` refreshes GitHub Pages on its own. Vercel is not connected to the repository yet, so refresh it with `vercel --prod` from a clean checkout of `main`, and confirm the two hosts agree on `darmstadt/data.json` before relying on either.
 
 ## Storage and development
 
