@@ -78,13 +78,14 @@ Each issue becomes a review-queue event with provenance pointing at the issue; a
 
 ### Public site on GitHub Pages
 
-The committed database is mirrored online as a read-only site at **https://agostontorok.github.io/nebenan/**. Every push to `main` runs [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which runs the test suite, exports the published review state from `data/events.sqlite` into `web/public/data.json` with `app/export_static.py`, builds `web/` with `VITE_STATIC=1`, and deploys `web/dist`. The editor's **Publish & push** control commits the database to `main`, so the public page redeploys automatically after each publish.
+The committed database is mirrored online as a read-only site at **https://agostontorok.github.io/nahe/**. Every push to `main` runs [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which tests the code, rebuilds `web/dist` with the shared build script, and deploys it.
 
-To rebuild manually, run the workflow from the Actions tab (**Run workflow** on *Deploy to GitHub Pages*), or locally:
+To rebuild manually, run the workflow from the Actions tab (**Run workflow** on *Deploy to GitHub Pages*), or run the shared build script from the repository root:
 
 ```sh
-PYTHONPATH=. .venv/bin/python -m app.export_static
-cd web && VITE_STATIC=1 npm run build
+bash scripts/build-static.sh
 ```
+
+It builds in a throwaway Python environment and installs the frontend from the lockfile, so a fresh clone needs no setup. The result is `web/dist`; the exported database is written to `web/public/darmstadt/data.json` and copied into the build as `darmstadt/data.json`.
 
 The static build loads `./data.json` and needs no backend, so interactions that would call the API — event submissions, source suggestions, review decisions, admin publish — are unavailable on the public site. Sharing still happens via the **Share an event** issue template. Submitted posters stay local (`data/posters/` is gitignored); remote `image_url` images do appear.
