@@ -38,6 +38,14 @@ Most events initially have **unknown size** because the sources do not state att
 
 The mapping service follows the [Nominatim usage policy](https://operations.osmfoundation.org/policies/nominatim/). OpenStreetMap attribution remains visible. Calendar handling uses the documented [recurring-ical-events occurrence API](https://recurring-ical-events.readthedocs.io/en/v3.8.0/reference/api.html).
 
+## Deploying
+
+The public site is static and read-only. `scripts/build-static.sh` is the single static build: it exports the committed `data/events.sqlite` with `app/export_static.py` and builds `web/` with `VITE_STATIC=1`. GitHub Pages runs that script from `.github/workflows/pages.yml` on every push to `main`, and `vercel.json` builds Vercel from the same script into the same `web/dist` output.
+
+`VITE_STATIC=1` makes the build read-only: the frontend fetches `./data.json` instead of calling the API, and Admin, Review, submissions and editing are absent. Those stay in the local `./run.sh` server, which never sets `VITE_STATIC`. Visitors submit events through the GitHub issue templates.
+
+To refresh the live data, run a collection locally, then use **Publish & push to GitHub** in the editor view. It checkpoints the SQLite write-ahead log before committing, and only `data/events.sqlite` is tracked, so the committed database is self-contained. Committing that database without the checkpoint deploys the older state, because the write-ahead log is ignored and never reaches the build; the site keeps the older data until the next publish.
+
 ## Storage and development
 
 `data/events.sqlite` holds events, source states, provenance, review edits, geocoding cache, and schedule. The database is tracked by Git; `data/posters/` holds submitted posters and stays ignored. Back up `data/` with the server stopped. To use a separate database, set `DARMSTADT_DB=/absolute/path/events.sqlite`.
