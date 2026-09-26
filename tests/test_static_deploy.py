@@ -24,9 +24,16 @@ def ignored_patterns():
 
 
 def is_ignored(path):
-    return any(fnmatch.fnmatch(path, pattern.rstrip('/'))
-               or path.startswith(pattern.rstrip('/') + '/')
-               for pattern in ignored_patterns())
+    # A pattern containing a slash is anchored at the root; one without a
+    # slash matches at any depth, as gitignore does.
+    for pattern in ignored_patterns():
+        pattern = pattern.rstrip('/')
+        if '/' in pattern:
+            if fnmatch.fnmatch(path, pattern) or path.startswith(pattern + '/'):
+                return True
+        elif any(fnmatch.fnmatch(part, pattern) for part in path.split('/')):
+            return True
+    return False
 
 
 def build_script():

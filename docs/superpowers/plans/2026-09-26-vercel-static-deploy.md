@@ -62,9 +62,16 @@ def ignored_patterns():
 
 
 def is_ignored(path):
-    return any(fnmatch.fnmatch(path, pattern.rstrip('/'))
-               or path.startswith(pattern.rstrip('/') + '/')
-               for pattern in ignored_patterns())
+    # A pattern containing a slash is anchored at the root; one without a
+    # slash matches at any depth, as gitignore does.
+    for pattern in ignored_patterns():
+        pattern = pattern.rstrip('/')
+        if '/' in pattern:
+            if fnmatch.fnmatch(path, pattern) or path.startswith(pattern + '/'):
+                return True
+        elif any(fnmatch.fnmatch(part, pattern) for part in path.split('/')):
+            return True
+    return False
 
 
 def build_script():
@@ -309,8 +316,8 @@ Expected: the three `ignore_file_*` tests PASS.
 
 - [ ] **Step 3: Confirm the database is still uploaded**
 
-Run: `.venv/bin/python -c "print('data/events.sqlite' in open('.vercelignore').read())"`
-Expected: `False`, meaning the line is absent from the ignore file and the file is therefore uploaded.
+Run: `.venv/bin/python -c "print('data/events.sqlite' in {l.strip() for l in open('.vercelignore')})"`
+Expected: `False`, meaning no whole line in the ignore file names the database, so it is uploaded. Compare whole lines, not the raw file text: the sidecar lines `data/events.sqlite-wal` and `data/events.sqlite-shm` deliberately contain the substring `data/events.sqlite` and are expected to be present, so a substring check cannot distinguish them and would report `True` against a correct ignore file. That ambiguity is why the real guard is the pattern-matching test in Step 2.
 
 - [ ] **Step 4: Commit**
 
