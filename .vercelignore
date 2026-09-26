@@ -1,0 +1,12 @@
+.venv/
+.git/
+.github/
+__pycache__/
+.pytest_cache/
+node_modules/
+data/events.sqlite-wal
+data/events.sqlite-shm
+data/posters/
+docs/
+tests/
+run.sh
