@@ -42,9 +42,9 @@ The mapping service follows the [Nominatim usage policy](https://operations.osmf
 
 The public site is static and read-only. `scripts/build-static.sh` is the single static build: it exports the committed `data/events.sqlite` with `app/export_static.py` and builds `web/` with `VITE_STATIC=1`. GitHub Pages runs that script from `.github/workflows/pages.yml` on every push to `main`, and `vercel.json` builds Vercel from the same script into the same `web/dist` output.
 
-`VITE_STATIC=1` makes the build read-only: the frontend fetches `./data.json` instead of calling the API, and Admin, Review, submissions and editing are absent. Those stay in the local `./run.sh` server, which never sets `VITE_STATIC`. Visitors submit events through the GitHub issue templates.
+`VITE_STATIC=1` makes the build read-only: the frontend fetches `./data.json` instead of calling the API, and Admin, Review, submissions and editing are absent. Those stay in the local `./run.sh` server, which never sets `VITE_STATIC`. Visitors submit events through the **Share an event** issue template.
 
-To refresh the live data, run a collection locally, then use **Publish & push to GitHub** in the editor view. It checkpoints the SQLite write-ahead log before committing, and only `data/events.sqlite` is tracked, so the committed database is self-contained. Committing that database without the checkpoint deploys the older state, because the write-ahead log is ignored and never reaches the build; the site keeps the older data until the next publish.
+To refresh the live data, run a collection locally, then use **Publish & push to GitHub** in the editor view. It pushes the current branch, so publishing from `main` is what refreshes the public site. Before committing it checkpoints the SQLite write-ahead log, and only `data/events.sqlite` is tracked, so the committed database is self-contained. Committing that database without the checkpoint deploys the older state, because the write-ahead log is ignored and never reaches the build; the site keeps the older data until the next publish.
 
 ## Storage and development
 
@@ -63,7 +63,7 @@ Architecture: `app/collect.py` extracts and validates; `app/db.py` persists data
 
 ### Editor mode and GitHub issues
 
-Run `MODE=editor ./run.sh` to start the local editorial desk with only the Review and Admin views; the Admin view includes a **Publish & push** control that mints a commit and pushes `data/events.sqlite` to the repo. The database is tracked; its WAL sidecar files and `data/posters/` remain ignored.
+Run `MODE=editor ./run.sh` to start the local editorial desk with only the Review and Admin views; the Admin view includes a **Publish & push to GitHub** control that mints a commit and pushes `data/events.sqlite` to the repo. The database is tracked; its WAL sidecar files and `data/posters/` remain ignored.
 
 Visitors share events by opening the **Share an event** issue template on the GitHub repo (issues labeled `submission`). Import those into the local review queue with:
 
@@ -78,7 +78,7 @@ Each issue becomes a review-queue event with provenance pointing at the issue; a
 
 ### Public site on GitHub Pages
 
-The committed database is mirrored online as a read-only site at **https://agostontorok.github.io/nahe/**. Every push to `main` runs [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which tests the code, rebuilds `web/dist` with the shared build script, and deploys it.
+The committed database is mirrored online as a read-only site at **https://agostontorok.github.io/nahe/darmstadt/**, behind a splash page at **https://agostontorok.github.io/nahe/**. Every push to `main` runs [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which runs the Python tests, rebuilds `web/dist` with the shared build script, and deploys it.
 
 To rebuild manually, run the workflow from the Actions tab (**Run workflow** on *Deploy to GitHub Pages*), or run the shared build script from the repository root:
 
@@ -86,6 +86,6 @@ To rebuild manually, run the workflow from the Actions tab (**Run workflow** on 
 bash scripts/build-static.sh
 ```
 
-It builds in a throwaway Python environment and installs the frontend from the lockfile, so a fresh clone needs no setup. The result is `web/dist`; the exported database is written to `web/public/darmstadt/data.json` and copied into the build as `darmstadt/data.json`.
+It builds in a throwaway Python environment and installs the frontend from the lockfile, so a fresh clone needs no setup. The result is `web/dist`; the exported database is written to `web/public/darmstadt/data.json` and copied into the build as `darmstadt/data.json`, which is where it has to stay: `darmstadt` is a second build input and the app fetches `data.json` relative to itself, so relocating the export breaks the page even though the build still succeeds.
 
 The static build loads `./data.json` and needs no backend, so interactions that would call the API — event submissions, source suggestions, review decisions, admin publish — are unavailable on the public site. Sharing still happens via the **Share an event** issue template. Submitted posters stay local (`data/posters/` is gitignored); remote `image_url` images do appear.
