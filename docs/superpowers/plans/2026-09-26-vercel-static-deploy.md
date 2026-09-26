@@ -186,14 +186,16 @@ cd "$(dirname "$0")/.."
 
 # 1. Build in a throwaway environment so a laptop, Actions and Vercel all
 #    resolve the same dependencies, whatever the ambient python is. A system
-#    python may be externally managed (PEP 668) and refuse installs. A
-#    caller-supplied BUILD_VENV is a cache the caller owns, so nothing here
-#    removes it.
-if [ -n "${BUILD_VENV:-}" ]; then
-  :
-else
-  BUILD_VENV="$(mktemp -d)/venv"
-  trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+#    python may be externally managed (PEP 668) and refuse installs. A caller
+#    may point BUILD_VENV at a cache it reuses; that path is the caller's to
+#    keep, and a relative one resolves against the repo root.
+BUILD_VENV="${BUILD_VENV:-}"
+if [ -z "$BUILD_VENV" ]; then
+  BUILD_VENV="$(mktemp -d)"
+  trap 'rm -rf "$BUILD_VENV" || :' EXIT
+elif [ -d "$BUILD_VENV" ] && [ ! -f "$BUILD_VENV/pyvenv.cfg" ] && [ -n "$(ls -A "$BUILD_VENV")" ]; then
+  echo "build-static: BUILD_VENV=$BUILD_VENV is not empty and is not a venv" >&2
+  exit 1
 fi
 if ! python3 -m venv "$BUILD_VENV" 2>/dev/null && ! uv venv "$BUILD_VENV" >/dev/null 2>&1; then
   echo "build-static: need python3 -m venv or uv to create $BUILD_VENV" >&2
@@ -203,8 +205,8 @@ if ! "$BUILD_VENV/bin/python" -c 'import sys; sys.exit(sys.version_info < (3, 10
   echo "build-static: need Python 3.10 or newer, found $("$BUILD_VENV/bin/python" -V 2>&1)" >&2
   exit 1
 fi
-if ! "$BUILD_VENV/bin/python" -m pip install --quiet -r requirements.txt 2>/dev/null; then
-  command -v uv >/dev/null 2>&1 || { echo "build-static: pip failed and uv is not installed" >&2; exit 1; }
+if ! err="$("$BUILD_VENV/bin/python" -m pip install --quiet -r requirements.txt 2>&1 >/dev/null)"; then
+  command -v uv >/dev/null 2>&1 || { printf '%s\nbuild-static: pip failed and uv is not installed\n' "$err" >&2; exit 1; }
   uv pip install --python "$BUILD_VENV/bin/python" -r requirements.txt
 fi
 
@@ -228,7 +230,7 @@ chmod +x scripts/build-static.sh
 - [ ] **Step 3: Verify the script runs end to end locally**
 
 Run: `bash scripts/build-static.sh`
-Expected: exit code 0, ending with Vite's build summary. The script builds in its own throwaway virtual environment, so it needs nothing on `PATH` but `python3` (or `uv`), `node` and `npm` — no venv need be activated, and an ambient PEP 668 "externally managed" python is not a problem. Confirm both artifacts exist:
+Expected: exit code 0, ending with Vite's build summary. The script builds in its own throwaway virtual environment, so it needs nothing on `PATH` but `python3` 3.10 or newer (or `uv` able to provide one), `node` and `npm` — no venv need be activated, and an ambient PEP 668 "externally managed" python is not a problem. An older `python3` fails the build with `build-static: need Python 3.10 or newer, found ...` rather than a syntax error from inside `app/`. Confirm all three artifacts exist:
 
 ```bash
 ls -l web/dist/index.html web/dist/darmstadt/index.html web/dist/darmstadt/data.json
@@ -244,12 +246,12 @@ The local build must not offer the Admin or Review surfaces. The review *data* s
 .venv/bin/python -c "import json;d=json.load(open('web/dist/darmstadt/data.json'));print(sorted(d), len(d['review']))"
 ```
 
-Expected: `['candidates', 'events', 'review', 'sources', 'status']` followed by an event count. Do not "fix" the JSON by removing `review`.
+Expected: `['candidates', 'events', 'review', 'sources', 'status']` followed by the number of review entries (304 at the time of writing), not the event count. Do not "fix" the JSON by removing `review`.
 
 - [ ] **Step 5: Run the guard test for the script**
 
 Run: `.venv/bin/python -m pytest tests/test_static_deploy.py -q -k build_script`
-Expected: the four `build_script_*` tests PASS (`exports_the_database_to_json`, `builds_the_frontend_read_only`, `fails_fast`, `is_executable`); the rest still fail.
+Expected: the four `build_script_*` tests PASS (`exports_the_database_to_json`, `builds_the_frontend_read_only`, `fails_fast`, `is_executable`). The `pages_workflow_still_runs_the_test_suite` and `pages_workflow_still_uploads_the_build_output` tests pass too, because Task 1 wrote them against `pages.yml` behaviour that already existed. Everything still failing belongs to a later task: the five `vercel_*` tests and three `ignore_file_*` tests (Tasks 3 and 4), and `pages_workflow_builds_with_the_shared_script` (Task 5).
 
 - [ ] **Step 6: Commit**
 
@@ -503,7 +505,7 @@ Expected: deployments listed, the newest from the commit pushed in Step 1 with a
 vercel inspect <deployment-url> --logs
 ```
 
-The failure modes to expect, in order of likelihood: the build image can neither run `python3 -m venv` nor `uv venv`, reported as `build-static: need python3 -m venv or uv to create ...`; the image's default `python3` is older than 3.10, reported as `build-static: need Python 3.10 or newer, found ...`; or the pinned `requirements.txt` cannot be resolved, in which case the script's own `pip` fails, `uv pip install` runs, and its resolution error surfaces. The first two mean setting a Python for the build, the third means loosening or re-pinning a requirement.
+The failure modes to expect, in order of likelihood: the build image can neither run `python3 -m venv` nor `uv venv`, reported as `build-static: need python3 -m venv or uv to create ...`; the image's default `python3` is older than 3.10, reported as `build-static: need Python 3.10 or newer, found ...`; or the pinned `requirements.txt` cannot be resolved, in which case the script's own `pip` fails, `uv pip install` runs, and its resolution error surfaces. The first two mean setting a Python for the build, the third means loosening or re-pinning a requirement. If `pip` fails and the image has no `uv` either, the script prints pip's own error above `build-static: pip failed and uv is not installed`, so the pip error is the one to read first. `BUILD_VENV` is not set in the deploy path, so `build-static: BUILD_VENV=... is not empty and is not a venv` cannot appear on Vercel; it guards a caller that sets the variable.
 
 - [ ] **Step 6: Verify Vercel routing and read-only behaviour**
 
