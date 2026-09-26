@@ -134,6 +134,7 @@ docs/
 tests/
 run.sh
 web/dist/
+web/public/**/data.json
 web/*.tsbuildinfo
 .vercel/
 .DS_Store
@@ -141,7 +142,7 @@ web/*.tsbuildinfo
 
 `data/events.sqlite` itself stays included — the export reads it. The `-wal` and `-shm` files are excluded deliberately: they are 3.9 MB of uncommitted local state, and SQLite recreates them on open. The `data/` directory is named one file at a time rather than with a broad `data/*` plus a negation, because `data/` holds nothing but the tracked database and an over-broad pattern there is the one mistake that would break the build silently.
 
-The last four patterns are redundant with `.gitignore` and are listed anyway. Vercel does not consult `.gitignore` when assembling an upload: it applies a fixed default list of ignored paths ([ignored files and folders](https://vercel.com/docs/builds/build-features#ignored-files-and-folders)) plus whatever `.vercelignore` says. `.gitignore` appears on that default list as a file to omit, not as a source of patterns, so anything it excludes is not excluded from the upload unless `.vercelignore` repeats it. Naming `web/dist/` also keeps a stale `web/dist/data.json` from riding along with the source as a second copy of the data that nothing keeps in sync. Of the four, `web/dist/` and `web/*.tsbuildinfo` are the ones that would genuinely have been uploaded; `.vercel/` and `.DS_Store` are already on Vercel's default list, and are listed to keep the file's coverage independent of that list.
+The last five patterns are redundant with `.gitignore` and are listed anyway. On the CLI upload path Vercel does not consult `.gitignore` when assembling an upload: it applies a fixed default list of ignored paths ([ignored files and folders](https://vercel.com/docs/builds/build-features#ignored-files-and-folders)) plus whatever `.vercelignore` says. `.gitignore` appears on that default list as a file to omit, not as a source of patterns, so anything it excludes is not excluded from the upload unless `.vercelignore` repeats it. (On the git-connected path `.gitignore` is irrelevant for a different reason: untracked files are not in the clone at all.) Naming the two data paths keeps a stale copy of `data.json` from riding along with the source as a second copy of the data that nothing keeps in sync; the build regenerates both, so excluding them loses nothing. Of the five, `web/dist/`, `web/public/**/data.json` and `web/*.tsbuildinfo` are the ones that would genuinely have been uploaded; `.vercel/` and `.DS_Store` are already on Vercel's default list, and are listed to keep the file's coverage independent of that list.
 
 ### 4. `.github/workflows/pages.yml` (modified)
 

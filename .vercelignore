@@ -11,6 +11,7 @@ docs/
 tests/
 run.sh
 web/dist/
+web/public/**/data.json
 web/*.tsbuildinfo
 .vercel/
 .DS_Store
