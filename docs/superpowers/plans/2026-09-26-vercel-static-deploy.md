@@ -186,14 +186,25 @@ cd "$(dirname "$0")/.."
 
 # 1. Build in a throwaway environment so a laptop, Actions and Vercel all
 #    resolve the same dependencies, whatever the ambient python is. A system
-#    python may be externally managed (PEP 668) and refuse installs.
-BUILD_VENV="${BUILD_VENV:-$(mktemp -d)/venv}"
-trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+#    python may be externally managed (PEP 668) and refuse installs. A
+#    caller-supplied BUILD_VENV is a cache the caller owns, so nothing here
+#    removes it.
+if [ -n "${BUILD_VENV:-}" ]; then
+  :
+else
+  BUILD_VENV="$(mktemp -d)/venv"
+  trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+fi
 if ! python3 -m venv "$BUILD_VENV" 2>/dev/null && ! uv venv "$BUILD_VENV" >/dev/null 2>&1; then
   echo "build-static: need python3 -m venv or uv to create $BUILD_VENV" >&2
   exit 1
 fi
+if ! "$BUILD_VENV/bin/python" -c 'import sys; sys.exit(sys.version_info < (3, 10))'; then
+  echo "build-static: need Python 3.10 or newer, found $("$BUILD_VENV/bin/python" -V 2>&1)" >&2
+  exit 1
+fi
 if ! "$BUILD_VENV/bin/python" -m pip install --quiet -r requirements.txt 2>/dev/null; then
+  command -v uv >/dev/null 2>&1 || { echo "build-static: pip failed and uv is not installed" >&2; exit 1; }
   uv pip install --python "$BUILD_VENV/bin/python" -r requirements.txt
 fi
 
@@ -492,7 +503,7 @@ Expected: deployments listed, the newest from the commit pushed in Step 1 with a
 vercel inspect <deployment-url> --logs
 ```
 
-The two failure modes to expect, in order of likelihood: the build image has neither `pip` nor `uv`, which the script reports as `build-static: need pip or uv...`; or the Python version cannot resolve the pinned `requirements.txt`. The first means falling back to the GitHub Actions approach in the spec, the second means adding a `.python-version`.
+The failure modes to expect, in order of likelihood: the build image can neither run `python3 -m venv` nor `uv venv`, reported as `build-static: need python3 -m venv or uv to create ...`; the image's default `python3` is older than 3.10, reported as `build-static: need Python 3.10 or newer, found ...`; or the pinned `requirements.txt` cannot be resolved, in which case the script's own `pip` fails, `uv pip install` runs, and its resolution error surfaces. The first two mean setting a Python for the build, the third means loosening or re-pinning a requirement.
 
 - [ ] **Step 6: Verify Vercel routing and read-only behaviour**
 

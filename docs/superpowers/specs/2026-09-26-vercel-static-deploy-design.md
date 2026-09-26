@@ -52,14 +52,25 @@ cd "$(dirname "$0")/.."
 
 # 1. Build in a throwaway environment so a laptop, Actions and Vercel all
 #    resolve the same dependencies, whatever the ambient python is. A system
-#    python may be externally managed (PEP 668) and refuse installs.
-BUILD_VENV="${BUILD_VENV:-$(mktemp -d)/venv}"
-trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+#    python may be externally managed (PEP 668) and refuse installs. A
+#    caller-supplied BUILD_VENV is a cache the caller owns, so nothing here
+#    removes it.
+if [ -n "${BUILD_VENV:-}" ]; then
+  :
+else
+  BUILD_VENV="$(mktemp -d)/venv"
+  trap 'rm -rf "$(dirname "$BUILD_VENV")"' EXIT
+fi
 if ! python3 -m venv "$BUILD_VENV" 2>/dev/null && ! uv venv "$BUILD_VENV" >/dev/null 2>&1; then
   echo "build-static: need python3 -m venv or uv to create $BUILD_VENV" >&2
   exit 1
 fi
+if ! "$BUILD_VENV/bin/python" -c 'import sys; sys.exit(sys.version_info < (3, 10))'; then
+  echo "build-static: need Python 3.10 or newer, found $("$BUILD_VENV/bin/python" -V 2>&1)" >&2
+  exit 1
+fi
 if ! "$BUILD_VENV/bin/python" -m pip install --quiet -r requirements.txt 2>/dev/null; then
+  command -v uv >/dev/null 2>&1 || { echo "build-static: pip failed and uv is not installed" >&2; exit 1; }
   uv pip install --python "$BUILD_VENV/bin/python" -r requirements.txt
 fi
 
@@ -74,9 +85,11 @@ VITE_STATIC=1 npm run build
 
 Notes:
 - `requirements.txt` keeps `pytest`, which is harmless; the script does not run tests. Test gating stays in `pages.yml`, which already runs `python -m pytest -q` before building.
-- Dependencies install into a throwaway virtual environment rather than the ambient python, so a build behaves the same on a laptop, on `actions/setup-python` and on Vercel regardless of whether the system python refuses installs (PEP 668). A `trap` removes the environment on both success and failure.
-- `python3 -m venv` is tried first and `uv venv` second, so an image that can create a virtual environment by only one of the two still builds. The venv's own `pip` is then preferred, with `uv pip install --python` as the fallback for a `uv`-created environment that has no `pip`.
-- `BUILD_VENV` can be set in the environment to reuse a cached virtual environment across builds; by default the script builds a fresh one under `mktemp -d` and deletes it on exit.
+- Dependencies install into a throwaway virtual environment rather than the ambient python, so a build behaves the same on a laptop, on `actions/setup-python` and on Vercel regardless of whether the system python refuses installs (PEP 668).
+- The virtual environment is the script's to clean up: it is created under `mktemp -d` and a `trap` removes it on both success and failure. A `BUILD_VENV` supplied by the caller is a cache that belongs to the caller, so the script registers no trap and removes nothing.
+- `python3 -m venv` is tried first and `uv venv` second, so an image that can create a virtual environment by only one of the two still builds. The venv's own `pip` is then preferred, with `uv pip install --python` as the fallback for a `uv`-created environment that has no `pip`; if neither is available the script says so rather than failing on a missing command.
+- The venv interpreter is checked for Python 3.10 or newer, which `app/main.py` needs for its `str | None` annotations. An image whose default `python3` is older fails with one readable line instead of a syntax error from inside `app/`. `pages.yml` already pins 3.12; this covers an image that pins nothing.
+- `BUILD_VENV` can be set in the environment to reuse a cached virtual environment across builds, in which case the caller is also responsible for the venv's contents staying current.
 - `export_static` writes to `web/public/darmstadt/data.json` by default (`app/export_static.py:6`); Vite copies `public/` to the output root, so the file lands at `web/dist/darmstadt/data.json`, which is what `/darmstadt/` requests.
 
 ### 2. `vercel.json` (new)
