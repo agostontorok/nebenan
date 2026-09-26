@@ -320,7 +320,8 @@ node_modules/
 data/events.sqlite-wal
 data/events.sqlite-shm
 data/posters/
-docs/
+docs/screenshots/
+docs/superpowers/
 tests/
 run.sh
 web/dist/

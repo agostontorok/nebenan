@@ -92,6 +92,14 @@ def test_ignore_file_excludes_the_write_ahead_log_and_shared_memory():
     assert is_ignored('data/events.sqlite-shm')
 
 
+def test_ignore_file_does_not_exclude_the_source_registry():
+    # app/db.py reads this registry while opening the database, so the static
+    # export needs it. Excluding docs/ wholesale broke the first real Vercel
+    # build with a FileNotFoundError; only the non-build subtrees are ignored.
+    assert not is_ignored('docs/research/darmstadt-sources.json')
+    assert is_ignored('docs/superpowers/plans/2026-09-26-vercel-static-deploy.md')
+
+
 def test_ignore_file_covers_dependencies_caches_and_vcs_metadata():
     assert {'.venv/', 'node_modules/', '__pycache__/', '.git/'} <= set(ignored_patterns())
 
