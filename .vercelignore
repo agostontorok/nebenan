@@ -10,3 +10,7 @@ data/posters/
 docs/
 tests/
 run.sh
+web/dist/
+web/*.tsbuildinfo
+.vercel/
+.DS_Store

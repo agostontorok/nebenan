@@ -308,7 +308,7 @@ git commit -m "build: Vercel static deployment config"
 
 - [ ] **Step 1: Write `.vercelignore`**
 
-Patterns use gitignore syntax, so a bare `tests/` matches at any depth. `data/events.sqlite` is deliberately absent: the export reads it.
+Patterns use gitignore syntax, so a bare `tests/` matches at any depth. `data/events.sqlite` is deliberately absent: the export reads it. `web/dist/`, `.vercel/`, `web/*.tsbuildinfo` and `.DS_Store` are listed even though `.gitignore` already covers them, because Vercel does not read `.gitignore` when deciding what to upload — it applies a fixed default list plus these patterns — so the upload must not lean on a fallback that is not there. Naming `web/dist/` also keeps a stale `web/dist/data.json` from riding along with the source, where it sits beside the real one as a copy nothing keeps in sync.
 
 ```
 .venv/
@@ -323,6 +323,10 @@ data/posters/
 docs/
 tests/
 run.sh
+web/dist/
+web/*.tsbuildinfo
+.vercel/
+.DS_Store
 ```
 
 - [ ] **Step 2: Run the guard tests**
