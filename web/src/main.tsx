@@ -973,7 +973,7 @@ function App() {
           <span className="brand-mark">
             n<span>•</span>
           </span>
-          nahe<span className="brand-city">DARMSTADT</span>
+          nähe<span className="brand-city">DARMSTADT</span>
         </a>
         <nav aria-label={tr("nav.aria")}>
           {!EDITOR && (
@@ -1756,7 +1756,7 @@ function App() {
             setTab(EDITOR ? "review" : "discover");
           }}
         >
-          nahe<span>•</span>
+          nähe<span>•</span>
         </a>
         <p className="footer-rights">
           {tr("footer.rights").replace("{year}", String(new Date().getFullYear()))}
